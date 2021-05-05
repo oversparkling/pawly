@@ -1,17 +1,19 @@
 import React,{useState} from 'react';
-import { View, ImageBackground,StyleSheet, Image,Text,Button, Alert,Touchable, TouchableOpacity } from 'react-native';
+import { View, ImageBackground,StyleSheet, Image,Text,Button, Alert,Touchable, TouchableOpacity, Pressable } from 'react-native';
 
 import RegisterStyle from './ButtonStyle';
 import LoginStyle from './ButtonStyle2';
 import ViewImageScreen from './ViewImageScreen';
+import { useNavigation } from '@react-navigation/native';
 
 
 
 
 function WelcomeScreenfinal(props) {
-    const navigator = ()=>{
-        props.navigation.navigate('SecondScreen')
-    }
+    // const navigation = useNavigation()
+    // const goToLoginPage = () =>{
+    //     navigation.navigate('LoginPage')
+    // }
     return (
             <ImageBackground style = {styles.container} source = {require("./assets/petBackground.jpg") }>
                 <View style = {styles.logoContainer}>
@@ -19,12 +21,11 @@ function WelcomeScreenfinal(props) {
                     <Text> Pawly </Text>
                 </View>
 
-                <Button title = 'Navigate' onPress = {navigator} style = {{height: 40, width: 40}}></Button>
-                
-                <View style = {styles.registerButton}>
+
+                <View style = {styles.registerButton} >
                     <RegisterStyle/>
                 </View>
-                <View style = {styles.loginButton}>
+                <View style = {styles.loginButton} >
                     {/* <Button onPress = {()=>Alert.alert("Hello")} title = "Login" color = "#000" ></Button> */}
                     <LoginStyle/>
                 </View>
@@ -47,6 +48,12 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "flex-end",
         alignItems: 'center'
+    },
+    button:{
+        width:'100%',
+        backgroundColor:'blue',
+        height:100,
+
     },
     registerButton:{
         top:-20,

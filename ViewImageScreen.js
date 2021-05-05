@@ -1,11 +1,22 @@
 import React from 'react';
-import { View, ImageBackground,StyleSheet, Image,Text } from 'react-native';
+import { View, ImageBackground,StyleSheet, Image,Text,Pressable } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 function ViewImageScreen(props) {
+    const navigation = useNavigation()
+    const goBackHome = () =>{
+        console.warn('Hello1')
+        navigation.navigate('Home')
+        
+    }
     return (
       <View style = {styles.container}>
-          <View style={styles.closeIcon}></View>
-          <View style={styles.openIcon}></View>
+          <Pressable onPress = {()=>goBackHome()} style ={styles.closeIcon}>
+        <Text>hello</Text>
+          </Pressable>
+          {/* <Pressable onPress = {goBackHome} style={styles.closeIcon} >
+          </Pressable> */}
+          <Pressable style={styles.openIcon} onPress = {() => goBackHome()}></Pressable>
           <Image style = {styles.image} source = {require("./assets/chair.jpg")}></Image>
       </View>
     );
@@ -14,6 +25,7 @@ function ViewImageScreen(props) {
 const styles = StyleSheet.create({
     container:{
         // flex:1,
+        zIndex: 1,
         backgroundColor: "#000"
     },
     closeIcon:{
@@ -22,7 +34,7 @@ const styles = StyleSheet.create({
         top:50,
         left:20,
         position:"absolute",
-        backgroundColor:"#fc5c65"
+        backgroundColor:"white"
     },
     openIcon:{
         width:50,
