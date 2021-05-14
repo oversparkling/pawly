@@ -2,16 +2,16 @@ import React from 'react';
 import { Pressable,StyleSheet,View,Text, Alert, TouchableOpacity } from 'react-native';
 import ViewImageScreen from "./ViewImageScreen"
 import { useNavigation } from '@react-navigation/native';
+import * as Font from 'expo-font';
 
 function RegisterStyle(props) {
     const navigation = useNavigation()
-    const goToLogin = () =>{
-        console.warn('hello')
-        navigation.navigate('LoginPage')
+    const goToRegister = () =>{
+        navigation.navigate('RegisterPage')
     }
     return (
         <View style = {styles.container}>
-            <TouchableOpacity style = {styles.button} onPress = {()=> goToLogin()}>
+            <TouchableOpacity style = {styles.button} onPress = {()=> goToRegister()}>
                 <Text>Register</Text>
             </TouchableOpacity>
         </View>
@@ -32,9 +32,6 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center'
     },
-    text:{
-        
-    }
 
 
 })

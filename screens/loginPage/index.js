@@ -1,24 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SafeAreaView } from 'react-navigation';
 import { View,Text, StyleSheet, Pressable, ViewBase, Button, Touchable } from 'react-native';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
+import { AntDesign } from '@expo/vector-icons';
+import * as Font from 'expo-font'
 
 function LoginPage(props) {
+    const[fontLoad,setFondLoad] = useState(false)
     const navigation = useNavigation()
     const backHome = () =>{
         navigation.navigate('Home')
-    }
+    };
+    
+    // useEffect( () => async loadFonts(){
+    //     await Font.loadAsync({
+    //       'Montserrat': require('../../assets/fonts/Montserrat.ttf'),
+    //     });
+    //     this.setState({ fontsLoaded: true });
+    //     console.warn('Hello')
+    // },[]);
+
     return (
         <SafeAreaView> 
+
             <View style = {styles.backButtonContainer}>
-                <Pressable style = {{justifyContent:'left',height:'100%',padding:20,width:50,backgroundColor:'white'}} onPress = {()=>backHome()}>
-                    <Text>back</Text>
+                <Pressable style = {{justifyContent:'center',height:'100%',alignItems:'center',width:50}} onPress = {()=>backHome()}>
+                    <AntDesign name="back" size={24} color="black" />
                 </Pressable>
             </View>
-            <View style = {styles.registerContainer}>
-                <View style = {styles.registerHeading}>
-                    <Text style = {{fontWeight:"normal",fontSize:36}}>Register</Text>
+            <View style = {styles.LoginContainer}>
+                <View style = {styles.LoginHeading}>
+                    <Text style = {{fontWeight:"normal",fontSize:36}}>Login</Text>
                 </View>
                 <View style = {styles.inputContainer} >
                     <TextInput placeholder='Email' style = {styles.inputFields}></TextInput>
@@ -27,8 +40,8 @@ function LoginPage(props) {
                     <TextInput placeholder='Password' style = {styles.inputFields}></TextInput>
                 </View>
 
-                <View style = {styles.registerButton} >
-                    <TouchableOpacity style = {styles.registerTouchable}>
+                <View style = {styles.LoginButton} >
+                    <TouchableOpacity style = {styles.LoginTouchable}>
                         <Text style = {{color: 'white'}} >Login</Text>
                     </TouchableOpacity>
                 </View>
@@ -48,15 +61,14 @@ const styles = StyleSheet.create({
         height:50,
         width:'100%',
     },
-    registerContainer:{
-        backgroundColor:'red',
+    LoginContainer:{
         flex:1,
         justifyContent: "space-between"
     },
-    registerHeading:{
+    LoginHeading:{
+        marginLeft:20,
         padding:20,
         height:100,
-        backgroundColor:'white',
         width:'100%',
         justifyContent:'center'
 
@@ -76,13 +88,13 @@ const styles = StyleSheet.create({
         borderWidth:2
 
     },
-    registerButton:{
+    LoginButton:{
         height:100,
         width:'100%',
         alignItems:"center",
         justifyContent:'center',
     },
-    registerTouchable:{alignContent:"center",
+    LoginTouchable:{alignContent:"center",
         height: 53,
         width:171,
         backgroundColor:'black',

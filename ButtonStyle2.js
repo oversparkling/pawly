@@ -1,10 +1,15 @@
 import React from 'react';
 import { Pressable,StyleSheet,View,Text, Alert, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 function LoginStyle(props) {
+    const navigation = useNavigation()
+    const goToLogin = () =>{
+        navigation.navigate('LoginPage')
+    }
     return (
         <View style = {styles.container}>
-            <TouchableOpacity style = {styles.button} onPress = {()=>Alert.alert("Hello")}>
+            <TouchableOpacity style = {styles.button} onPress = {()=>goToLogin()}>
                 <Text>Login</Text>
             </TouchableOpacity>
         </View>

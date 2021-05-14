@@ -5,6 +5,7 @@ import WelcomeScreenfinal from './welcomeScreenfinal';
 import ViewImageScreen from './ViewImageScreen';
 import { NavigationContainer} from '@react-navigation/native';
 import LoginPage from './screens/loginPage';
+import RegisterPage from './screens/registerPage';
 
 
 
@@ -18,6 +19,7 @@ const Screens = (props) =>{
             <Stack.Screen name = {'Home'} component = {WelcomeScreenfinal} />
             <Stack.Screen name = {'NextPage'} component =  {ViewImageScreen} />
             <Stack.Screen name = {'LoginPage'} component = {LoginPage} />
+            <Stack.Screen name = {'RegisterPage'} component = {RegisterPage} />
 
         </Stack.Navigator>
         </NavigationContainer>
