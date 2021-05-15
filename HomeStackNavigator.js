@@ -6,6 +6,7 @@ import ViewImageScreen from './ViewImageScreen';
 import { NavigationContainer} from '@react-navigation/native';
 import LoginPage from './screens/loginPage';
 import RegisterPage from './screens/registerPage';
+import Tabs from './screens/tabs';
 
 
 
@@ -20,6 +21,7 @@ const Screens = (props) =>{
             <Stack.Screen name = {'NextPage'} component =  {ViewImageScreen} />
             <Stack.Screen name = {'LoginPage'} component = {LoginPage} />
             <Stack.Screen name = {'RegisterPage'} component = {RegisterPage} />
+            <Stack.Screen name = {'TabsHomePage'} component = {Tabs} />
 
         </Stack.Navigator>
         </NavigationContainer>

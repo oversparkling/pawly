@@ -28,10 +28,6 @@ function ProfilePage(props) {
                 </ScrollView>
             </View>
             </ScrollView>
-            
-            <NavigationContainer style = {styles.functionContainer}>
-                <Tabs/>
-            </NavigationContainer>
         </SafeAreaView>
     );
 }
@@ -39,7 +35,6 @@ function ProfilePage(props) {
 const styles = StyleSheet.create({
     maincontainer:{
         height:'100%',
-        backgroundColor:'red'
     },
     heading:{
         height:80,

@@ -12,6 +12,9 @@ function LoginPage(props) {
     const backHome = () =>{
         navigation.navigate('Home')
     };
+    const loggedIn = () =>{
+        navigation.navigate('TabsHomePage')
+    };
     
     // useEffect( () => async loadFonts(){
     //     await Font.loadAsync({
@@ -41,7 +44,7 @@ function LoginPage(props) {
                 </View>
 
                 <View style = {styles.LoginButton} >
-                    <TouchableOpacity style = {styles.LoginTouchable}>
+                    <TouchableOpacity style = {styles.LoginTouchable} onPress = {()=> loggedIn()}>
                         <Text style = {{color: 'white'}} >Login</Text>
                     </TouchableOpacity>
                 </View>
