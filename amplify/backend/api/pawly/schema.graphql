@@ -1,0 +1,16 @@
+type User @model {
+  id: ID!
+  username: String!
+  name: String!
+  image: String
+  pet: [Pet] @connection(keyName: "byPetName", fields: ["id"])
+}
+
+type Pet @model @key(name: "byPetName", fields: ["ownerID"]) {
+  id: ID!
+  name: String!
+  ownerID: ID!
+  birthdate: String!
+}
+
+

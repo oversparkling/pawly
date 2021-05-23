@@ -1,32 +1,49 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { View,Text, StyleSheet, Pressable, ViewBase, Button, Touchable,Image } from 'react-native';
 import { FlatList, ScrollView } from 'react-native-gesture-handler';
 import { ceil } from 'react-native-reanimated';
 import Tabs from '../tabs';
 import { NavigationContainer } from '@react-navigation/native';
+import { Auth, API, graphqlOperation } from 'aws-amplify';
+import { getUser } from '../../src/graphql/queries';
 
 function ProfilePage(props) {
-    const image1 = require('../../assets/petBackground.jpg')
-    const image3 = require('../../assets/pet2.jpg')
-    const image4 = require('../../assets/pet3.jpg')
+    
+    const [data,setData] = useState([]);
+    useEffect ( ()=>{
+        const fetchUser = async ()=>{
+            const userInfo = await Auth.currentAuthenticatedUser({bypassCache:true});
+            if (userInfo){
+                const userData = await API.graphql(graphqlOperation(getUser,{id: userInfo.attributes.sub}))
+                console.log(userData)
+                if (userData.data.getUser){
+                    setUser(userData.data.getUser.username)
+                }
+            }
+        }
+        fetchUser();
+    })
+    
+    
     return (
         <SafeAreaView style = {styles.maincontainer}>
             <ScrollView>
-            <View style = {styles.heading}>
+            {/* <View style = {styles.heading}>
                 <Text style = {{fontSize:36}}>Petfolios</Text>
             </View>
             <View style = {styles.subheading}>
-                <Text style = {{fontSize:13,fontWeight:"bold"}}>What's new with Hiro </Text>
+                <Text style = {{fontSize:13,fontWeight:"bold"}}>What's new with {user} </Text>
             </View>
             <View style = {styles.container}>
-                <ScrollView horizontal={true}>
-                    <Image source={image1} style = {styles.imageContainer} />
+                <ScrollView horizontal={true}> */}
+                    {/* <Image source={image1} style = {styles.imageContainer} /> */}
                     {/* <Image source={image2} style = {styles.imageContainer} /> */}
-                    <Image source={image3} style = {styles.imageContainer} />
-                    <Image source={image4} style = {styles.imageContainer} />
-                </ScrollView>
-            </View>
+                    {/* <Image source={image3} style = {styles.imageContainer} />
+                    <Image source={image4} style = {styles.imageContainer} /> */}
+                {/* </ScrollView>
+            </View> */}
+            
             </ScrollView>
         </SafeAreaView>
     );
