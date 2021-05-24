@@ -7,6 +7,8 @@ import { NavigationContainer} from '@react-navigation/native';
 import LoginPage from './screens/loginPage';
 import RegisterPage from './screens/registerPage';
 import Tabs from './screens/tabs';
+import TempProfile from './screens/Petfolio/tempIndex';
+import Petfolio from './screens/Petfolio';
 
 
 
@@ -22,6 +24,7 @@ const Screens = (props) =>{
             <Stack.Screen name = {'LoginPage'} component = {LoginPage} />
             <Stack.Screen name = {'RegisterPage'} component = {RegisterPage} />
             <Stack.Screen name = {'TabsHomePage'} component = {Tabs} />
+            <Stack.Screen name = {'Petfolio'} component = {Petfolio}/>
 
         </Stack.Navigator>
         </NavigationContainer>

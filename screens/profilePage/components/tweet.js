@@ -1,8 +1,13 @@
 import React from "react";
-import { Text,View,StyleSheet } from "react-native";
+import { Text,View,StyleSheet,ScrollView,Image, Button } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 function Tweet(props) {
-
+  const navigation = useNavigation();
+    const tempPage= (pet) =>{
+      
+      navigation.navigate('Petfolio',{pet:pet})
+    };
     const image1 = require('../../../assets/petBackground.jpg')
     const image3 = require('../../../assets/pet2.jpg')
     const image4 = require('../../../assets/pet3.jpg')
@@ -10,8 +15,9 @@ function Tweet(props) {
     <View>
       <View style={styles.subheading}>
         <Text style={{ fontSize: 13, fontWeight: "bold" }}>
-          What's new with {props.data.getUser.username}{" "}
+          What's new with {props.data.name}
         </Text>
+        <Button onPress={()=>tempPage(props.data)} title = 'HI HI'/>
       </View>
       <View style={styles.container}>
         <ScrollView horizontal={true}>

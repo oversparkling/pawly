@@ -7,28 +7,39 @@ import Tabs from '../tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { Auth, API, graphqlOperation } from 'aws-amplify';
 import { getUser } from '../../src/graphql/queries';
+import Tweet from './components/tweet';
 
 function ProfilePage(props) {
     
-    const [data,setData] = useState([]);
+    const [datas,setDatas] = useState([]);
     useEffect ( ()=>{
         const fetchUser = async ()=>{
             const userInfo = await Auth.currentAuthenticatedUser({bypassCache:true});
             if (userInfo){
                 const userData = await API.graphql(graphqlOperation(getUser,{id: userInfo.attributes.sub}))
-                console.log(userData)
-                if (userData.data.getUser){
-                    setUser(userData.data.getUser.username)
+                if (userData.data.getUser.pet){
+                    setDatas(userData.data.getUser.pet.items)
                 }
             }
         }
         fetchUser();
     })
+    const getPets=( ()=>{
+        console.log(datas)
+        return datas.map(data => {
+            return <Tweet data = {data} key = {data.id}/>
+        })
+    })
+
     
     
     return (
         <SafeAreaView style = {styles.maincontainer}>
             <ScrollView>
+                <View>
+                    {getPets()}
+                </View>
+                
             {/* <View style = {styles.heading}>
                 <Text style = {{fontSize:36}}>Petfolios</Text>
             </View>

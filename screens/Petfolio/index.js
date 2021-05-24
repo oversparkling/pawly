@@ -3,13 +3,18 @@ import { View, StyleSheet, Pressable,Image,Text } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { AntDesign } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
 
 function Petfolio(props) {
+    const navigation = useNavigation();
+    const backButton = () =>{
+        navigation.goBack()
+    }
     return (
         <SafeAreaView style = {styles.container}>
         <ScrollView>
             <View style = {styles.backButtonContainer}>
-                <Pressable style={{justifyContent:'center',height:'100%',alignItems:'center',width:50}}>
+                <Pressable style={{justifyContent:'center',height:'100%',alignItems:'center',width:50}} onPress = {()=>backButton()}>
                     <AntDesign name="back" size={24} color="black" />
                 </Pressable>
             </View>
@@ -20,10 +25,10 @@ function Petfolio(props) {
 
             <View style = {styles.descriptionContainer}>
                 <Text style = {styles.name}>
-                    HIRO
+                    {props.route.params.pet.name}
                 </Text>
                 <Text style = {styles.description}>
-                    Manx Cat
+                    {props.route.params.pet.birthdate}
                 </Text>
             </View>
             <View style = {styles.itemRow}>
