@@ -4,25 +4,30 @@ import { View,Text, StyleSheet, Pressable, ViewBase, Button, Touchable } from 'r
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
-import * as Font from 'expo-font'
+import { Auth } from 'aws-amplify';
 
 function LoginPage(props) {
-    const[fontLoad,setFondLoad] = useState(false)
+    const [username, setUser] = useState('');
+    const [password,setPass] = useState('');
     const navigation = useNavigation()
     const backHome = () =>{
         navigation.navigate('Home')
     };
     const loggedIn = () =>{
-        navigation.navigate('TabsHomePage')
+        signIn(username,password)
     };
     
-    // useEffect( () => async loadFonts(){
-    //     await Font.loadAsync({
-    //       'Montserrat': require('../../assets/fonts/Montserrat.ttf'),
-    //     });
-    //     this.setState({ fontsLoaded: true });
-    //     console.warn('Hello')
-    // },[]);
+
+async function signIn(username,password) {
+    try {
+        const user = await Auth.signIn(username, password);
+        if (user){
+            navigation.navigate('TabsHomePage')
+        }
+    } catch (error) {
+        console.log('error signing in', error);
+    }
+}
 
     return (
         <SafeAreaView> 
@@ -37,10 +42,10 @@ function LoginPage(props) {
                     <Text style = {{fontWeight:"normal",fontSize:36}}>Login</Text>
                 </View>
                 <View style = {styles.inputContainer} >
-                    <TextInput placeholder='Email' style = {styles.inputFields}></TextInput>
+                    <TextInput placeholder='Username' style = {styles.inputFields} onChangeText = {text => setUser(text)}></TextInput>
                 </View>
                 <View style = {styles.inputContainer} >
-                    <TextInput placeholder='Password' style = {styles.inputFields}></TextInput>
+                    <TextInput placeholder='Password' style = {styles.inputFields} onChangeText = {text => setPass(text)}></TextInput>
                 </View>
 
                 <View style = {styles.LoginButton} >

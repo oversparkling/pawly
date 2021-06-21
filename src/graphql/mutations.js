@@ -124,3 +124,42 @@ export const deletePet = /* GraphQL */ `
     }
   }
 `;
+export const createTasks = /* GraphQL */ `
+  mutation CreateTasks(
+    $input: CreateTasksInput!
+    $condition: ModelTasksConditionInput
+  ) {
+    createTasks(input: $input, condition: $condition) {
+      id
+      taskName
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateTasks = /* GraphQL */ `
+  mutation UpdateTasks(
+    $input: UpdateTasksInput!
+    $condition: ModelTasksConditionInput
+  ) {
+    updateTasks(input: $input, condition: $condition) {
+      id
+      taskName
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteTasks = /* GraphQL */ `
+  mutation DeleteTasks(
+    $input: DeleteTasksInput!
+    $condition: ModelTasksConditionInput
+  ) {
+    deleteTasks(input: $input, condition: $condition) {
+      id
+      taskName
+      createdAt
+      updatedAt
+    }
+  }
+`;

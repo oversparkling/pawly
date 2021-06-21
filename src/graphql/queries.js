@@ -77,3 +77,30 @@ export const listPets = /* GraphQL */ `
     }
   }
 `;
+export const getTasks = /* GraphQL */ `
+  query GetTasks($id: ID!) {
+    getTasks(id: $id) {
+      id
+      taskName
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listTaskss = /* GraphQL */ `
+  query ListTaskss(
+    $filter: ModelTasksFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listTaskss(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        taskName
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;

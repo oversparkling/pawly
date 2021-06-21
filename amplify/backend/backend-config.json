@@ -16,8 +16,8 @@
           "defaultAuthentication": {
             "authenticationType": "API_KEY",
             "apiKeyConfig": {
-              "apiKeyExpirationDays": 7,
-              "description": "Paw app"
+              "apiKeyExpirationDays": 30,
+              "description": "PawlyApp1"
             }
           },
           "additionalAuthenticationProviders": []

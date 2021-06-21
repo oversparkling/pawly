@@ -12,12 +12,11 @@ function Tweet(props) {
     const image3 = require('../../../assets/pet2.jpg')
     const image4 = require('../../../assets/pet3.jpg')
   return (
-    <View>
+    <View style = {styles.maincontainer}>
       <View style={styles.subheading}>
         <Text style={{ fontSize: 13, fontWeight: "bold" }}>
-          What's new with {props.data.name}
+          What's new with <Text onPress = {()=>tempPage(props.data)} style = {{color:'blue'}}>{props.data.name}</Text>
         </Text>
-        <Button onPress={()=>tempPage(props.data)} title = 'HI HI'/>
       </View>
       <View style={styles.container}>
         <ScrollView horizontal={true}>
@@ -32,7 +31,7 @@ function Tweet(props) {
 }
 const styles = StyleSheet.create({
     maincontainer:{
-        height:'100%',
+        marginBottom:20
     },
     heading:{
         height:80,

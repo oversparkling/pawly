@@ -106,3 +106,33 @@ export const onDeletePet = /* GraphQL */ `
     }
   }
 `;
+export const onCreateTasks = /* GraphQL */ `
+  subscription OnCreateTasks {
+    onCreateTasks {
+      id
+      taskName
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateTasks = /* GraphQL */ `
+  subscription OnUpdateTasks {
+    onUpdateTasks {
+      id
+      taskName
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteTasks = /* GraphQL */ `
+  subscription OnDeleteTasks {
+    onDeleteTasks {
+      id
+      taskName
+      createdAt
+      updatedAt
+    }
+  }
+`;

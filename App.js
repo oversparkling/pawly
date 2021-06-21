@@ -14,39 +14,40 @@ import {getUser} from './src/graphql/queries'
 import {createUser} from './src/graphql/mutations'
 import AddPets from './screens/addPets';
 import Tweet from './screens/profilePage/components/tweet';
+import RegistrationConfirmation from './screens/registerConfirmation';
 Amplify.configure(config)
 
  
 
 function App() {
+  // const saveUserToDB = async(user) =>{
+  //   await API.graphql(graphqlOperation(createUser,{input: user}))
+  // }
 
-  const saveUserToDB = async(user) =>{
-    await API.graphql(graphqlOperation(createUser,{input: user}))
-  }
-
-  useEffect(() =>{
-    const updateUser = async()=>{
-      const userInfo = await Auth.currentAuthenticatedUser({bypassCache:true})
-      if (userInfo){
-        const userData = await API.graphql(graphqlOperation(getUser,{id:userInfo.attributes.sub}))
-        console.log(userData);
-        if (!userData.getUser){
-          const user = {
-            id: userInfo.attributes.sub,
-            username: userInfo.username,
-            name: userInfo.username,
-            image: 'dummy'
-          }
-          console.log(user)
-          saveUserToDB(user);
-        } else{
-          console.log("user alr exists");
-        }
-      }
-    }
-    updateUser();
-  }
-  ,[])
+  // useEffect(() =>{
+  //   const updateUser = async()=>{
+  //     const userInfo = await Auth.currentAuthenticatedUser({bypassCache:true})
+  //     if (userInfo){
+  //       console.log(userInfo.attributes.sub)
+  //       const userData = await API.graphql(graphqlOperation(getUser,{id:userInfo.attributes.sub}))
+  //       if (!userData.getUser){
+  //         const user = {
+  //           id: userInfo.attributes.sub,
+  //           username: userInfo.username,
+  //           name: userInfo.username,
+  //           image: 'dummy'
+  //         }
+  //         console.log(user)
+  //         saveUserToDB(user);
+  //       } else{
+  //         console.log("user alr exists");
+  //       }
+  //     }
+      
+  //   }
+  //   updateUser();
+  // }
+  // ,[])
   
   
   
@@ -56,4 +57,5 @@ function App() {
   );
 }
 
-export default withAuthenticator(App)
+// export default withAuthenticator(App)
+export default App;

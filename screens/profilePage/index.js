@@ -25,9 +25,11 @@ function ProfilePage(props) {
         fetchUser();
     })
     const getPets=( ()=>{
-        console.log(datas)
         return datas.map(data => {
-            return <Tweet data = {data} key = {data.id}/>
+            return (
+            <Tweet data = {data} key = {data.id}/>
+                )
+
         })
     })
 

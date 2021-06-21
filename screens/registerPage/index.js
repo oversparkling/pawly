@@ -1,15 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SafeAreaView } from 'react-navigation';
 import { View,Text, StyleSheet, Pressable, ViewBase, Button, Touchable } from 'react-native';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
+import {Auth} from 'aws-amplify';
 
 function RegisterPage(props) {
+
+    const [username, setUser] = useState('');
+    const [password,setPass] = useState('');
+    const [email,setEmail] = useState('');
     const navigation = useNavigation()
     const backHome = () =>{
-        navigation.navigate('Home')
+        signUp()
     }
+    async function signUp() {
+        try {
+            // console.log(username)
+            // const { user } = await Auth.signUp({
+            //     username,
+            //     password,
+            //     attributes:{
+            //         email,
+            //     }
+            // });
+            // console.log(user);
+            navigation.navigate('RegisterConfirmation',{username:username});
+        } catch (error) {
+            console.log('error signing up:', error);
+        }
+    }
+
+
+
+
     return (
         <SafeAreaView> 
             <View style = {styles.backButtonContainer}>
@@ -22,14 +47,18 @@ function RegisterPage(props) {
                     <Text style = {{fontWeight:"normal",fontSize:36}}>Register</Text>
                 </View>
                 <View style = {styles.inputContainer} >
-                    <TextInput placeholder='Email' style = {styles.inputFields}></TextInput>
+                    <TextInput autoCapitalize='none' placeholder='Email' style = {styles.inputFields} onChangeText = {(text)=>setEmail(text)}></TextInput>
                 </View>
                 <View style = {styles.inputContainer} >
-                    <TextInput placeholder='Password' style = {styles.inputFields}></TextInput>
+                    <TextInput autoCapitalize='none' placeholder='Username' style = {styles.inputFields} onChangeText = {(text)=>setUser(text)}></TextInput>
                 </View>
+                <View style = {styles.inputContainer} >
+                    <TextInput autoCapitalize='none' placeholder='Password' style = {styles.inputFields} onChangeText = {(text)=>setPass(text)}></TextInput>
+                </View>
+                
 
                 <View style = {styles.RegisterButton} >
-                    <TouchableOpacity style = {styles.RegisterTouchable}>
+                    <TouchableOpacity style = {styles.RegisterTouchable} onPress= {()=>backHome()}>
                         <Text style = {{color: 'white'}} >Register</Text>
                     </TouchableOpacity>
                 </View>
@@ -40,7 +69,6 @@ function RegisterPage(props) {
         </SafeAreaView>
     );
 }
-
 //{ }
 
 const styles = StyleSheet.create({
