@@ -3,7 +3,8 @@ type User @model {
   username: String!
   name: String!
   image: String
-  pet: [Pet] @connection(keyName: "byPetName", fields: ["id"])
+  pets: [Pet] @connection(keyName: "byPetName", fields: ["id"])
+  tasks: [Task] @connection(keyName: "byTaskName", fields: ["id"])
 }
 
 type Pet @model @key(name: "byPetName", fields: ["ownerID"]) {
@@ -13,7 +14,7 @@ type Pet @model @key(name: "byPetName", fields: ["ownerID"]) {
   birthdate: String!
 }
 
-type Tasks @model {
+type Task @model @key(name:"byTaskName",fields:["id"]) {
   id: ID!
   taskName: String
   iconName: String

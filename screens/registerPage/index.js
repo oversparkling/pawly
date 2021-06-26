@@ -17,15 +17,15 @@ function RegisterPage(props) {
     }
     async function signUp() {
         try {
-            // console.log(username)
-            // const { user } = await Auth.signUp({
-            //     username,
-            //     password,
-            //     attributes:{
-            //         email,
-            //     }
-            // });
-            // console.log(user);
+            console.log(username)
+            const { user } = await Auth.signUp({
+                username,
+                password,
+                attributes:{
+                    email,
+                }
+            });
+            console.log(user);
             navigation.navigate('RegisterConfirmation',{username:username});
         } catch (error) {
             console.log('error signing up:', error);

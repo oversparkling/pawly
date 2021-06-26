@@ -18,13 +18,13 @@ const Screens = (props) =>{
     return (
         <NavigationContainer>
             <Stack.Navigator screenOptions ={{headerShown: false,
-            }}
+            }} 
         >
             <Stack.Screen name = {'Home'} component = {WelcomeScreenfinal} />
             <Stack.Screen name = {'NextPage'} component =  {ViewImageScreen} />
-            <Stack.Screen name = {'LoginPage'} component = {LoginPage} />
+            <Stack.Screen name = {'LoginPage'} component = {LoginPage} options={{gestureEnabled: false}} />
             <Stack.Screen name = {'RegisterPage'} component = {RegisterPage} />
-            <Stack.Screen name = {'TabsHomePage'} component = {Tabs} />
+            <Stack.Screen name = {'TabsHomePage'} component = {Tabs} options={{gestureEnabled: false}}/>
             <Stack.Screen name = {'Petfolio'} component = {Petfolio}/>
             <Stack.Screen name = {'RegisterConfirmation'} component = {RegistrationConfirmation}/>
 

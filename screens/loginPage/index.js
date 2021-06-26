@@ -5,15 +5,29 @@ import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
 import { Auth } from 'aws-amplify';
+import { Ionicons } from '@expo/vector-icons';
 
 function LoginPage(props) {
     const [username, setUser] = useState('');
     const [password,setPass] = useState('');
+    const [errorMessage,setError] = useState('');
+    const [isVisible,setVisibility] = useState(true);
+    const toggleEye = () =>{
+        setVisibility(!isVisible);
+    }
     const navigation = useNavigation()
     const backHome = () =>{
         navigation.navigate('Home')
     };
     const loggedIn = () =>{
+        if (username == ''){
+            setError('Username cannot be empty')
+            return
+        }
+        if (password == ''){
+            setError('Password cannot be empty')
+            return
+        }
         signIn(username,password)
     };
     
@@ -25,7 +39,8 @@ async function signIn(username,password) {
             navigation.navigate('TabsHomePage')
         }
     } catch (error) {
-        console.log('error signing in', error);
+        setError(error.message)
+        console.log(errorMessage)
     }
 }
 
@@ -42,16 +57,21 @@ async function signIn(username,password) {
                     <Text style = {{fontWeight:"normal",fontSize:36}}>Login</Text>
                 </View>
                 <View style = {styles.inputContainer} >
-                    <TextInput placeholder='Username' style = {styles.inputFields} onChangeText = {text => setUser(text)}></TextInput>
+                    <TextInput  autoCapitalize='none' placeholder='Username' style = {styles.inputFields} onChangeText = {text => setUser(text)}></TextInput>
                 </View>
                 <View style = {styles.inputContainer} >
-                    <TextInput placeholder='Password' style = {styles.inputFields} onChangeText = {text => setPass(text)}></TextInput>
+                    <TextInput secureTextEntry={isVisible} autoCapitalize='none' placeholder='Password' style = {styles.inputFields} onChangeText = {text => setPass(text)}></TextInput>
+                    <Ionicons name="eye-off-outline" size={24} color="black" style = {styles.eyeIcon} onPress = {()=>toggleEye()}/>
                 </View>
 
                 <View style = {styles.LoginButton} >
                     <TouchableOpacity style = {styles.LoginTouchable} onPress = {()=> loggedIn()}>
                         <Text style = {{color: 'white'}} >Login</Text>
                     </TouchableOpacity>
+                </View>
+
+                <View style = {styles.errorMessage}>
+                    <Text style = {{color: 'black',height:'100%',width:'100%',textAlign:'center'}}>{errorMessage}</Text>
                 </View>
 
 
@@ -68,32 +88,39 @@ const styles = StyleSheet.create({
         marginTop:30,
         height:50,
         width:'100%',
+        
     },
     LoginContainer:{
-        flex:1,
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        alignItems:'center'
+        
     },
     LoginHeading:{
         marginLeft:20,
         padding:20,
         height:100,
         width:'100%',
-        justifyContent:'center'
-
+        justifyContent:'center',
+    },
+    eyeIcon:{
+        justifyContent: 'flex-end',
+        marginLeft:55
     },
     inputContainer:{
-        alignItems:"center",
         height:52,
-        width: '100%',
-        marginBottom:10
+        width: '80%',
+        marginBottom:10,
+        flexDirection:'row',
+        alignItems:'center',
+        borderWidth:2,
+        justifyContent:'flex-start'
+        
+        
 
     },
     inputFields:{
-        justifyContent:"center",
-        width:314,
+        width:'70%',
         height:'100%',
-        alignItems:"center",
-        borderWidth:2
 
     },
     LoginButton:{
@@ -108,7 +135,13 @@ const styles = StyleSheet.create({
         backgroundColor:'black',
         borderRadius:30,
         alignItems:'center',
-        justifyContent:'center'}
+        justifyContent:'center'},
+    errorMessage:{
+        marginTop:5,
+        width:'100%',
+        height:30,
+        alignItems:'center'
+    }
     
 
 

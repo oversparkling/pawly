@@ -8,12 +8,22 @@ export const getUser = /* GraphQL */ `
       username
       name
       image
-      pet {
+      pets {
         items {
           id
           name
           ownerID
           birthdate
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      tasks {
+        items {
+          id
+          taskName
+          iconName
           createdAt
           updatedAt
         }
@@ -36,7 +46,10 @@ export const listUsers = /* GraphQL */ `
         username
         name
         image
-        pet {
+        pets {
+          nextToken
+        }
+        tasks {
           nextToken
         }
         createdAt
@@ -77,26 +90,28 @@ export const listPets = /* GraphQL */ `
     }
   }
 `;
-export const getTasks = /* GraphQL */ `
-  query GetTasks($id: ID!) {
-    getTasks(id: $id) {
+export const getTask = /* GraphQL */ `
+  query GetTask($id: ID!) {
+    getTask(id: $id) {
       id
       taskName
+      iconName
       createdAt
       updatedAt
     }
   }
 `;
-export const listTaskss = /* GraphQL */ `
-  query ListTaskss(
-    $filter: ModelTasksFilterInput
+export const listTasks = /* GraphQL */ `
+  query ListTasks(
+    $filter: ModelTaskFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listTaskss(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listTasks(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         taskName
+        iconName
         createdAt
         updatedAt
       }

@@ -11,12 +11,22 @@ export const createUser = /* GraphQL */ `
       username
       name
       image
-      pet {
+      pets {
         items {
           id
           name
           ownerID
           birthdate
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      tasks {
+        items {
+          id
+          taskName
+          iconName
           createdAt
           updatedAt
         }
@@ -37,12 +47,22 @@ export const updateUser = /* GraphQL */ `
       username
       name
       image
-      pet {
+      pets {
         items {
           id
           name
           ownerID
           birthdate
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      tasks {
+        items {
+          id
+          taskName
+          iconName
           createdAt
           updatedAt
         }
@@ -63,12 +83,22 @@ export const deleteUser = /* GraphQL */ `
       username
       name
       image
-      pet {
+      pets {
         items {
           id
           name
           ownerID
           birthdate
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      tasks {
+        items {
+          id
+          taskName
+          iconName
           createdAt
           updatedAt
         }
@@ -124,40 +154,43 @@ export const deletePet = /* GraphQL */ `
     }
   }
 `;
-export const createTasks = /* GraphQL */ `
-  mutation CreateTasks(
-    $input: CreateTasksInput!
-    $condition: ModelTasksConditionInput
+export const createTask = /* GraphQL */ `
+  mutation CreateTask(
+    $input: CreateTaskInput!
+    $condition: ModelTaskConditionInput
   ) {
-    createTasks(input: $input, condition: $condition) {
+    createTask(input: $input, condition: $condition) {
       id
       taskName
+      iconName
       createdAt
       updatedAt
     }
   }
 `;
-export const updateTasks = /* GraphQL */ `
-  mutation UpdateTasks(
-    $input: UpdateTasksInput!
-    $condition: ModelTasksConditionInput
+export const updateTask = /* GraphQL */ `
+  mutation UpdateTask(
+    $input: UpdateTaskInput!
+    $condition: ModelTaskConditionInput
   ) {
-    updateTasks(input: $input, condition: $condition) {
+    updateTask(input: $input, condition: $condition) {
       id
       taskName
+      iconName
       createdAt
       updatedAt
     }
   }
 `;
-export const deleteTasks = /* GraphQL */ `
-  mutation DeleteTasks(
-    $input: DeleteTasksInput!
-    $condition: ModelTasksConditionInput
+export const deleteTask = /* GraphQL */ `
+  mutation DeleteTask(
+    $input: DeleteTaskInput!
+    $condition: ModelTaskConditionInput
   ) {
-    deleteTasks(input: $input, condition: $condition) {
+    deleteTask(input: $input, condition: $condition) {
       id
       taskName
+      iconName
       createdAt
       updatedAt
     }

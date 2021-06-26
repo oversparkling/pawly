@@ -4,7 +4,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-navigation';
 import BackButton from '../commonComponents/BackButton';
 import { MaterialIcons } from '@expo/vector-icons';
-import { listTaskss } from '../../src/graphql/queries';
+import { listTasks } from '../../src/graphql/queries';
 import TaskButton from './component';
 import { useState, useEffect } from 'react';
 import { Auth, API, graphqlOperation } from 'aws-amplify';
@@ -15,9 +15,9 @@ function Task(props) {
         const fetchUser = async ()=>{
             const userInfo = await Auth.currentAuthenticatedUser({bypassCache:true});
             if (userInfo){
-                const taskData = await API.graphql(graphqlOperation(listTaskss))
+                const taskData = await API.graphql(graphqlOperation(listTasks))
                 if (taskData){
-                    setDatas(taskData.data.listTaskss.items)
+                    setDatas(taskData.data.listTasks.items)
                 }
             }
         }

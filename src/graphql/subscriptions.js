@@ -8,12 +8,22 @@ export const onCreateUser = /* GraphQL */ `
       username
       name
       image
-      pet {
+      pets {
         items {
           id
           name
           ownerID
           birthdate
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      tasks {
+        items {
+          id
+          taskName
+          iconName
           createdAt
           updatedAt
         }
@@ -31,12 +41,22 @@ export const onUpdateUser = /* GraphQL */ `
       username
       name
       image
-      pet {
+      pets {
         items {
           id
           name
           ownerID
           birthdate
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      tasks {
+        items {
+          id
+          taskName
+          iconName
           createdAt
           updatedAt
         }
@@ -54,12 +74,22 @@ export const onDeleteUser = /* GraphQL */ `
       username
       name
       image
-      pet {
+      pets {
         items {
           id
           name
           ownerID
           birthdate
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      tasks {
+        items {
+          id
+          taskName
+          iconName
           createdAt
           updatedAt
         }
@@ -106,31 +136,34 @@ export const onDeletePet = /* GraphQL */ `
     }
   }
 `;
-export const onCreateTasks = /* GraphQL */ `
-  subscription OnCreateTasks {
-    onCreateTasks {
+export const onCreateTask = /* GraphQL */ `
+  subscription OnCreateTask {
+    onCreateTask {
       id
       taskName
+      iconName
       createdAt
       updatedAt
     }
   }
 `;
-export const onUpdateTasks = /* GraphQL */ `
-  subscription OnUpdateTasks {
-    onUpdateTasks {
+export const onUpdateTask = /* GraphQL */ `
+  subscription OnUpdateTask {
+    onUpdateTask {
       id
       taskName
+      iconName
       createdAt
       updatedAt
     }
   }
 `;
-export const onDeleteTasks = /* GraphQL */ `
-  subscription OnDeleteTasks {
-    onDeleteTasks {
+export const onDeleteTask = /* GraphQL */ `
+  subscription OnDeleteTask {
+    onDeleteTask {
       id
       taskName
+      iconName
       createdAt
       updatedAt
     }

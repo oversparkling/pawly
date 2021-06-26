@@ -17,8 +17,8 @@ function ProfilePage(props) {
             const userInfo = await Auth.currentAuthenticatedUser({bypassCache:true});
             if (userInfo){
                 const userData = await API.graphql(graphqlOperation(getUser,{id: userInfo.attributes.sub}))
-                if (userData.data.getUser.pet){
-                    setDatas(userData.data.getUser.pet.items)
+                if (userData.data.getUser.pets){
+                    setDatas(userData.data.getUser.pets.items)
                 }
             }
         }
