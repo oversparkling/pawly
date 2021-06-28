@@ -10,4 +10,4 @@ Are you a father? 👶🏻
 - [ ] no
 
 The answer is:
-![](https://gph.is/g/apLvXmv)
+![](https://media.giphy.com/media/daPCSjwus6UR2JxRX1/giphy.gif)
