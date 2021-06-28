@@ -15,11 +15,28 @@ import {createUser} from './src/graphql/mutations'
 import AddPets from './screens/addPets';
 import Tweet from './screens/profilePage/components/tweet';
 import RegistrationConfirmation from './screens/registerConfirmation';
+import TaskCard from './screens/TaskHomePage/components/TaskCard';
+import * as Font from "expo-font";
+import { View,Text } from 'react-native';
+import TaskHomePage from './screens/TaskHomePage';
 Amplify.configure(config)
 
  
 
 function App() {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  const loadFonts = async () => {
+      await Font.loadAsync({
+          "Recoleta-Regular": require("./assets/fonts/Recoleta-Regular.ttf"),
+          "Recoleta-Bold": require("./assets/fonts/Recoleta-Bold.ttf"),
+      });
+      setIsLoaded(true);
+  };
+
+  useEffect(() => {
+      loadFonts();
+  }, [])
   // const saveUserToDB = async(user) =>{
   //   await API.graphql(graphqlOperation(createUser,{input: user}))
   // }
@@ -49,13 +66,19 @@ function App() {
   // }
   // ,[])
   
+
   
   
   return(
-    <Screens/>
+    isLoaded?(
+      <TaskHomePage/>
+    ):(<View><Text>Still Loading</Text></View>)
+
     // <Tweet/>
   );
 }
 
 // export default withAuthenticator(App)
 export default App;
+
+
