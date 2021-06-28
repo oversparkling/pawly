@@ -1,13 +1,13 @@
 # Pawly
 
 Nicholas Ong, will you marry me? 💍
-- [ ] yes
+- [X] yes
 - [ ] no
 
 
 Are you a father? 👶🏻
 - [ ] yes
-- [ ] no
+- [X] no
 
 The answer is: <br>
 ![](https://media.giphy.com/media/daPCSjwus6UR2JxRX1/giphy.gif)
