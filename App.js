@@ -1,27 +1,9 @@
+import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
-import WelcomeScreenfinal from './welcomeScreenfinal';
-import ViewImageScreen from './ViewImageScreen';
-import Screens from './HomeStackNavigator'
-import LoginPage from './screens/loginPage';
-import ProfilePage from './screens/profilePage';
-import { NavigationContainer } from '@react-navigation/native';
-import Tabs from './screens/tabs';
-import Task from './screens/TaskPage';
-import Amplify, { Auth, API, graphqlOperation } from 'aws-amplify'
-import config from './src/aws-exports'
-import { withAuthenticator } from 'aws-amplify-react-native'
-import {getUser} from './src/graphql/queries'
-import {createUser} from './src/graphql/mutations'
-import AddPets from './screens/addPets';
-import Tweet from './screens/profilePage/components/tweet';
-import RegistrationConfirmation from './screens/registerConfirmation';
-import TaskCard from './screens/TaskHomePage/components/TaskCard';
+import { StyleSheet, Text, View } from 'react-native';
+import TaskCard from './components/TaskCard';
 import * as Font from "expo-font";
-import { View,Text } from 'react-native';
-import TaskHomePage from './screens/TaskHomePage';
-Amplify.configure(config)
-
- 
+import TaskHomeScreen from './screens/TaskHomeScreen';
 
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -71,7 +53,7 @@ function App() {
   
   return(
     isLoaded?(
-      <TaskHomePage/>
+      <TaskHomeScreen/>
     ):(<View><Text>Still Loading</Text></View>)
 
     // <Tweet/>
@@ -80,5 +62,3 @@ function App() {
 
 // export default withAuthenticator(App)
 export default App;
-
-
