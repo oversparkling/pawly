@@ -18,7 +18,7 @@ function PetProfileScreen(props) {
             {/* <ImageBackground source = {require("../assets/cat-profile.png")} style = {{width:'100%',height:500}}>
                 <Text>hello</Text>
             </ImageBackground> */}
-            <Swiper autoplay = {true} showsPagination = {false} style={{height: 500}}>
+        <Swiper autoplay = {true} showsPagination = {false} style={{height: 500}}>
                 <Image
                     source={require("../assets/cat-profile.png")}
                     style={{ width: "100%", height: 500 }}
