@@ -9,12 +9,12 @@ function TaskCard(props) {
         <View>
             <Text style = {{alignSelf:'flex-end', fontFamily:"Recoleta-Regular"}}>{props.hoursAgo}</Text>
             <View style = {styles.container}>
-            <Image style = {styles.imageContainer} source = {require(props.image)}/>
+            <Image style = {styles.imageContainer} source = {require("../assets/TaskCard1.png")}/>
             <View style = {{flexDirection:'row',justifyContent:'space-between',alignItems:'center',padding:10}}>
             <View style = {styles.textInfo}>
                 <Text style = {styles.headerText}>{props.taskName}</Text>
                 <View style = {styles.timeOwner}>
-                    <Image style = {styles.profileImage} source = {require(props.profileImage)}/>
+                    <Image style = {styles.profileImage} source = {require("../assets/pet1.jpg")}/>
                     <Text style = {{color:'white', marginLeft:15}}>|</Text>
                     <Text style = {styles.time}>{props.time}</Text>
                 </View>
@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
         height:222,
         width:326,
         borderRadius:14,
+        borderWidth:0.5,
         resizeMode:'contain'
     },
     timeOwner:{

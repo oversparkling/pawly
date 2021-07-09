@@ -1,63 +1,66 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import TaskCard from './components/TaskCard';
+import { StatusBar } from "expo-status-bar";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import TaskCard from "./components/TaskCard";
 import * as Font from "expo-font";
-import TaskHomeScreen from './screens/TaskHomeScreen';
+import TaskHomeScreen from "./screens/TaskHomeScreen";
+import PetProfileScreen from "./screens/PetProfileScreen";
+import AttributeCard from "./components/AttributeCard";
+import MainPetsScreen from "./screens/MainPetsScreen";
 
 function App() {
-  const [isLoaded, setIsLoaded] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false);
 
-  const loadFonts = async () => {
-      await Font.loadAsync({
-          "Recoleta-Regular": require("./assets/fonts/Recoleta-Regular.ttf"),
-          "Recoleta-Bold": require("./assets/fonts/Recoleta-Bold.ttf"),
-      });
-      setIsLoaded(true);
-  };
+    const loadFonts = async () => {
+        await Font.loadAsync({
+            "Recoleta-Regular": require("./assets/fonts/Recoleta-Regular.ttf"),
+            "Recoleta-Bold": require("./assets/fonts/Recoleta-Bold.ttf"),
+            "Sofia-Pro-Regular": require("./assets/fonts/Sofia-Pro-Regular.ttf"),
+        });
+        setIsLoaded(true);
+    };
 
-  useEffect(() => {
-      loadFonts();
-  }, [])
-  // const saveUserToDB = async(user) =>{
-  //   await API.graphql(graphqlOperation(createUser,{input: user}))
-  // }
+    useEffect(() => {
+        loadFonts();
+    }, []);
+    // const saveUserToDB = async(user) =>{
+    //   await API.graphql(graphqlOperation(createUser,{input: user}))
+    // }
 
-  // useEffect(() =>{
-  //   const updateUser = async()=>{
-  //     const userInfo = await Auth.currentAuthenticatedUser({bypassCache:true})
-  //     if (userInfo){
-  //       console.log(userInfo.attributes.sub)
-  //       const userData = await API.graphql(graphqlOperation(getUser,{id:userInfo.attributes.sub}))
-  //       if (!userData.getUser){
-  //         const user = {
-  //           id: userInfo.attributes.sub,
-  //           username: userInfo.username,
-  //           name: userInfo.username,
-  //           image: 'dummy'
-  //         }
-  //         console.log(user)
-  //         saveUserToDB(user);
-  //       } else{
-  //         console.log("user alr exists");
-  //       }
-  //     }
-      
-  //   }
-  //   updateUser();
-  // }
-  // ,[])
-  
+    // useEffect(() =>{
+    //   const updateUser = async()=>{
+    //     const userInfo = await Auth.currentAuthenticatedUser({bypassCache:true})
+    //     if (userInfo){
+    //       console.log(userInfo.attributes.sub)
+    //       const userData = await API.graphql(graphqlOperation(getUser,{id:userInfo.attributes.sub}))
+    //       if (!userData.getUser){
+    //         const user = {
+    //           id: userInfo.attributes.sub,
+    //           username: userInfo.username,
+    //           name: userInfo.username,
+    //           image: 'dummy'
+    //         }
+    //         console.log(user)
+    //         saveUserToDB(user);
+    //       } else{
+    //         console.log("user alr exists");
+    //       }
+    //     }
 
-  
-  
-  return(
-    isLoaded?(
-      <TaskHomeScreen/>
-    ):(<View><Text>Still Loading</Text></View>)
+    //   }
+    //   updateUser();
+    // }
+    // ,[])
+
+    return isLoaded ? (
+        <MainPetsScreen />
+    ) : (
+        <View>
+            <Text>Still Loading</Text>
+        </View>
+    );
 
     // <Tweet/>
-  );
 }
 
 // export default withAuthenticator(App)
