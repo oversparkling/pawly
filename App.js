@@ -3,10 +3,14 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import TaskCard from "./components/TaskCard";
 import * as Font from "expo-font";
-import TaskHomeScreen from "./screens/TaskHomeScreen";
-import PetProfileScreen from "./screens/PetProfileScreen";
+import TaskHomeScreen from "./screens/Home/TaskHomeScreen";
+import PetProfileScreen from "./screens/Petfolio/PetProfileScreen";
 import AttributeCard from "./components/AttributeCard";
-import MainPetsScreen from "./screens/MainPetsScreen";
+import MainPetsScreen from "./screens/Petfolio/MainPetsScreen";
+import PetfolioStack from "./screens/Petfolio/PetfolioStack";
+import { NavigationContainer } from "@react-navigation/native";
+import TabStack from "./screens/misc/TabStack";
+import CustomTabButton from "./screens/misc/components/CustomTabButton";
 
 function App() {
     const [isLoaded, setIsLoaded] = useState(false);
@@ -53,7 +57,10 @@ function App() {
     // ,[])
 
     return isLoaded ? (
-        <MainPetsScreen />
+      <NavigationContainer>
+        <TabStack />
+      </NavigationContainer>
+        
     ) : (
         <View>
             <Text>Still Loading</Text>

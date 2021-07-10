@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, SafeAreaView, ScrollView, Text, StyleSheet } from 'react-native';
 import tailwind from 'tailwind-rn';
-import TaskCard from '../components/TaskCard';
+import TaskCard from '../../components/TaskCard';
 
 function TaskHomeScreen(props) {
     return (

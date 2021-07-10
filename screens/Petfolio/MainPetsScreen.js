@@ -1,10 +1,12 @@
 import React from "react";
-import { SafeAreaView,View, StyleSheet,TouchableOpacity, Text, ScrollView,Image } from "react-native";
+import { SafeAreaView,View, StyleSheet,TouchableOpacity, Text, ScrollView,Image, TouchableNativeFeedback } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { Icon,Divider } from "react-native-elements";
+import { useNavigation } from '@react-navigation/native';
 
 
 function MainPetsScreen(props) {
+    const navigation = useNavigation();
     return (
         <SafeAreaView>
             <View style={styles.header}>
@@ -19,10 +21,13 @@ function MainPetsScreen(props) {
             </View>
             <View>
                 <View style = {styles.petContainer}>
-                    <Text style = {{fontFamily:'Recoleta-Regular',fontSize:25}}>Hiro</Text>
+                    <TouchableOpacity onPress = {()=> navigation.navigate("PetProfileScreen")}>
+                        <Text style = {{fontFamily:'Recoleta-Regular',fontSize:25}}>Hiro</Text>
+                    </TouchableOpacity>
+                    
                     <ScrollView horizontal={true}>
-                        <Image source = {require("../assets/cat-profile.png")} style = {styles.image}/>
-                        <Image source = {require("../assets/cat-profile2.png")} style = {styles.image}/>
+                        <Image source = {require("../../assets/cat-profile.png")} style = {styles.image}/>
+                        <Image source = {require("../../assets/cat-profile2.png")} style = {styles.image}/>
                     </ScrollView>
                     <Divider style = {{width:306,marginTop:20}} width = {2}/>
                 </View>
@@ -33,8 +38,8 @@ function MainPetsScreen(props) {
                 <View style = {styles.petContainer}>
                     <Text style = {{fontFamily:'Recoleta-Regular',fontSize:25}}>Kai</Text>
                     <ScrollView horizontal={true}>
-                        <Image source = {require("../assets/shiba-1.png")} style = {styles.image}/>
-                        <Image source = {require("../assets/shiba-2.png")} style = {styles.image}/>
+                        <Image source = {require("../../assets/shiba-1.png")} style = {styles.image}/>
+                        <Image source = {require("../../assets/shiba-2.png")} style = {styles.image}/>
                     </ScrollView>
                 </View>
             </View>

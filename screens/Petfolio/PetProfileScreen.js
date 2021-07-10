@@ -9,10 +9,13 @@ import {
     TouchableHighlight,
     TouchableOpacity,
 } from "react-native";
-import AttributeCard from "../components/AttributeCard";
+import AttributeCard from "../../components/AttributeCard";
 import Swiper from 'react-native-swiper'
+import { Icon,Divider } from "react-native-elements";
+import { useNavigation } from "@react-navigation/native";
 
 function PetProfileScreen(props) {
+    const navigation = useNavigation();
     return (
         <>
             {/* <ImageBackground source = {require("../assets/cat-profile.png")} style = {{width:'100%',height:500}}>
@@ -20,11 +23,11 @@ function PetProfileScreen(props) {
             </ImageBackground> */}
         <Swiper autoplay = {true} showsPagination = {false} style={{height: 500}}>
                 <Image
-                    source={require("../assets/cat-profile.png")}
+                    source={require("../../assets/cat-profile.png")}
                     style={{ width: "100%", height: 500 }}
                 />
                 <Image
-                    source={require("../assets/pet1.jpg")}
+                    source={require("../../assets/pet1.jpg")}
                     style={{ width: "100%", height: 500 }}
                 />
             </Swiper>
@@ -32,6 +35,13 @@ function PetProfileScreen(props) {
                 source={require("../assets/cat-profile.png")}
                 style={{ width: "100%", height: 500, position: "absolute" }}
             /> */}
+             <TouchableOpacity style ={{position:'absolute',top:40,left:20}} onPress = {()=>navigation.goBack()}>
+                    <Icon
+                        name="arrow-back-outline"
+                        type="ionicon"
+                        color="#000"
+                    />
+                </TouchableOpacity>
             <View style={styles.informationContainer}>
                 <Text style={styles.petName}>Hiro</Text>
                 <Text style={styles.petDescription}>The sweetest ragdoll</Text>
