@@ -11,6 +11,7 @@ import PetfolioStack from "./screens/Petfolio/PetfolioStack";
 import { NavigationContainer } from "@react-navigation/native";
 import TabStack from "./screens/misc/TabStack";
 import CustomTabButton from "./screens/misc/components/CustomTabButton";
+import AddTaskScreen from "./screens/Tasks/AddTaskScreen";
 
 function App() {
     const [isLoaded, setIsLoaded] = useState(false);
@@ -57,9 +58,10 @@ function App() {
     // ,[])
 
     return isLoaded ? (
-      <NavigationContainer>
-        <TabStack />
-      </NavigationContainer>
+        <AddTaskScreen></AddTaskScreen>
+    //   <NavigationContainer>
+    //     <TabStack />
+    //   </NavigationContainer>
         
     ) : (
         <View>
