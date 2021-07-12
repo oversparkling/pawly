@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
 
     text:{
         fontSize: 18,
-        fontFamily: "Sofia Pro Regular",
+        fontFamily: "Sofia-Pro-Regular",
         color: "#E1AAAA",
     },
     

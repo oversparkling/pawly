@@ -58,10 +58,10 @@ function App() {
     // ,[])
 
     return isLoaded ? (
-        <AddTaskScreen></AddTaskScreen>
-    //   <NavigationContainer>
-    //     <TabStack />
-    //   </NavigationContainer>
+        // <AddTaskScreen></AddTaskScreen>
+      <NavigationContainer>
+        <TabStack />
+      </NavigationContainer>
         
     ) : (
         <View>
