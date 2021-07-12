@@ -3,34 +3,7 @@ import { StyleSheet, Text, ScrollView, View } from "react-native";
 import TaskTypeCard from "./TaskTypeCard";
 import { useNavigation } from "@react-navigation/native";
 
-// function AddTaskScreen(props){
-//   const [task, setTask] = useState([
-//     { name: 'Brush',  key: '1' },
-//     { name: 'Clean',  key: '2' },
-//     { name: 'Feed',   key: '3' },
-//     { name: 'Groom',  key: '4' },
-//     { name: 'Play',   key: '5' },
-//     { name: 'Shower', key: '6' },
-//     { name: 'Walk',   key: '7' },
-//     { name: 'Train',  key: '8' }
-//   ]);
-
-//   return (
-//     <View styles = {styles.container }>
-//       <ScrollView>
-//         { task.map( (item) => {
-//             return (
-//               <View key = {item.key} >
-//                 <Text style = {styles.item}>{item.name}</Text>
-//               </View>
-//             )
-//         })}
-//       </ScrollView>
-//     </View>
-//   );
-// }
-
-function AddTaskScreen(props) {
+function EditTaskScreen(props) {
     const [task, setTask] = useState([
         { name: "Brush", key: "1" },
         { name: "Clean", key: "2" },
@@ -99,4 +72,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default AddTaskScreen;
+export default EditTaskScreen;

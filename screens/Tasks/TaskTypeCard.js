@@ -1,23 +1,21 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import React from "react";
+import { Text, StyleSheet, TouchableHighlight } from "react-native";
 
 function TaskTypeCard(props) {
-
     return (
-        <View style={styles.container}>
-            <Text style={styles.text}>Brush</Text>
-        </View>
-        
-    )
+        <TouchableHighlight style={styles.container} onPress={props.onPress}>
+            <Text style={styles.text}>{props.text}</Text>
+        </TouchableHighlight>
+    );
 }
 
 const styles = StyleSheet.create({
-    container:{
+    container: {
         width: 186,
         height: 69,
         borderRadius: 15,
-        flexDirection: 'column',
-        backgroundColor: 'white',
+        flexDirection: "column",
+        backgroundColor: "white",
         alignItems: "center",
         justifyContent: "center",
         borderColor: "#E1AAAA",
@@ -26,12 +24,11 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
 
-    text:{
+    text: {
         fontSize: 18,
         fontFamily: "Sofia-Pro-Regular",
         color: "#E1AAAA",
     },
-    
-}) 
+});
 
 export default TaskTypeCard;

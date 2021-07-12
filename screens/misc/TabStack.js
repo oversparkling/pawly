@@ -5,6 +5,8 @@ import HomeStack from "../Home/HomeStack";
 import PetfolioStack from "../Petfolio/PetfolioStack";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import CustomTabButton from "./components/CustomTabButton";
+import AddTaskScreen from "../Tasks/AddTaskScreen";
+import TaskStack from "../Tasks/TaskStack";
 
 function TabStack(props) {
     const Tab = createBottomTabNavigator();
@@ -23,7 +25,7 @@ function TabStack(props) {
                     ),
                 }}
             />
-            <Tab.Screen name = "AddPets" component = {HomeStack} options = {{ tabBarIcon:({focused})=>(
+            <Tab.Screen name = "AddPets" component = {TaskStack} options = {{ tabBarIcon:({focused})=>(
                 <CustomTabButton />
             )
             }}/>

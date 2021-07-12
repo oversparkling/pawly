@@ -8,7 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 function MainPetsScreen(props) {
     const navigation = useNavigation();
     return (
-        <SafeAreaView>
+        <SafeAreaView style = {{backgroundColor:'white',height:'100%'}}>
             <View style={styles.header}>
                 <TouchableOpacity style ={{marginLeft:20}} >
                     <Icon
