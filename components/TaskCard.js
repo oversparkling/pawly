@@ -27,37 +27,44 @@ function TaskCard(props) {
 }
 
 const styles = StyleSheet.create({
+
     container:{
-        borderRadius:14,
-        flexDirection:'column',
-        backgroundColor:'#C5CCA6',
-        width:326,
-        marginBottom:30
+        borderRadius:       15,
+        flexDirection:      'column',
+        backgroundColor:    '#C5CCA6',
+        width:              326,
+        marginBottom:       30,
     },
+
     textInfo:{
 
     },
+
     imageContainer:{
-        height:222,
-        width:326,
-        borderRadius:14,
-        borderWidth:0.5,
-        resizeMode:'contain'
+        height:             222,
+        width:              326,
+        borderRadius:       14,
+        borderWidth:        0.5,
+        resizeMode:         'contain',
     },
+
     timeOwner:{
         flexDirection:'row'
     },
+
     profileImage:{
         height: 22,
         width: 22,
         borderRadius: 11,
     },
+    
     time:{
         marginLeft:15,
         fontFamily:"Recoleta-Regular",
         color:'white',
         fontSize:15
     },
+    
     headerText:{
         fontSize:25,
         fontFamily:"Recoleta-Regular",

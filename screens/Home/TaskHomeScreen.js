@@ -1,33 +1,41 @@
 import React from "react";
-import { View, SafeAreaView, ScrollView, Text, StyleSheet } from "react-native";
+import { View, ScrollView, Text, StyleSheet } from "react-native";
 import tailwind from "tailwind-rn";
 import TaskCard from "../../components/TaskCard";
 
 function TaskHomeScreen(props) {
     return (
-        <View style = {{backgroundColor:'white'}}>
-            <ScrollView contentContainerStyle={[tailwind("mt-20 p-4")]}>
-                <Text style={styles.header}>Upcoming</Text>
-                <View>
-                    <Text style={styles.dayHeader}>Today</Text>
-                    <View style={tailwind("items-center mt-10")}>
-                        <TaskCard time="3hrs" />
+        <View style = { styles.container }>
+            <ScrollView showsVerticalScrollIndicator = { false }>
+                <Text style = {styles.header}> Upcoming </Text>
+                <Text style={styles.headerDay}> Today </Text>
+                    <View style = {tailwind("items-center mt-10")}>
+                        <TaskCard time = "3hrs" />
                         <TaskCard />
                         <TaskCard />
                     </View>
-                </View>
             </ScrollView>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
+
+    container: {
+        width:              "100%",
+        backgroundColor:    "white",
+        paddingLeft:        30,
+        paddingRight:       30,
+        paddingTop:         60,
+    },
+
     header: {
-        fontSize: 36,
+        fontSize: 40,
         fontFamily: "Recoleta-Regular",
     },
-    dayHeader: {
-        fontSize: 15,
+
+    headerDay: {
+        fontSize: 23,
         fontFamily: "Recoleta-Regular",
     },
 });
