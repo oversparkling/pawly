@@ -1,9 +1,8 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import TaskTypeCard from "../components/TaskTypeCard";
+import TaskTypeCard from "./TaskTypeCard";
 
-const AddTaskScreen = (props) => {
-
+function AddTaskScreen(props) {
   return (
     <View style = { styles.mainContainer }>
       <Text style = { styles.header }> Add Task </Text> 
