@@ -22,26 +22,24 @@ function PetProfileScreen(props) {
                 <Text>hello</Text>
             </ImageBackground> */}
         <Swiper autoplay = {true} showsPagination = {false} style={{height: 500}}>
-                <Image
-                    source={require("../../assets/cat-profile.png")}
-                    style={{ width: "100%", height: 500 }}
-                />
-                <Image
-                    source={require("../../assets/pet1.jpg")}
-                    style={{ width: "100%", height: 500 }}
-                />
-            </Swiper>
+            <Image
+                source = {require("../../assets/cat-profile.png")}
+                style = {{ width: "100%", height: 500 }} />
+            <Image
+                source={require("../../assets/pet1.jpg")}
+                style={{ width: "100%", height: 500 }}/>
+        </Swiper>
             {/* <Image
                 source={require("../assets/cat-profile.png")}
                 style={{ width: "100%", height: 500, position: "absolute" }}
             /> */}
-             <TouchableOpacity style ={{position:'absolute',top:40,left:20}} onPress = {()=>navigation.goBack()}>
-                    <Icon
-                        name="arrow-back-outline"
-                        type="ionicon"
-                        color="#000"
-                    />
-                </TouchableOpacity>
+            <TouchableOpacity style = { styles.arrow } onPress = {()=>navigation.goBack()}>
+                <Icon
+                    name = "arrow-back-outline"
+                    type = "ionicon"
+                    color = "#000"
+                />
+            </TouchableOpacity>
             <View style={styles.informationContainer}>
                 <Text style={styles.petName}>Hiro</Text>
                 <Text style={styles.petDescription}>The sweetest ragdoll</Text>
@@ -62,6 +60,7 @@ function PetProfileScreen(props) {
 }
 
 const styles = StyleSheet.create({
+
     informationContainer: {
         position:'absolute',
         top:381,
@@ -71,6 +70,7 @@ const styles = StyleSheet.create({
         backgroundColor:'white',
         padding:30
     },
+    
     petName: {
         fontSize: 35,
         fontFamily: "Recoleta-Regular",
@@ -98,6 +98,12 @@ const styles = StyleSheet.create({
         height:82,
         borderWidth:1,
         borderRadius:10
+    },
+
+    arrow: {
+        position:           'absolute',
+        top:                40,
+        left:               20,
     }
 });
 
