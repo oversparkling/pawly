@@ -7,7 +7,7 @@ function TaskHomeScreen(props) {
     return (
         <View style = { styles.container }>
             <ScrollView showsVerticalScrollIndicator = { false }>
-                <Text style = {styles.header}> Upcoming </Text>
+                <Text style = {styles.headerText}> Upcoming </Text>
                 <Text style={styles.headerDay}> Today </Text>
                     <View style = {tailwind("items-center mt-10")}>
                         <TaskCard time = "3hrs" />
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
         paddingTop:         60,
     },
 
-    header: {
+    headerText: {
         fontSize: 40,
         fontFamily: "Recoleta-Regular",
     },

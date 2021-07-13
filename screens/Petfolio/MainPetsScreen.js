@@ -1,72 +1,91 @@
 import React from "react";
-import { SafeAreaView,View, StyleSheet,TouchableOpacity, Text, ScrollView,Image, TouchableNativeFeedback } from "react-native";
-import Ionicons from "react-native-vector-icons/Ionicons";
-import { Icon,Divider } from "react-native-elements";
+import { View, StyleSheet,TouchableOpacity, Text, ScrollView,Image, TouchableNativeFeedback } from "react-native";
+import { Icon, Divider } from "react-native-elements";
 import { useNavigation } from '@react-navigation/native';
+import Carousel from './Carousel'
+import { petfolioData } from './petfolioData'
 
 
 function MainPetsScreen(props) {
     const navigation = useNavigation();
     return (
-        <SafeAreaView style = {{backgroundColor:'white',height:'100%'}}>
-            <View style={styles.header}>
-                <TouchableOpacity style ={{marginLeft:20}} >
-                    <Icon
-                        name="arrow-back-outline"
-                        type="ionicon"
-                        color="#000"
-                    />
-                </TouchableOpacity>
-                <Text style = {{fontFamily:'Recoleta-Regular',fontSize:35,marginLeft:10}}>My Pets</Text>
-            </View>
-            <View>
-                <View style = {styles.petContainer}>
+    
+        <View style = { styles.container }>
+            <ScrollView showsVerticalScrollIndicator = { false } style = { styles.scrollView }>
+                <View style = { styles.header }>
+                    <Text style = { styles.headerText }> My Pets </Text>
+                </View> 
+                <View style = { styles.body }>
                     <TouchableOpacity onPress = {()=> navigation.navigate("PetProfileScreen")}>
-                        <Text style = {{fontFamily:'Recoleta-Regular',fontSize:25}}>Hiro</Text>
+                        <Text style = { styles.petText }> Hiro </Text>
                     </TouchableOpacity>
-                    
-                    <ScrollView horizontal={true}>
-                        <Image source = {require("../../assets/cat-profile.png")} style = {styles.image}/>
-                        <Image source = {require("../../assets/cat-profile2.png")} style = {styles.image}/>
-                    </ScrollView>
-                    <Divider style = {{width:306,marginTop:20}} width = {2}/>
-                </View>
-                
-            </View>
+                    <View><Carousel data = {petfolioData}/></View>
 
-            <View>
-                <View style = {styles.petContainer}>
-                    <Text style = {{fontFamily:'Recoleta-Regular',fontSize:25}}>Kai</Text>
-                    <ScrollView horizontal={true}>
-                        <Image source = {require("../../assets/shiba-1.png")} style = {styles.image}/>
-                        <Image source = {require("../../assets/shiba-2.png")} style = {styles.image}/>
-                    </ScrollView>
+                    <TouchableOpacity onPress = {()=> navigation.navigate("PetProfileScreen")}>
+                        <Text style = { styles.petText }> Hiro </Text>
+                    </TouchableOpacity>
+                    <View><Carousel data = {petfolioData}/></View>
+
                 </View>
-            </View>
-        </SafeAreaView>
+            </ScrollView>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
-    header: {
-        width: '100%',
-        alignItems:'center',
-        flexDirection:'row',
-        marginTop:10,
-        marginBottom:20,
-    },
-    petContainer:{
-        marginLeft:39,
-        width:'100%',
-        marginBottom:20
 
+    container: {
+        height:             "100%",
+        width:              "100%",
+        backgroundColor:    "#E1AAAA",
     },
-    image:{
-        height:250,
-        width:250,
-        marginRight:15,
-        borderRadius:14
-    }
+
+    header: {
+        width:              '100%',
+        alignItems:         'center',
+        flexDirection:      'row',
+        paddingBottom:      25,
+        paddingTop:         60,
+        backgroundColor:    "#E1AAAA"
+    },
+
+    body: {
+        borderRadius:       35,
+        backgroundColor:    'white',
+        height:             "100%",
+    },
+
+    headerText: {
+        fontSize:           40,
+        fontFamily:         "Recoleta-Regular",
+        paddingLeft:        30,
+        color:              'white',
+    },
+
+    petContainer: {
+        paddingTop:         20,
+        paddingBottom:      20,            
+    },
+
+    petText: {
+        fontFamily:         'Recoleta-Regular',
+        fontSize:           25,
+        paddingTop:         30,
+        paddingLeft:        60,
+    },
+
+    image: {
+        height:             250,
+        width:              250,
+        marginRight:        15,
+        borderRadius:       14,
+    },
+
+    // scrollView: {
+    //     marginTop:          30,
+    //     marginBottom:       137,
+    // }
+
 });
 
 export default MainPetsScreen;
