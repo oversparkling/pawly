@@ -1,13 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, StyleSheet,TouchableOpacity, Text, ScrollView,Image, TouchableNativeFeedback } from "react-native";
 import { Icon, Divider } from "react-native-elements";
 import { useNavigation } from '@react-navigation/native';
 import Carousel from './Carousel'
 import { petfolioData } from './petfolioData'
+import { getPets } from "../../actions/PetActions";
+import firebase from "../../firebaseConfig"
 
 
 function MainPetsScreen(props) {
     const navigation = useNavigation();
+    const [Pets,setPets] = useState([]);
+    useEffect(()=>{
+        
+        getPets().then(response => setPets(response))
+        
+        
+        // firebase.firestore().collection("pets").doc("fFAzuW79gFAAssqko7Y4").collection("photos").get().then((querySnapShot1) =>{
+        //     querySnapShot1.forEach((doc1)=>{
+        //         console.log(doc1.data())
+        //     })
+        // })
+    
+    },[])
     return (
     
         <View style = { styles.container }>
@@ -16,15 +31,24 @@ function MainPetsScreen(props) {
                     <Text style = { styles.headerText }> My Pets </Text>
                 </View> 
                 <View style = { styles.body }>
-                    <TouchableOpacity onPress = {()=> navigation.navigate("PetProfileScreen")}>
-                        <Text style = { styles.petText }> Hiro </Text>
-                    </TouchableOpacity>
-                    <View><Carousel data = {petfolioData}/></View>
-
-                    <TouchableOpacity onPress = {()=> navigation.navigate("PetProfileScreen")}>
-                        <Text style = { styles.petText }> Hiro </Text>
-                    </TouchableOpacity>
-                    <View><Carousel data = {petfolioData}/></View>
+                    {/* navigation.navigate("PetProfileScreen") */}
+                    {Pets.map((item) => {
+                        console.log(item.id)
+                        return (
+                            <View key = {item.id}>
+                                <TouchableOpacity onPress = {()=> getPets() }>
+                                    <Text style = { styles.petText }> {item.data().name} </Text>
+                                    </TouchableOpacity>
+                                <View><Carousel data = {petfolioData} id = {item.id}/></View>
+                            </View>
+                        )
+                    })}
+                
+                    
+                      {/* <TouchableOpacity onPress = {()=> navigation.navigate("PetProfileScreen")}>
+                         <Text style = { styles.petText }> Hiro </Text>
+                     </TouchableOpacity>
+                     <View><Carousel data = {petfolioData}/></View>  */}
 
                 </View>
             </ScrollView>

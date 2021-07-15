@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, Dimensions, FlatList, Animated } from 'react-native'
 import CarouselItem from './CarouselItem'
+import { getPetDetails } from '../../actions/PetActions'
 
 
-const { width, heigth } = Dimensions.get('window')
+const { width, height } = Dimensions.get('window')
 let flatList
 
 function infiniteScroll(dataList){
@@ -12,35 +13,38 @@ function infiniteScroll(dataList){
 
     setInterval(function() {
         scrolled ++
-        if(scrolled < numberOfData)
-        scrollValue = scrollValue + width
-
+        if(scrolled < numberOfData){
+            scrollValue = scrollValue + width
+        }
         else {
             scrollValue = 0
             scrolled = 0
         }
-
+        
         this.flatList.scrollToOffset({ animated: false, offset: scrollValue})
         
     }, 3000)
 }
 
 
-const Carousel = ({ data }) => {
+function Carousel(props) {
     const scrollX = new Animated.Value(0)
     let position = Animated.divide(scrollX, width)
-    const [dataList, setDataList] = useState(data)
+    const [dataList, setDataList] = useState([])
 
     useEffect(()=> {
-        setDataList(data)
+        getPetDetails(props.id).then(response => setDataList(response))
+        // setDataList(props.data)
+        console.log(dataList)
         infiniteScroll(dataList)
-    })
+        
+    },[])
 
 
-    if (data && data.length) {
+    if (dataList) {
         return (
             <View>
-                <FlatList data={data}
+                <FlatList data={dataList}
                 ref = {(flatList) => {this.flatList = flatList}}
                     keyExtractor={(item, index) => 'key' + index}
                     horizontal
@@ -59,7 +63,7 @@ const Carousel = ({ data }) => {
                 />
 
                 <View style={styles.dotView}>
-                    {data.map((_, i) => {
+                    {dataList.map((_, i) => {
                         let opacity = position.interpolate({
                             inputRange: [i - 1, i, i + 1],
                             outputRange: [0.3, 1, 0.3],
