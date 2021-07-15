@@ -13,31 +13,31 @@ function TabStack(props) {
     return (
         <Tab.Navigator tabBarOptions={{ showLabel: false }}>
             <Tab.Screen
-                name="Home"
-                component={HomeStack}
-                options={{
+                name = "Home"
+                component = { HomeStack }
+                options = {{
                     tabBarIcon: ({ focused, size }) => (
                         <Ionicons
-                            name={focused ? "home" : "home-outline"}
-                            color={focused ? "#2B2B2B" : "#AEAEB2"}
-                            size={size}
+                            name = {focused ? "home" : "home-outline"}
+                            color = {focused ? "#2B2B2B" : "#AEAEB2"}
+                            size = {size}
                         />
                     ),
                 }}
             />
-            <Tab.Screen name = "AddPets" component = {TaskStack} options = {{ tabBarIcon:({focused})=>(
+            <Tab.Screen name = "AddPets" component = { TaskStack } options = {{ tabBarIcon:({focused})=>(
                 <CustomTabButton />
             )
             }}/>
             <Tab.Screen
-                name="Petfolio"
-                component={PetfolioStack}
-                options={{
+                name = "Petfolio"
+                component = { PetfolioStack } 
+                options = {{
                     tabBarIcon: ({ focused, size }) => (
                         <Ionicons
-                            name={focused ? "person" : "person-outline"}
-                            color={focused ? "#2B2B2B" : "#AEAEB2"}
-                            size={size}
+                            name = { focused ? "person" : "person-outline" }
+                            color = { focused ? "#2B2B2B" : "#AEAEB2" }
+                            size = { size} 
                         />
                     ),
                 }}

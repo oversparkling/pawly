@@ -14,6 +14,13 @@ function MainPetsScreen(props) {
             <ScrollView showsVerticalScrollIndicator = { false } style = { styles.scrollView }>
                 <View style = { styles.header }>
                     <Text style = { styles.headerText }> My Pets </Text>
+                    <TouchableOpacity style = { styles.plus } >
+                    <Icon
+                        name = "plus"
+                        type = "antdesign"
+                        color = "white"
+                    />
+                  </TouchableOpacity>
                 </View> 
                 <View style = { styles.body }>
                     <TouchableOpacity onPress = {()=> navigation.navigate("PetProfileScreen")}>
@@ -71,7 +78,7 @@ const styles = StyleSheet.create({
         fontFamily:         'Recoleta-Regular',
         fontSize:           25,
         paddingTop:         30,
-        paddingLeft:        60,
+        paddingLeft:        30,
     },
 
     image: {
@@ -79,6 +86,10 @@ const styles = StyleSheet.create({
         width:              250,
         marginRight:        15,
         borderRadius:       14,
+    },
+
+    plus: {
+        paddingLeft:        150,
     },
 
     // scrollView: {
