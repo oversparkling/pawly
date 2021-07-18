@@ -43,7 +43,7 @@ function MainPetsScreen(props) {
                         console.log(item.id)
                         return (
                             <View key = {item.id}>
-                                <TouchableOpacity onPress = {()=> getPets() }>
+                                <TouchableOpacity onPress = {()=> navigation.navigate('PetProfileScreen',{id:item.id, age:item.data().age, weight:item.data().weight,gender:item.data().gender, name: item.data().name, description: item.data().description} ) }>
                                     <Text style = { styles.petText }> {item.data().name} </Text>
                                     </TouchableOpacity>
                                 <View><Carousel data = {petfolioData} id = {item.id}/></View>

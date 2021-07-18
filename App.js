@@ -59,10 +59,10 @@ function App() {
     // ,[])
 
     return isLoaded ? (
-        <AddPetScreen></AddPetScreen>
-    //   <NavigationContainer>
-    //     <TabStack />
-    //   </NavigationContainer>
+        // <AddPetScreen></AddPetScreen>
+      <NavigationContainer>
+        <TabStack />
+      </NavigationContainer>
         
     ) : (
         <View>

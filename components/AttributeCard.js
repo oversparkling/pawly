@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Text, SafeAreaView } from "react-native";
+import { set } from "react-native-reanimated";
 
 function AttributeCard(props) {
     const [suffix, setSuffix] = useState("");
@@ -11,12 +12,15 @@ function AttributeCard(props) {
             case "Age":
                 setSuffix("years");
                 break;
+            case "Gender":
+                setSuffix("");
+                break;
         }
     });
     return (
         <View style={styles.container}>
-            <Text style={styles.fontMain}>5 years</Text>
-            <Text style={styles.fontDescription}>Age</Text>
+            <Text style={styles.fontMain}>{props.value} {suffix}</Text>
+            <Text style={styles.fontDescription}>{props.type}</Text>
         </View>
     );
 }
