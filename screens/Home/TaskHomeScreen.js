@@ -1,18 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, ScrollView, Text, StyleSheet } from "react-native";
 import tailwind from "tailwind-rn";
 import TaskCard from "../../components/TaskCard";
+import { getTaskByUser } from "../../actions/TaskActions";
 
 function TaskHomeScreen(props) {
+    const [tasks,setTaskList] = useState([])
+     useEffect(()=>{
+        getTaskByUser("2r6du4nvDvUcOGgMzMce").then(response => setTaskList(response))
+        
+    },[])
     return (
         <View style = { styles.container }>
             <ScrollView showsVerticalScrollIndicator = { false }>
                 <Text style = {styles.headerText}> Upcoming </Text>
                 <Text style={styles.headerDay}> Today </Text>
                     <View style = {tailwind("items-center mt-10")}>
-                        <TaskCard time = "3hrs" />
+                        {/* <TaskCard time = "3hrs" />
                         <TaskCard />
-                        <TaskCard />
+                        <TaskCard /> */}
+                        {tasks.map((item,index) =>{
+                            return(
+                                <TaskCard taskName = {item.description} time = {item.TaskTime} cardImageUrl = {item.cardImageUrl} key = {index} pets = {item.pets}/>
+                            )
+                        })
+
+                        }
                     </View>
             </ScrollView>
         </View>

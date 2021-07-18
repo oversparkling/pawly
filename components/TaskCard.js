@@ -9,12 +9,30 @@ function TaskCard(props) {
         <View>
             <Text style = {{alignSelf:'flex-end', fontFamily:"Recoleta-Regular"}}>{props.hoursAgo}</Text>
             <View style = {styles.container}>
-            <Image style = {styles.imageContainer} source = {require("../assets/TaskCard1.png")}/>
+            <Image style = {styles.imageContainer} source = {{uri: props.cardImageUrl}}/>
             <View style = {{flexDirection:'row',justifyContent:'space-between',alignItems:'center',padding:10}}>
             <View style = {styles.textInfo}>
                 <Text style = {styles.headerText}>{props.taskName}</Text>
                 <View style = {styles.timeOwner}>
-                    <Image style = {styles.profileImage} source = {require("../assets/pet1.jpg")}/>
+                    {/* <Image style = {styles.profileImage} source = {require("../assets/pet1.jpg")}/> */}
+                    
+                        {/* typeof props.pet === 'undefined'){
+                            props.pets.map((item,index) =>{
+                                return(
+                                    <Image style = {styles.profileImage} source = {{uri:item.petUrl}} key = {index}/>
+                                )
+                            })
+                            
+                        } */}
+                        { props.pets  && 
+                            props.pets.map((item,index) =>{
+                                return(
+                                    <Image style = {styles.profileImage} source = {{uri:item.petUrl}} key = {index}/>
+                                )
+                            })
+                        }
+                    
+                    
                     <Text style = {{color:'white', marginLeft:15}}>|</Text>
                     <Text style = {styles.time}>{props.time}</Text>
                 </View>
@@ -56,6 +74,7 @@ const styles = StyleSheet.create({
         height: 22,
         width: 22,
         borderRadius: 11,
+        marginRight:5
     },
     
     time:{
