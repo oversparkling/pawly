@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { View, ScrollView, Text, StyleSheet } from "react-native";
+import React, { useEffect, useState,useContext } from "react";
+import { View, ScrollView, Text, StyleSheet,Button } from "react-native";
+import { AuthContext } from "../../provider/AuthProvider";
 import tailwind from "tailwind-rn";
 import TaskCard from "../../components/TaskCard";
 import { getTaskByUser } from "../../actions/TaskActions";
+
 
 function TaskHomeScreen(props) {
     const [tasks,setTaskList] = useState([])
@@ -10,11 +12,18 @@ function TaskHomeScreen(props) {
         getTaskByUser("2r6du4nvDvUcOGgMzMce").then(response => setTaskList(response))
         
     },[])
+    const logout = () =>{
+        setIsLoggedIn(false)
+        console.log(isLoggedIn)
+    }
+    const { setIsLoggedIn,isLoggedIn } = useContext(AuthContext);
     return (
         <View style = { styles.container }>
             <ScrollView showsVerticalScrollIndicator = { false }>
                 <Text style = {styles.headerText}> Upcoming </Text>
                 <Text style={styles.headerDay}> Today </Text>
+
+                <Button title = "log out" onPress = {()=> logout()}/>
                     <View style = {tailwind("items-center mt-10")}>
                         {/* <TaskCard time = "3hrs" />
                         <TaskCard />

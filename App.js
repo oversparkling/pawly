@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, LogBox } from "react-native";
 import TaskCard from "./components/TaskCard";
 import * as Font from "expo-font";
 import TaskHomeScreen from "./screens/Home/TaskHomeScreen";
@@ -13,6 +13,9 @@ import TabStack from "./screens/misc/TabStack";
 import CustomTabButton from "./screens/misc/components/CustomTabButton";
 import AddTaskScreen from "./screens/Tasks/AddTaskScreen";
 import AddPetScreen from "./screens/Petfolio/AddPetScreen";
+import RegisterScreen from "./screens/Auth/RegisterScreen";
+import AuthContextProvider from './provider/AuthProvider';
+import RootStack from "./screens/RootStack";
 
 function App() {
     const [isLoaded, setIsLoaded] = useState(false);
@@ -59,12 +62,15 @@ function App() {
     // ,[])
 
     return isLoaded ? (
-        // <AddPetScreen></AddPetScreen>
-      <NavigationContainer>
-        <TabStack />
-      </NavigationContainer>
-        
+        <AuthContextProvider>
+            <NavigationContainer>
+                <RootStack />
+            </NavigationContainer>
+        </AuthContextProvider>
+        // <RegisterScreen />
     ) : (
+       
+
         <View>
             <Text>Still Loading</Text>
         </View>

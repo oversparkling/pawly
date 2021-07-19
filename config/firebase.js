@@ -1,16 +1,25 @@
-import firebase from "@react-native-firebase/app"
+import firebase from "firebase/app";
+import "firebase/auth";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCSEFIA-NGaemU8P5tumHo1KIztzxbgwLQ",
-    authDomain: "pawly-40e17.firebaseapp.com",
-    projectId: "pawly-40e17",
-    storageBucket: "pawly-40e17.appspot.com",
-    messagingSenderId: "895474516699",
-    appId: "1:895474516699:web:23b9e5931f7a13ee58c2fe",
-    measurementId: "G-0R0PC68MSX"
-  };
+  apiKey: "AIzaSyCSEFIA-NGaemU8P5tumHo1KIztzxbgwLQ",
+  authDomain: "pawly-40e17.firebaseapp.com",
+  projectId: "pawly-40e17",
+  storageBucket: "pawly-40e17.appspot.com",
+  messagingSenderId: "895474516699",
+  appId: "1:895474516699:web:23b9e5931f7a13ee58c2fe",
+  measurementId: "G-0R0PC68MSX"
+};
 
-firebase.initializeApp(firebaseConfig);
-firebase.firestore()
+// if (!firebase.apps.length)
+//     firebase.initializeApp(firebaseConfig);
+    
+// // firebase.firestore()
+// console.log(firebase.auth) // Undefined
+// console.log(firebase.default.auth) // Function
 
-export default firebase
+if (!firebase.apps.length)
+    firebase.initializeApp(firebaseConfig);
+
+
+export default firebase;
