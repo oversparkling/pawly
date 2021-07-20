@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { StyleSheet, Text, ScrollView, View, TouchableOpacity, TextInput } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Icon, Divider } from "react-native-elements";
 import { insertTaskByUser } from "../../actions/TaskActions";
+import { AuthContext } from "../../provider/AuthProvider";
 
 function EditTaskScreen(props) {
     const [type,setType] = useState("")
     const [time,setTime] = useState("")
+    const {username} = useContext(AuthContext)
     useEffect(()=>{
         console.log(props)
     },[])
@@ -30,7 +32,7 @@ function EditTaskScreen(props) {
                     <Text style = { styles.headingText }> Time </Text>  
                     <TextInput placeholder = "Time" style = { styles.input } onChangeText = {(text)=>setTime(text)}/>
 
-                    <TouchableOpacity onPress ={()=>insertTaskByUser(type,time)}>
+                    <TouchableOpacity onPress ={()=>insertTaskByUser(type,time,username)}>
                         <View style = {{backgroundColor:'grey',height:40,marginTop:30}} >
                             <Text>Submit</Text>
                         </View>

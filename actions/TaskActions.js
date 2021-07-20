@@ -53,12 +53,12 @@ export const getTaskByUser = (username) =>{
     
 }
 
-export const insertTaskByUser = (type,time) =>{
+export const insertTaskByUser = (type,time,username) =>{
     getTaskByType(type).then( description =>{
         firebase.firestore().collection("UserTasks").add({
             TaskTime : time,
             cardImageUrl:"https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1051&q=80",
-            userID:"2r6du4nvDvUcOGgMzMce",
+            userID:username,
             description:description
         })
     }

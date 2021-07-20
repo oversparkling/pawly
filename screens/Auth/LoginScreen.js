@@ -9,11 +9,14 @@ import { useNavigation } from '@react-navigation/native';
 function LoginScreen(props) {
     const [email,setEmail] = useState("")
     const [password,setPassword] = useState("")
-    const { setIsLoggedIn } = useContext(AuthContext);
+    const { setIsLoggedIn,setUsername } = useContext(AuthContext);
     const navigation = useNavigation();
     const submitLogin = () =>{
         loginUser(email,password).then(response =>{
+            console.log("hi"+response)
+            setUsername(response)
             setIsLoggedIn(true)
+            
         });
     }
     return (

@@ -27,11 +27,7 @@ export const loginUser = (email, password) => {
             .auth()
             .signInWithEmailAndPassword(email, password)
             .then((userCredential) => {
-                // Signed in
-                var user = userCredential.user;
-                console.log(user);
-                // ...
-                resolve(true);
+                resolve(userCredential.user.displayName);
             })
             .catch((error) => {
                 var errorCode = error.code;
