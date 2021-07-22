@@ -50,22 +50,22 @@ const styles = StyleSheet.create({
     },
 
     infoContainer: {
-        flexDirection:  "column",
+        flexDirection:    "column",
         // alignItems:     "center",
-        width:          "100%",
-        justifyContent: "space-between",
+        width:            "100%",
+        justifyContent:   "space-between",
     },
 
     header: {
-      width:            '100%',
-      alignItems:       'center',
-      flexDirection:    'row',
+      width:              '100%',
+      alignItems:         'center',
+      flexDirection:      'row',
     },
 
     headerText: {
-      fontSize:         40,
-      fontFamily:       "Recoleta-Regular",
-      paddingLeft:      60,
+      fontSize:           40,
+      fontFamily:         "Recoleta-Regular",
+      paddingLeft:        60,
     },
 
     headingText: {
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     input: {    
         borderColor:        "#E1AAAA",
         borderRadius:       15,
-        borderWidth:     2,
+        borderWidth:        2,
         width:              "80%",
         fontSize:           20,
         paddingVertical:    10,

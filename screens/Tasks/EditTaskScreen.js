@@ -1,50 +1,87 @@
 import React, { useState, useEffect, useContext } from "react";
-import { StyleSheet, Text, ScrollView, View, TouchableOpacity, TextInput } from "react-native";
+import { StyleSheet, Text, ScrollView, View, TouchableOpacity, TextInput, Button, Platform } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Icon, Divider } from "react-native-elements";
 import { insertTaskByUser } from "../../actions/TaskActions";
 import { AuthContext } from "../../provider/AuthProvider";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+
 
 function EditTaskScreen(props) {
-    const [type,setType] = useState("")
-    const [time,setTime] = useState("")
-    const {username} = useContext(AuthContext)
-    useEffect(()=>{
-        console.log(props)
-    },[])
-    return (
-        <View style = { styles.mainContainer }>
-            <ScrollView showsVerticalScrollIndicator = { false }> 
-                <View style = { styles.header }>
-                  <TouchableOpacity>
-                    <Icon
-                        name = "arrow-back-outline"
-                        type = "ionicon"
-                        color = "#000"
-                    />
-                  </TouchableOpacity>
-                <Text style = { styles.headerText }> Add Tasks </Text>
-                </View>
-                <View style = {styles.infoContainer}>
-                    <Text style = { styles.headingText }> Task Type </Text>  
-                    <TextInput placeholder = {props.route.params.type} style = { styles.input } onChangeText = {(text)=>setType(text)}/>
+    // const [type, setType] = useState("")
+//     const [date, setDate] = useState("")
+//     const [time, setTime] = useState("")
+//     const { username } = useContext(AuthContext)
+//     useEffect(()=>{
+//         console.log(props)
+//     },[])
+//     return (
+//         <View style = { styles.mainContainer }>
+//             <ScrollView showsVerticalScrollIndicator = { false }> 
+//                 <View style = { styles.header }>
+//                   <TouchableOpacity>
+//                     <Icon
+//                         name = "arrow-back-outline"
+//                         type = "ionicon"
+//                         color = "#000"
+//                     />
+//                   </TouchableOpacity>
+//                 {/* <Text style = { styles.headerText }> Edit Task </Text> */}
+//                 </View>
+//                 <View style = {styles.infoContainer}>
+//                     {/* <Text style = { styles.headingText }> Task Type </Text>  
+//                     <TextInput placeholder = {props.route.params.type} style = { styles.input } onChangeText = {(text)=>setType(text)}/> */}
 
-                    <Text style = { styles.headingText }> Time </Text>  
-                    <TextInput placeholder = "Time" style = { styles.input } onChangeText = {(text)=>setTime(text)}/>
+// <                   Text style = { styles.headingText }> Date </Text>  
+//                     <TextInput placeholder = "Date" style = { styles.input } onChangeText = {(text)=>setDate(text)}/>
 
-                    <TouchableOpacity onPress ={()=>insertTaskByUser(type,time,username)}>
-                        <View style = {{backgroundColor:'grey',height:40,marginTop:30}} >
-                            <Text>Submit</Text>
-                        </View>
-                    </TouchableOpacity>
+//                     <Text style = { styles.headingText }> Time </Text>  
+//                     <TextInput placeholder = "Time" style = { styles.input } onChangeText = {(text)=>setTime(text)}/>
+
+//                     <TouchableOpacity onPress ={()=>insertTaskByUser(date,time,username)}>
+//                         <View style = {{backgroundColor:'grey',height:40,marginTop:30}} >
+//                             <Text>Submit</Text>
+//                         </View>
+//                     </TouchableOpacity>
                     
-                </View>
-            </ScrollView>
+//                 </View>
+//             </ScrollView>
+//         </View>
+//     );
+    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+
+    const showDatePicker = () => {
+        setDatePickerVisibility(true);
+    };
+
+    const hideDatePicker = () => {
+        setDatePickerVisibility(false);
+    };
+
+    const handleConfirm = (date) => {
+        console.warn("A date has been picked: ", date);
+        hideDatePicker();
+    };
+
+    return (
+        <View style = {styles.mainContainer}>
+            <TouchableOpacity
+                style = { styles.arrow }
+                onPress={() => navigation.goBack()}
+            ></TouchableOpacity>
+            {/* <Image source = {require('')}/> */}
+            <Button title="Show Date Picker" onPress={showDatePicker} />
+            <DateTimePickerModal
+                isVisible={isDatePickerVisible}
+                mode="datetime"
+                onConfirm={handleConfirm}
+                onCancel={hideDatePicker}/>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
+
     mainContainer: {
       width:              "100%",
       backgroundColor:    "white",
@@ -100,6 +137,12 @@ const styles = StyleSheet.create({
     scrollView: {
       backgroundColor:  "white",
       marginHorizontal:  20,
+    },
+
+    arrow: {
+        position: "absolute",
+        top: 40,
+        left: 20,
     },
 });
 export default EditTaskScreen;

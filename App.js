@@ -16,6 +16,7 @@ import AddPetScreen from "./screens/Petfolio/AddPetScreen";
 import RegisterScreen from "./screens/Auth/RegisterScreen";
 import AuthContextProvider from './provider/AuthProvider';
 import RootStack from "./screens/RootStack";
+import EditTaskScreen from "./screens/Tasks/EditTaskScreen";
 
 function App() {
     const [isLoaded, setIsLoaded] = useState(false);
@@ -67,7 +68,7 @@ function App() {
                 <RootStack />
             </NavigationContainer>
         </AuthContextProvider>
-        // <RegisterScreen />
+        // <EditTaskScreen></EditTaskScreen>
     ) : (
        
 
