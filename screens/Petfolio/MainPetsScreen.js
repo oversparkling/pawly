@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { View, StyleSheet,TouchableOpacity, Text, ScrollView,Image, TouchableNativeFeedback } from "react-native";
 import { Icon, Divider } from "react-native-elements";
 import { useNavigation } from '@react-navigation/native';
-import Carousel from './Carousel'
 import { petfolioData } from './petfolioData'
 import { getPets } from "../../actions/PetActions";
 import firebase from "../../firebaseConfig"
@@ -115,11 +114,6 @@ const styles = StyleSheet.create({
     plus: {
         paddingLeft:        150,
     },
-
-    // scrollView: {
-    //     marginTop:          30,
-    //     marginBottom:       137,
-    // }
 
 });
 
