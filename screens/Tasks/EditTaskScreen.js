@@ -68,7 +68,7 @@ function EditTaskScreen(props) {
 
     return (
         <ScrollView showsVerticalScrollIndicator = { false }>
-        <View style = {styles.primaryContainer}>
+        <View style = { styles.primaryContainer }>
             <TouchableOpacity
                 style = { styles.arrow }
                 onPress = {() => navigation.goBack()}>

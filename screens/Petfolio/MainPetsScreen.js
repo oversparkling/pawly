@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet,TouchableOpacity, Text, ScrollView,Image, TouchableNativeFeedback } from "react-native";
+import { View, StyleSheet,TouchableOpacity, Text, ScrollView, Image, TouchableNativeFeedback } from "react-native";
 import { Icon, Divider } from "react-native-elements";
 import { useNavigation } from '@react-navigation/native';
 import { petfolioData } from './petfolioData'
 import { getPets } from "../../actions/PetActions";
 import firebase from "../../firebaseConfig"
+import Carousel from './Carousel'
 
 
 function MainPetsScreen(props) {
     const navigation = useNavigation();
-    const [Pets,setPets] = useState([]);
+    
+    const [Pets, setPets] = useState([]);
     useEffect(()=>{
         
         getPets().then(response => setPets(response))
