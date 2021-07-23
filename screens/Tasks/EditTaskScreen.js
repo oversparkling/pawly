@@ -50,7 +50,7 @@ function EditTaskScreen(props) {
             />
             <View style = { styles.secondaryContainer }>  
                 {/* Header */}
-                <Text style = { styles.headerText }>Shower</Text>
+                <Text style = { styles.headerText }> Shower </Text>
 
             <TouchableOpacity>
                 <InfoCard title = '🗓  Date' input = "Oct 4, 4:30 PM"></InfoCard>
