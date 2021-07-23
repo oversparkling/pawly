@@ -7,9 +7,10 @@ import { useNavigation } from '@react-navigation/native';
 
 
 function LoginScreen(props) {
-    const [email,setEmail] = useState("")
-    const [password,setPassword] = useState("")
-    const { setIsLoggedIn,setUsername } = useContext(AuthContext);
+    
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const { setIsLoggedIn, setUsername } = useContext(AuthContext);
     const navigation = useNavigation();
     const submitLogin = () =>{
         loginUser(email,password).then(response =>{
@@ -42,13 +43,11 @@ function LoginScreen(props) {
 }
 
 const styles = StyleSheet.create({
-    container:{
-        padding:32,
-        marginTop:80,
 
+    container: {
+        padding:    32,
+        marginTop:  80,
     }
 })
-
-
 
 export default LoginScreen;
