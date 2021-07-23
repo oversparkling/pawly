@@ -17,11 +17,7 @@ function AddTaskScreen(props) {
         // { name: "Train", key: "8" },
     ]);
 
-    useEffect(()=>{
-      getTaskPage().then(response => setTask(response))
-  },[])
-
-
+    useEffect(() => { getTaskPage().then(response => setTask(response)) },[])
 
     const navigation = useNavigation();
 
@@ -29,25 +25,17 @@ function AddTaskScreen(props) {
         <View style = { styles.mainContainer }>
             <ScrollView showsVerticalScrollIndicator = { false }> 
                 <View style = { styles.header }>
-                  <TouchableOpacity>
-                    <Icon
-                        name = "arrow-back-outline"
-                        type = "ionicon"
-                        color = "#000"
-                    />
-                  </TouchableOpacity>
-                <Text style = { styles.headerText }> Add Task </Text>
+                  <Text style = { styles.headerText }> Add Task </Text>
                 </View>
                 <View style = {styles.taskContainer}>
-                    {task.map((item,index) => {
+                    { task.map((item, index) => {
                         return (
-                            <TaskTypeCard
-                                text={item.id}
-                                key={index}
-                                onPress={() => navigation.navigate("EditTask",{
-                                  type: item.id
-                                })}
-                            />
+                          <TaskTypeCard
+                              text = { item.id }
+                              key = { index }
+                              onPress={() => navigation.navigate("EditTask",{
+                              type: item.id
+                              })}/>
                         );
                     })}
                 </View>
@@ -77,12 +65,13 @@ const styles = StyleSheet.create({
       alignItems:       'center',
       flexDirection:    'row',
       marginBottom:     25,
+      paddingTop:       10,
+      justifyContent:   'center',
     },
 
     headerText: {
       fontSize:         40,
       fontFamily:       "Recoleta-Regular",
-      paddingLeft:      60,
     },
 
     scrollView: {

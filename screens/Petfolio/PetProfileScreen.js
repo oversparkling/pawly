@@ -17,10 +17,10 @@ import { getPetDetails } from "../../actions/PetActions";
 
 function PetProfileScreen(props) {
     const navigation = useNavigation();
-    const [PetImages,setPetImages] = useState([])
+    const [PetImages, setPetImages] = useState([])
     useEffect(()=>{
         console.log(props)
-        getPetDetails(props.route.params.id).then(response=>setPetImages(response))
+        getPetDetails(props.route.params.id).then(response => setPetImages(response))
     },[])
     return (
         <>
@@ -44,8 +44,7 @@ function PetProfileScreen(props) {
             /> */}
             <TouchableOpacity
                 style={styles.arrow}
-                onPress={() => navigation.goBack()}
-            >
+                onPress={() => navigation.goBack()}>
                 <Icon name="arrow-back-outline" type="ionicon" color="#000" />
             </TouchableOpacity>
             <View style={styles.informationContainer}>

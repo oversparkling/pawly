@@ -5,9 +5,13 @@ import { Icon, Divider } from "react-native-elements";
 import { insertTaskByUser } from "../../actions/TaskActions";
 import { AuthContext } from "../../provider/AuthProvider";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import InfoCard from "./InfoCard";
 
 
 function EditTaskScreen(props) {
+
+    const navigation = useNavigation();
+
     // const [type, setType] = useState("")
 //     const [date, setDate] = useState("")
 //     const [time, setTime] = useState("")
@@ -64,25 +68,30 @@ function EditTaskScreen(props) {
     };
 
     return (
-        <View style = {styles.mainContainer}>
+        <View style = {styles.primaryContainer}>
             <TouchableOpacity
                 style = { styles.arrow }
-                onPress={() => navigation.goBack()}
-            ></TouchableOpacity>
-            {/* <Image source = {require('')}/> */}
-            <Button title="Show Date Picker" onPress={showDatePicker} />
+                onPress = {() => navigation.goBack()}>
+                <Icon name = "arrow-back-outline" type = "ionicon" color = "#000" />
+            </TouchableOpacity>
+            {/* <Image
+                source = {require('./shower.jpg')}
+                style = {{ width: "100%", height: 500, position: "absolute" }}
+            /> */}
+            <InfoCard title = 'Date' input = "Oct 4, 4:30 PM"></InfoCard>
+            <Button title="Show Date Picker" onPress = { showDatePicker } />
             <DateTimePickerModal
-                isVisible={isDatePickerVisible}
-                mode="datetime"
-                onConfirm={handleConfirm}
-                onCancel={hideDatePicker}/>
+                isVisible = { isDatePickerVisible }
+                mode = "datetime"
+                onConfirm = { handleConfirm }
+                onCancel = { hideDatePicker }/>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
 
-    mainContainer: {
+    primaryContainer: {
       width:              "100%",
       backgroundColor:    "white",
       paddingLeft:        30,
@@ -90,17 +99,16 @@ const styles = StyleSheet.create({
       paddingTop:         60,
     },
 
-    infoContainer: {
+    secondaryContainer: {
         flexDirection:  "column",
-        // alignItems:     "center",
         width:          "100%",
         justifyContent: "space-between",
     },
 
     header: {
-      width:            '100%',
-      alignItems:       'center',
-      flexDirection:    'row',
+        width:            '100%',
+        alignItems:       'center',
+        flexDirection:    'row',
     },
 
     headerText: {
@@ -109,7 +117,7 @@ const styles = StyleSheet.create({
       paddingLeft:      60,
     },
 
-    headingText: {
+    title: {
         fontSize:           20,
         fontFamily:         "Recoleta-Regular",
         paddingBottom:      5,
