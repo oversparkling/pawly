@@ -5,52 +5,22 @@ import { Icon } from "react-native-elements";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import InfoCard from "./InfoCard";
 import { ScrollView } from "react-native";
+import { TextInput } from "react-native";
 
 
 function EditTaskScreen(props) {
 
     const navigation = useNavigation();
 
-    // const [type, setType] = useState("")
-//     const [date, setDate] = useState("")
-//     const [time, setTime] = useState("")
+    const [type, setType] = useState("")
+    const [date, setDate] = useState("")
+    const [time, setTime] = useState("")
+    const [notes, setNotes] = useState("")
 //     const { username } = useContext(AuthContext)
 //     useEffect(()=>{
 //         console.log(props)
 //     },[])
-//     return (
-//         <View style = { styles.mainContainer }>
-//             <ScrollView showsVerticalScrollIndicator = { false }> 
-//                 <View style = { styles.header }>
-//                   <TouchableOpacity>
-//                     <Icon
-//                         name = "arrow-back-outline"
-//                         type = "ionicon"
-//                         color = "#000"
-//                     />
-//                   </TouchableOpacity>
-//                 {/* <Text style = { styles.headerText }> Edit Task </Text> */}
-//                 </View>
-//                 <View style = {styles.infoContainer}>
-//                     {/* <Text style = { styles.headingText }> Task Type </Text>  
-//                     <TextInput placeholder = {props.route.params.type} style = { styles.input } onChangeText = {(text)=>setType(text)}/> */}
 
-// <                   Text style = { styles.headingText }> Date </Text>  
-//                     <TextInput placeholder = "Date" style = { styles.input } onChangeText = {(text)=>setDate(text)}/>
-
-//                     <Text style = { styles.headingText }> Time </Text>  
-//                     <TextInput placeholder = "Time" style = { styles.input } onChangeText = {(text)=>setTime(text)}/>
-
-//                     <TouchableOpacity onPress ={()=>insertTaskByUser(date,time,username)}>
-//                         <View style = {{backgroundColor:'grey',height:40,marginTop:30}} >
-//                             <Text>Submit</Text>
-//                         </View>
-//                     </TouchableOpacity>
-                    
-//                 </View>
-//             </ScrollView>
-//         </View>
-//     );
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
     const showDatePicker = () => {
@@ -79,17 +49,30 @@ function EditTaskScreen(props) {
                 style = {{ width: "100%", height: 500, position: "absolute" }}
             />
             <View style = { styles.secondaryContainer }>  
+                {/* Header */}
                 <Text style = { styles.headerText }>Shower</Text>
-            <InfoCard title = '🗓  Date' input = "Oct 4, 4:30 PM"></InfoCard>
-            <InfoCard title = '🔁  Repeat' input = "Daily"></InfoCard>
-            <InfoCard title = '🐾  Who' input = "Hiro"></InfoCard>
+
+            <TouchableOpacity>
+                <InfoCard title = '🗓  Date' input = "Oct 4, 4:30 PM"></InfoCard>
+            </TouchableOpacity>
+
+            <TouchableOpacity>
+                <InfoCard title = '🔁  Repeat' input = "Daily"></InfoCard>
+            </TouchableOpacity>
+
+            <TouchableOpacity>
+                <InfoCard title = '🐾  Who' input = "Hiro"></InfoCard>
+            </TouchableOpacity>
+
+            {/* Notes */}
             <View style = { styles.notesContainer }>
                 <Text style = { styles.noteText }>✏ Notes</Text>
                 <View style = {{ borderBottomColor: 'black', borderBottomWidth: 1 }} />
-                <Text style = { styles.text }>Remember to start from the tail to his head. 
-Hiro doesn’t like it when you splash him so
-use a cup instead of the shower head.</Text>             
+                <TouchableOpacity>
+                    <TextInput style = { styles.text } placeholder = "Enter some notes about this task!" onChangeText = {(text)=>setNotes(text)}/>  
+                </TouchableOpacity>           
             </View>
+
             <Button title="Show Date Picker" onPress = { showDatePicker } />
             <DateTimePickerModal
                 isVisible = { isDatePickerVisible }
@@ -144,7 +127,7 @@ const styles = StyleSheet.create({
     input: {    
         borderColor:        "#E1AAAA",
         borderRadius:       15,
-        borderWidth:     2,
+        borderWidth:        2,
         width:              "80%",
         fontSize:           20,
         paddingVertical:    10,
@@ -158,7 +141,7 @@ const styles = StyleSheet.create({
         color:              "black",
         fontSize:           15,
         justifyContent:     "flex-start",
-        paddingTop:         5,
+        paddingTop:         15,
     },
 
     arrow: {

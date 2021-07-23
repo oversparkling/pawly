@@ -64,15 +64,15 @@ function App() {
     // ,[])
 
     return isLoaded ? (
-        <AuthContextProvider>
-            <NavigationContainer>
-                <RootStack />
-            </NavigationContainer>
-        </AuthContextProvider>
+        // <AuthContextProvider>
+        //     <NavigationContainer>
+        //         <RootStack />
+        //     </NavigationContainer>
+        // </AuthContextProvider>
         
-        // <NavigationContainer>
-        //     <TaskStack/>
-        // </NavigationContainer>
+        <NavigationContainer>
+            <TaskStack/>
+        </NavigationContainer>
     ) : (
        
 

@@ -43,11 +43,11 @@ function PetProfileScreen(props) {
                 style={{ width: "100%", height: 500, position: "absolute" }}
             /> */}
             <TouchableOpacity
-                style={styles.arrow}
-                onPress={() => navigation.goBack()}>
-                <Icon name="arrow-back-outline" type="ionicon" color="#000" />
+                style = { styles.arrow }
+                onPress = {() => navigation.goBack()}>
+                <Icon name = "arrow-back-outline" type = "ionicon" color = "#000" />
             </TouchableOpacity>
-            <View style={styles.informationContainer}>
+            <View style = { styles.informationContainer }>
                 <Text style={styles.petName}>{props.route.params.name}</Text>
                 <Text style={styles.petDescription}>{props.route.params.description}</Text>
                 <View style={styles.cardContainer}>
@@ -74,15 +74,17 @@ function PetProfileScreen(props) {
 }
 
 const styles = StyleSheet.create({
+
     informationContainer: {
-        position: "absolute",
-        top: 381,
-        width: "100%",
-        borderRadius: 35,
-        alignItems: "center",
-        backgroundColor: "white",
-        padding: 30,
+        position:           "absolute",
+        top:                381,
+        width:              "100%",
+        borderRadius:       35,
+        alignItems:         "center",
+        backgroundColor:    "white",
+        padding:            30,
     },
+
     image: {
         width: "100%",
         height: 500,
@@ -92,21 +94,25 @@ const styles = StyleSheet.create({
         fontSize: 35,
         fontFamily: "Recoleta-Regular",
     },
+
     petDescription: {
         fontFamily: "Sofia-Pro-Regular",
         fontSize: 15,
         marginBottom: 15,
     },
+
     cardContainer: {
         flexDirection: "row",
         width: "100%",
         justifyContent: "space-between",
     },
+
     document: {
         marginTop: 10,
         fontSize: 15,
         fontFamily: "Recoleta-Regular",
     },
+    
     vaccination: {
         marginTop: 10,
         alignItems: "center",

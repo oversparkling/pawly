@@ -1,42 +1,53 @@
 import React, { useState,useContext } from 'react';
-import { View, Text,TextInput,Button, StyleSheet } from 'react-native';
-import { TouchableHighlight, TouchableOpacity } from 'react-native-gesture-handler';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import { createUser, loginUser } from '../../actions/AuthAction';
 import { AuthContext } from "../../provider/AuthProvider";
 import { useNavigation } from '@react-navigation/native';
+import { Icon, Divider } from "react-native-elements";
 
 
 function LoginScreen(props) {
+
+    const navigation = useNavigation();
     
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const { setIsLoggedIn, setUsername } = useContext(AuthContext);
-    const navigation = useNavigation();
+
     const submitLogin = () =>{
-        loginUser(email,password).then(response =>{
-            console.log("hi"+response)
+        loginUser(email, password).then(response =>{
+            console.log("hi" + response)
             setUsername(response)
             setIsLoggedIn(true)
-            
         });
     }
-    return (
-        <View style = {styles.container}>
-           <Text style = {{fontFamily:'Recoleta-Regular',fontSize:36,marginBottom:30}}>Login</Text>
-           <TextInput autoCapitalize = {"none"} style = {{width:'100%',height:52,borderWidth:2,padding:15,fontSize:15,fontFamily:'Recoleta-Regular',marginBottom:20}} placeholder="Email" onChangeText = {(text)=>setEmail(text)}/>
-           <TextInput secureTextEntry={true} autoCapitalize = {"none"} style = {{width:'100%',height:52,borderWidth:2,padding:15,fontSize:15,fontFamily:'Recoleta-Regular',marginBottom:20}} placeholder="Password" onChangeText = {(text)=>setPassword(text)}/>
-           <View style = {{alignItems:'center'}}>
-               <TouchableOpacity onPress = {()=>submitLogin()}>
-                    <View style = {{width:171,height:56,borderRadius:50,backgroundColor:'black',alignItems:'center',justifyContent:'center'}}>
-                        <Text style = {{color:'white',fontFamily:'Recoleta-Regular',fontSize:13}}>Login</Text>
-                    </View>
-               </TouchableOpacity>
 
-               <TouchableOpacity onPress = {()=>navigation.navigate('Register')} style = {{marginTop:20}}>
-                    <View style = {{width:171,height:56,borderRadius:50,backgroundColor:'black',alignItems:'center',justifyContent:'center'}}>
-                        <Text style = {{color:'white',fontFamily:'Recoleta-Regular',fontSize:13}}>Register Instead!</Text>
+    return (
+        <View style = { styles.container }>
+
+            {/* Arrow */}
+            <TouchableOpacity
+                style = { styles.arrow }
+                onPress = { () => navigation.goBack() }>
+                <Icon name = "arrow-back-outline" type = "ionicon" color = "black" />
+            </TouchableOpacity>
+
+            {/* Header: Login */}
+            <Text style = { styles.title }>Login</Text>
+
+            {/* Input Boxes: Email, Password */}
+            <TextInput autoCapitalize = { "none" } style = { styles.input } placeholder = "Email" onChangeText = {(text)=>setEmail(text)}/>
+            <TextInput secureTextEntry = { true } autoCapitalize = {"none"} style = { styles.input } placeholder = "Password" onChangeText = {(text)=>setPassword(text)}/>
+            
+            {/* Buttons: Submit */}
+            <View style = {{alignItems:'center'}}>
+                <TouchableOpacity onPress = { ()=>submitLogin() }>
+                    <View style = { styles.button }>
+                        <Text style = { styles.buttonText }>Login</Text>
                     </View>
-               </TouchableOpacity>
+                </TouchableOpacity>
+
            </View>
         </View>
     );
@@ -45,9 +56,54 @@ function LoginScreen(props) {
 const styles = StyleSheet.create({
 
     container: {
-        padding:    32,
-        marginTop:  80,
-    }
+        height:             "100%",
+        width:              "100%",
+        backgroundColor:    "white",
+        padding:            50,
+    },
+    
+    title: {
+        fontFamily:         'Recoleta-Regular',
+        fontSize:           36,
+        paddingTop:         150,
+        paddingBottom:      20,
+    },
+
+    input: {
+        width:              '100%', 
+        height:             52, 
+        borderWidth:        2,
+        padding:            10,
+        fontSize:           18,
+        fontFamily:         'Sofia-Pro-Regular',
+        marginBottom:       20
+    },
+
+    button: {
+        width:              190,
+        height:             60,
+        borderRadius:       50,
+        backgroundColor:    'black',
+        alignItems:         'center',
+        justifyContent:     'center',
+    },
+
+    buttonText: {
+        color:              'white',
+        fontFamily:         'Sofia-Pro-Regular',
+        fontSize:           18,
+    },
+
+    inputText: {
+        color:              'grey',
+        fontFamily:         'Sofia-Pro-Regular',
+        fontSize:           18,
+    },
+
+    arrow: {
+        top:                40,
+        position:           "absolute",
+    },
 })
 
 export default LoginScreen;

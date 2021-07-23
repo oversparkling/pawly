@@ -1,32 +1,38 @@
 import React from "react";
-import { Text, StyleSheet, TouchableHighlight } from "react-native";
+import { View } from "react-native";
+import { Text, StyleSheet, TouchableHighlight, Image } from "react-native";
 
 function TaskTypeCard(props) {
+    
     return (
         <TouchableHighlight style = { styles.container } onPress = { props.onPress } >
-            <Text style={styles.text}>{props.text}</Text>
+            {/* <Image 
+                source = {require('./bowl.png')}
+                style = {{ width: 29, height: 29 }} /> */}
+            <Text style = { styles.text }> { props.text } </Text>
         </TouchableHighlight>
     );
 }
 
 const styles = StyleSheet.create({
+
     container: {
-        width:              "70%",
-        height:             80,
-        flexDirection:      "column",
+        width:              186,
+        height:             70,
+        flexDirection:      "row",
         backgroundColor:    "white",
         alignItems:         "center",
         justifyContent:     "center",
-        borderColor:        "#E1AAAA",
+        borderColor:        "black",
         borderRadius:       20,
         borderWidth:        1,
-        marginBottom:       25,
+        marginBottom:       30,
     },
 
     text: {
-        fontSize: 22,
-        fontFamily: "Sofia-Pro-Regular",
-        color: "#E1AAAA",
+        fontSize:           18,
+        fontFamily:         "Sofia-Pro-Regular",
+        color:              "black",
     },
 
     containerPressed: {
@@ -34,7 +40,7 @@ const styles = StyleSheet.create({
         height:             80,
         borderRadius:       15,
         flexDirection:      "column",
-        backgroundColor:    "white",
+        backgroundColor:    "pink",
         alignItems:         "center",
         justifyContent:     "center",
         borderColor:        "#E1AAAA",

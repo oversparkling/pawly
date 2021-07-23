@@ -54,12 +54,12 @@ const styles = StyleSheet.create({
         backgroundColor:    'black',
         alignItems:         'center',
         justifyContent:     'center',
-        marginBottom:       15,
+        marginBottom:       18,
     },
 
     buttonText: {
         fontFamily:         "Sofia-Pro-Regular",
-        fontSize:           15,
+        fontSize:           18,
         color:              'white',
     }
 });
