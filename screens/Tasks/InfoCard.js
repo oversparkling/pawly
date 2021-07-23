@@ -16,8 +16,8 @@ function InfoCard(props) {
 const styles = StyleSheet.create({
 
     container: {
-        width:              300,
-        height:             40,
+        width:              350,
+        height:             50,
         borderRadius:       30,
         flexDirection:      "row",
         backgroundColor:    "white",
@@ -29,22 +29,22 @@ const styles = StyleSheet.create({
     },
 
     titleText: {
-        fontSize:           15,
+        fontSize:           18,
         fontFamily:         "Sofia-Pro-Regular",
         color:              "black",
         justifyContent:     "flex-start",
-        paddingLeft:        20,
+        paddingLeft:        13,
     },
 
     inputText: {
-        fontSize:           15,
+        fontSize:           18,
         fontFamily:         "Sofia-Pro-Regular",
         color:              "white",
     },
 
     input: {
-        width:              160,
-        height:             40,
+        width:              180,
+        height:             50,
         borderRadius:       30,
         backgroundColor:    "#E1AAAA",
         borderColor:        "#E1AAAA",

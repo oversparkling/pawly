@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
-import { StyleSheet, Text, ScrollView, View, TouchableOpacity, TextInput, Button, Platform } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Button, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { Icon, Divider } from "react-native-elements";
-import { insertTaskByUser } from "../../actions/TaskActions";
-import { AuthContext } from "../../provider/AuthProvider";
+import { Icon } from "react-native-elements";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import InfoCard from "./InfoCard";
+import { ScrollView } from "react-native";
 
 
 function EditTaskScreen(props) {
@@ -68,66 +67,78 @@ function EditTaskScreen(props) {
     };
 
     return (
+        <ScrollView showsVerticalScrollIndicator = { false }>
         <View style = {styles.primaryContainer}>
             <TouchableOpacity
                 style = { styles.arrow }
                 onPress = {() => navigation.goBack()}>
-                <Icon name = "arrow-back-outline" type = "ionicon" color = "#000" />
+                <Icon name = "arrow-back-outline" type = "ionicon" color = "white" />
             </TouchableOpacity>
-            {/* <Image
+            <Image
                 source = {require('./shower.jpg')}
                 style = {{ width: "100%", height: 500, position: "absolute" }}
-            /> */}
-            <InfoCard title = 'Date' input = "Oct 4, 4:30 PM"></InfoCard>
+            />
+            <View style = { styles.secondaryContainer }>  
+                <Text style = { styles.headerText }>Shower</Text>
+            <InfoCard title = '🗓  Date' input = "Oct 4, 4:30 PM"></InfoCard>
+            <InfoCard title = '🔁  Repeat' input = "Daily"></InfoCard>
+            <InfoCard title = '🐾  Who' input = "Hiro"></InfoCard>
+            <View style = { styles.notesContainer }>
+                <Text style = { styles.noteText }>✏ Notes</Text>
+                <View style = {{ borderBottomColor: 'black', borderBottomWidth: 1 }} />
+                <Text style = { styles.text }>Remember to start from the tail to his head. 
+Hiro doesn’t like it when you splash him so
+use a cup instead of the shower head.</Text>             
+            </View>
             <Button title="Show Date Picker" onPress = { showDatePicker } />
             <DateTimePickerModal
                 isVisible = { isDatePickerVisible }
                 mode = "datetime"
                 onConfirm = { handleConfirm }
                 onCancel = { hideDatePicker }/>
+            </View>
         </View>
+        </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
 
     primaryContainer: {
-      width:              "100%",
-      backgroundColor:    "white",
-      paddingLeft:        30,
-      paddingRight:       30,
-      paddingTop:         60,
+        width:              "100%",
+        backgroundColor:    "white",
+        paddingTop:         380,
     },
 
     secondaryContainer: {
-        flexDirection:  "column",
-        width:          "100%",
-        justifyContent: "space-between",
+        width:              "100%",
+        height:             "100%",
+        borderRadius:       50,
+        alignItems:         "center",
+        backgroundColor:    "white",
+        padding:            30,
     },
 
-    header: {
-        width:            '100%',
-        alignItems:       'center',
-        flexDirection:    'row',
+    notesContainer: {
+        width:              "100%",
+        height:             "100%",
+        backgroundColor:    "white",
+        paddingTop:         5,
     },
 
     headerText: {
-      fontSize:         40,
-      fontFamily:       "Recoleta-Regular",
-      paddingLeft:      60,
+        fontSize:           40,
+        fontFamily:         "Recoleta-Regular",
+        paddingTop:         5,
+        paddingBottom:      25,
     },
 
-    title: {
-        fontSize:           20,
+    noteText: {
         fontFamily:         "Recoleta-Regular",
+        color:              "black",
+        fontSize:           18,
+        justifyContent:     "flex-start",
         paddingBottom:      5,
-        paddingTop:         20,
-    },
-
-    inputText: {
-        fontFamily:         "Recoleta-Regular",
-        color:              "grey",
-        paddingLeft:        5,
     },
 
     input: {    
@@ -142,15 +153,19 @@ const styles = StyleSheet.create({
         paddingLeft:        10,
     },
 
-    scrollView: {
-      backgroundColor:  "white",
-      marginHorizontal:  20,
+    text: {
+        fontFamily:         "Sofia-Pro-Regular",
+        color:              "black",
+        fontSize:           15,
+        justifyContent:     "flex-start",
+        paddingTop:         5,
     },
 
     arrow: {
-        position: "absolute",
-        top: 40,
-        left: 20,
+        position:       "absolute",
+        top:            60,
+        left:           30,
+        zIndex:         1,
     },
 });
 export default EditTaskScreen;
