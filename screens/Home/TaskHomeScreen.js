@@ -8,18 +8,21 @@ import { getTaskByUser } from "../../actions/TaskActions";
 
 function TaskHomeScreen(props) {
     // const { username} = useContext(AuthContext);
-    const { setIsLoggedIn,isLoggedIn,username } = useContext(AuthContext);
-    const [tasks,setTaskList] = useState([])
+    const { setIsLoggedIn, isLoggedIn, username } = useContext(AuthContext);
+    const [tasks, setTaskList] = useState([])
+
      useEffect(()=>{
         console.log("hi")
         console.log(username)
         getTaskByUser(username).then(response => setTaskList(response))
         
     },[])
+     
     const logout = () =>{
         setIsLoggedIn(false)
         console.log(isLoggedIn)
     }
+    
     return (
         <View style = { styles.container }>
             <ScrollView showsVerticalScrollIndicator = { false }>
