@@ -45,6 +45,7 @@ function AddTaskScreen(props) {
 }
 
 const styles = StyleSheet.create({
+  
     mainContainer: {
       width:              "100%",
       backgroundColor:    "white",
