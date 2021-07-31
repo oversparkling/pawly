@@ -28,10 +28,22 @@ function EditTaskScreen(props) {
     const [selectedPet, setSelectedPet] = useState("");
     const [value, setValue] = useState(null);
     const [type, setType] = useState("");
-    const [date, setDate] = useState("");
+    const [date, setDate] = useState(new Date());
     const [time, setTime] = useState("");
     const [notes, setNotes] = useState("");
     const [imageUrl, setImageUrl] = useState("")
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    function formatAMPM(date) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return strTime;
+  }
 
     //     const { username } = useContext(AuthContext)
     //     useEffect(()=>{
@@ -53,8 +65,9 @@ function EditTaskScreen(props) {
     };
   
     const handleConfirm = (date) => {
-      console.warn("A date has been picked: ", date);
-      hideDatePicker();
+    //   console.warn("A date has been picked: " + date.getDate() + " " + monthNames[date.getMonth()] + " " + formatAMPM(date));
+    setDate(date)  
+    hideDatePicker();
     };
     
     const confirmAddTask = () =>{
@@ -90,10 +103,9 @@ function EditTaskScreen(props) {
                 <View style={styles.secondaryContainer}>
                     {/* Header */}
                     <View style = {{zIndex:5}}>
-                    <Button title="Show Date Picker" onPress={showDatePicker} />
                     <DateTimePickerModal
         isVisible={isDatePickerVisible}
-        mode="date"
+        mode="datetime"
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
       />
@@ -104,10 +116,10 @@ function EditTaskScreen(props) {
                         {props.route.params.type}{" "}
                     </Text>
 
-                    <TouchableOpacity >
+                    <TouchableOpacity onPress = {()=>showDatePicker()}>
                         <InfoCard
                             title="🗓  Date"
-                            input="Oct 4, 4:30 PM"
+                            input={date.getDate() + " " + monthNames[date.getMonth()] + " " + formatAMPM(date)}
                         ></InfoCard>
                     </TouchableOpacity>
                    
