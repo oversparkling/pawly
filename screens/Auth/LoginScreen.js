@@ -37,8 +37,8 @@ function LoginScreen(props) {
             <Text style = { styles.title }>Login</Text>
 
             {/* Input Boxes: Email, Password */}
-            <TextInput autoCapitalize = { "none" } style = { styles.input } placeholder = "Email" onChangeText = {(text)=>setEmail(text)}/>
-            <TextInput secureTextEntry = { true } autoCapitalize = {"none"} style = { styles.input } placeholder = "Password" onChangeText = {(text)=>setPassword(text)}/>
+            <TextInput autoCapitalize = { "none" } style = { styles.input } placeholder = "Email" onChangeText = {(text)=>setEmail(text)} placeholderTextColor = "#d3d3d3"/>
+            <TextInput secureTextEntry = { true } autoCapitalize = {"none"} style = { styles.input } placeholder = "Password" onChangeText = {(text)=>setPassword(text)}  placeholderTextColor = "#d3d3d3"/>
             
             {/* Buttons: Submit */}
             <View style = {{alignItems:'center'}}>
