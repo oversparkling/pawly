@@ -22,10 +22,23 @@ function TaskHomeScreen(props) {
                 UserTasks.push(doc.data())
             })
             setTaskList(UserTasks)
+            console.log(UserTasks)
         })
         return () => unsubscribe();
     },[])
-     
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      function formatAMPM(date) {
+      var hours = date.getHours();
+      var minutes = date.getMinutes();
+      var ampm = hours >= 12 ? 'pm' : 'am';
+      hours = hours % 12;
+      hours = hours ? hours : 12; // the hour '0' should be '12'
+      minutes = minutes < 10 ? '0'+minutes : minutes;
+      var strTime = date.getDate() + " " + monthNames[date.getMonth()] + " "  + hours + ':' + minutes + ' ' + ampm;
+      
+      return strTime;
+    }
     const logout = () =>{
         setIsLoggedIn(false)
         console.log(isLoggedIn)
@@ -44,7 +57,7 @@ function TaskHomeScreen(props) {
                         <TaskCard /> */}
                         {tasks.map((item,index) =>{
                             return(
-                                <TaskCard taskName = {item.description} time = {item.TaskTime} cardImageUrl = {item.cardImageUrl} key = {index} pets = {item.pets}/>
+                                <TaskCard taskName = {item.description}  cardImageUrl = {item.cardImageUrl} time = {formatAMPM(item.TaskTime.toDate()) }key = {index} pets = {item.pets}/>
                             )
                         })
 

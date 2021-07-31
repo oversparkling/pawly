@@ -41,9 +41,11 @@ function EditTaskScreen(props) {
     hours = hours % 12;
     hours = hours ? hours : 12; // the hour '0' should be '12'
     minutes = minutes < 10 ? '0'+minutes : minutes;
-    var strTime = hours + ':' + minutes + ' ' + ampm;
+    var strTime = date.getDate() + " " + monthNames[date.getMonth()] + " "  + hours + ':' + minutes + ' ' + ampm;
+    
     return strTime;
   }
+
 
     //     const { username } = useContext(AuthContext)
     //     useEffect(()=>{
@@ -70,8 +72,10 @@ function EditTaskScreen(props) {
     hideDatePicker();
     };
     
+
+
     const confirmAddTask = () =>{
-        insertTaskByUser(props.route.params.type,"4:30",username)
+        insertTaskByUser(props.route.params.type,date,username)
     }
 
     return (
@@ -119,7 +123,7 @@ function EditTaskScreen(props) {
                     <TouchableOpacity onPress = {()=>showDatePicker()}>
                         <InfoCard
                             title="🗓  Date"
-                            input={date.getDate() + " " + monthNames[date.getMonth()] + " " + formatAMPM(date)}
+                            input={formatAMPM(date)}
                         ></InfoCard>
                     </TouchableOpacity>
                    
