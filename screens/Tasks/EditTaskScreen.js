@@ -6,6 +6,8 @@ import {
     TouchableOpacity,
     Button,
     Image,
+
+    KeyboardAvoidingView
 } from "react-native";
 import { useNavigation, useScrollToTop } from "@react-navigation/native";
 import { Icon } from "react-native-elements";
@@ -15,8 +17,12 @@ import { ScrollView } from "react-native";
 import { TextInput } from "react-native";
 import { getPets } from "../../actions/PetActions";
 import { Picker } from "@react-native-picker/picker";
+import DropdownMenu from 'react-native-dropdown-menu';
+import { getTaskByType, insertTaskByUser } from "../../actions/TaskActions";
+import { AuthContext } from "../../provider/AuthProvider";
 
 function EditTaskScreen(props) {
+    const { setIsLoggedIn, isLoggedIn, username } = useContext(AuthContext);
     const navigation = useNavigation();
     const [pets, setPets] = useState([]);
     const [selectedPet, setSelectedPet] = useState("");
@@ -25,6 +31,7 @@ function EditTaskScreen(props) {
     const [date, setDate] = useState("");
     const [time, setTime] = useState("");
     const [notes, setNotes] = useState("");
+    const [imageUrl, setImageUrl] = useState("")
 
     //     const { username } = useContext(AuthContext)
     //     useEffect(()=>{
@@ -33,45 +40,36 @@ function EditTaskScreen(props) {
     useEffect(() => {
         getPets().then((response) => setPets(response));
         console.log(pets);
-        close();
+        getTaskByType(props.route.params.type).then((response) => setImageUrl(response[1]))
     }, []);
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-    const pickerRef = useRef();
-
-    function open() {
-        pickerRef.current.focus();
-    }
-
-    function close() {
-        console.log("close")
-        pickerRef.current.blur();
-    }
+    
     const showDatePicker = () => {
-        setDatePickerVisibility(true);
+      setDatePickerVisibility(true);
     };
-
+  
     const hideDatePicker = () => {
-        setDatePickerVisibility(false);
+      setDatePickerVisibility(false);
     };
-
+  
     const handleConfirm = (date) => {
-        console.warn("A date has been picked: ", date);
-        hideDatePicker();
+      console.warn("A date has been picked: ", date);
+      hideDatePicker();
     };
+    
+    const confirmAddTask = () =>{
+        insertTaskByUser(props.route.params.type,"4:30",username)
+    }
 
     return (
-        <ScrollView showsVerticalScrollIndicator={false}>
-            <Picker
-                selectedValue={selectedPet}
-                ref={pickerRef}
-                onValueChange={(itemValue, itemIndex) =>
-                    setSelectedPet(itemValue)
-                }
-            >
-                <Picker.Item label="Java" value="java" />
-                <Picker.Item label="JavaScript" value="js" />
-            </Picker>
+        
+        <KeyboardAvoidingView style={{ flex: 1, flexDirection: 'column',justifyContent: 'center',backgroundColor:'white'}} behavior="padding" enabled  keyboardVerticalOffset={20} >
+
+
+        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ flexGrow: 1 }}>
+             
             <View style={styles.primaryContainer}>
+                
                 <TouchableOpacity
                     style={styles.arrow}
                     onPress={() => navigation.goBack()}
@@ -82,36 +80,48 @@ function EditTaskScreen(props) {
                         color="white"
                     />
                 </TouchableOpacity>
+                <TouchableOpacity style = {styles.addButton} onPress = {()=>confirmAddTask()}>
+                    <Text style = {{color:'blue'}}>Add</Text>
+                </TouchableOpacity>
                 <Image
-                    source={require("./shower.jpg")}
+                    source={{uri:imageUrl }}
                     style={{ width: "100%", height: 500, position: "absolute" }}
                 />
                 <View style={styles.secondaryContainer}>
                     {/* Header */}
+                    <View style = {{zIndex:5}}>
+                    <Button title="Show Date Picker" onPress={showDatePicker} />
+                    <DateTimePickerModal
+        isVisible={isDatePickerVisible}
+        mode="date"
+        onConfirm={handleConfirm}
+        onCancel={hideDatePicker}
+      />
+      
+                </View>
+    
                     <Text style={styles.headerText}>
                         {props.route.params.type}{" "}
                     </Text>
 
-                    <TouchableOpacity  onPress = {()=>close()}>
+                    <TouchableOpacity >
                         <InfoCard
                             title="🗓  Date"
                             input="Oct 4, 4:30 PM"
                         ></InfoCard>
                     </TouchableOpacity>
-
+                   
                     <TouchableOpacity>
                         <InfoCard title="🔁  Repeat" input="Daily"></InfoCard>
                     </TouchableOpacity>
 
+                    
                     <TouchableOpacity>
-                        <InfoCard
-                            title="🐾  Who"
-                            input={selectedPet}
-                        ></InfoCard>
+                        <InfoCard title='🐾  Who' input = {selectedPet}></InfoCard>
                     </TouchableOpacity>
 
                     {/* Notes */}
-                    <View style={styles.notesContainer}>
+                    <View style={styles.notesContainer} >
                         <Text style={styles.noteText}>✏ Notes</Text>
                         <View
                             style={{
@@ -127,17 +137,14 @@ function EditTaskScreen(props) {
                             />
                         </TouchableOpacity>
                     </View>
-
-                    <Button title="Show Date Picker" onPress={showDatePicker} />
-                    <DateTimePickerModal
-                        isVisible={isDatePickerVisible}
-                        mode="datetime"
-                        onConfirm={handleConfirm}
-                        onCancel={hideDatePicker}
-                    />
+                    
                 </View>
+                
             </View>
+            
         </ScrollView>
+        </KeyboardAvoidingView>
+        
     );
 }
 
@@ -154,7 +161,7 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         alignItems: "center",
         backgroundColor: "white",
-        padding: 30,
+        // padding: 30,
     },
 
     notesContainer: {
@@ -162,6 +169,7 @@ const styles = StyleSheet.create({
         height: "100%",
         backgroundColor: "white",
         paddingTop: 5,
+        padding:30
     },
 
     headerText: {
@@ -205,5 +213,12 @@ const styles = StyleSheet.create({
         left: 30,
         zIndex: 1,
     },
+
+    addButton:{
+        position: "absolute",
+        top: 60,
+        right: 30,
+        zIndex: 1,
+    }
 });
 export default EditTaskScreen;

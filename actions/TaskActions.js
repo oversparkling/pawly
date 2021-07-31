@@ -22,7 +22,11 @@ export const getTaskPage = () =>{
 
 export const getTaskByType = (type) =>{
     return new Promise((resolve,reject) =>{
-        firebase.firestore().collection("task").doc(type).get().then(doc => resolve(doc.data().description)
+        firebase.firestore().collection("task").doc(type).get().then(doc => {
+            let details = []
+            details.push(doc.data().description)
+            details.push(doc.data().photoUrl)
+            resolve(details)}
         )
         .catch(error =>{
             console.log(error)
@@ -54,12 +58,12 @@ export const getTaskByUser = (username) =>{
 }
 
 export const insertTaskByUser = (type,time,username) =>{
-    getTaskByType(type).then( description =>{
+    getTaskByType(type).then( result =>{
         firebase.firestore().collection("UserTasks").add({
             TaskTime : time,
-            cardImageUrl:"https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1051&q=80",
+            cardImageUrl:result[1],
             userID:username,
-            description:description
+            description:result[0],
         })
     }
     )

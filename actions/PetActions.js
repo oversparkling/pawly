@@ -17,7 +17,7 @@ export const getPets = () =>{
         firebase.firestore().collection("pets").get().then((querySnapShot)=>{
             let Pets = []
             querySnapShot.forEach((doc)=>{
-                Pets.push(doc)
+                Pets.push(doc.data())
             })
             resolve(Pets);
         })
