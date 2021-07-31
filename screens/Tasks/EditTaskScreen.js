@@ -20,6 +20,11 @@ import { Picker } from "@react-native-picker/picker";
 import DropdownMenu from 'react-native-dropdown-menu';
 import { getTaskByType, insertTaskByUser } from "../../actions/TaskActions";
 import { AuthContext } from "../../provider/AuthProvider";
+import DateTimePicker from '@react-native-community/datetimepicker'
+import { onChange } from "react-native-reanimated";
+import { Platform } from "react-native";
+import { Appearance, useColorScheme } from 'react-native-appearance';
+import App from "../../App";
 
 function EditTaskScreen(props) {
     const { setIsLoggedIn, isLoggedIn, username } = useContext(AuthContext);
@@ -31,6 +36,7 @@ function EditTaskScreen(props) {
     const [date, setDate] = useState(new Date());
     const [time, setTime] = useState("");
     const [notes, setNotes] = useState("");
+    const [show,setShow] = useState(false)
     const [imageUrl, setImageUrl] = useState("")
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -51,14 +57,17 @@ function EditTaskScreen(props) {
     //     useEffect(()=>{
     //         console.log(props)
     //     },[])
+    Appearance.getColorScheme();
     useEffect(() => {
         getPets().then((response) => setPets(response));
         console.log(pets);
         getTaskByType(props.route.params.type).then((response) => setImageUrl(response[1]))
     }, []);
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-    
+    const currentColorScheme = useColorScheme();
     const showDatePicker = () => {
+        // colorScheme = useColorScheme();
+        console.log(currentColorScheme)
       setDatePickerVisibility(true);
     };
   
@@ -72,6 +81,7 @@ function EditTaskScreen(props) {
     hideDatePicker();
     };
     
+    
 
 
     const confirmAddTask = () =>{
@@ -84,6 +94,7 @@ function EditTaskScreen(props) {
 
 
         <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ flexGrow: 1 }}>
+             
              
             <View style={styles.primaryContainer}>
                 
@@ -112,6 +123,8 @@ function EditTaskScreen(props) {
         mode="datetime"
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
+        display = 'spinner'
+        isDarkModeEnabled = {currentColorScheme == 'dark'}
       />
       
                 </View>
@@ -127,7 +140,7 @@ function EditTaskScreen(props) {
                         ></InfoCard>
                     </TouchableOpacity>
                    
-                    <TouchableOpacity>
+                    <TouchableOpacity >
                         <InfoCard title="🔁  Repeat" input="Daily"></InfoCard>
                     </TouchableOpacity>
 

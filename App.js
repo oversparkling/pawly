@@ -18,6 +18,8 @@ import AuthContextProvider from './provider/AuthProvider';
 import RootStack from "./screens/RootStack";
 import EditTaskScreen from "./screens/Tasks/EditTaskScreen";
 import TaskStack from "./screens/Tasks/TaskStack";
+import Example from "./screens/Tasks/DatePicker.js"
+import { AppearanceProvider } from 'react-native-appearance';
 
 function App() {
     const [isLoaded, setIsLoaded] = useState(false);
@@ -64,12 +66,16 @@ function App() {
     // ,[])
 
     return isLoaded ? (
-        <AuthContextProvider>
-            <NavigationContainer>
-                <RootStack />
-            </NavigationContainer>
-        </AuthContextProvider>
+
+        <AppearanceProvider>
+            <AuthContextProvider>
+                <NavigationContainer>
+                    <RootStack/>
+                </NavigationContainer>
+            </AuthContextProvider> 
+        </AppearanceProvider>
         
+       
         
             
         
