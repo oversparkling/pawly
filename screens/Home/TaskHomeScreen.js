@@ -4,6 +4,7 @@ import { AuthContext } from "../../provider/AuthProvider";
 import tailwind from "tailwind-rn";
 import TaskCard from "../../components/TaskCard";
 import { getTaskByUser } from "../../actions/TaskActions";
+import firebase from "../../firebaseConfig"
 
 
 function TaskHomeScreen(props) {
@@ -14,8 +15,15 @@ function TaskHomeScreen(props) {
      useEffect(()=>{
         console.log("hi")
         console.log(username)
-        getTaskByUser(username).then(response => setTaskList(response))
-        
+        const unsubscribe = firebase.firestore().collection("UserTasks").where("userID","==",username).onSnapshot(querySnapShot=>{
+            let UserTasks = []
+            querySnapShot.forEach((doc)=>{
+                console.log(doc.data())
+                UserTasks.push(doc.data())
+            })
+            setTaskList(UserTasks)
+        })
+        return () => unsubscribe();
     },[])
      
     const logout = () =>{

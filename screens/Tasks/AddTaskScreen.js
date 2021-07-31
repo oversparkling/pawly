@@ -34,7 +34,8 @@ function AddTaskScreen(props) {
                               text = { item.id }
                               key = { index }
                               onPress={() => navigation.navigate("EditTask",{
-                              type: item.id
+                              type: item.id,
+                              name: item.data().description
                               })}/>
                         );
                     })}
