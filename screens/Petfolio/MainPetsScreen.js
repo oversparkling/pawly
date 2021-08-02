@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import { View, StyleSheet,TouchableOpacity, Text, ScrollView, Image, TouchableNativeFeedback } from "react-native";
 import { Icon, Divider } from "react-native-elements";
 import { useNavigation } from '@react-navigation/native';
@@ -6,15 +6,16 @@ import { petfolioData } from './petfolioData'
 import { getPets } from "../../actions/PetActions";
 import firebase from "../../firebaseConfig"
 import Carousel from './Carousel'
+import { AuthContext } from "../../provider/AuthProvider";
 
 
 function MainPetsScreen(props) {
     const navigation = useNavigation();
-    
+    const {username} = useContext(AuthContext);
     const [Pets, setPets] = useState([]);
     useEffect(()=>{
-        
-        getPets().then(response => setPets(response))
+        console.log(username)
+        getPets(username).then(response => setPets(response))
         
         
         // firebase.firestore().collection("pets").doc("fFAzuW79gFAAssqko7Y4").collection("photos").get().then((querySnapShot1) =>{
@@ -22,7 +23,7 @@ function MainPetsScreen(props) {
         //         console.log(doc1.data())
         //     })
         // })
-    
+     
     },[])
     return (
     

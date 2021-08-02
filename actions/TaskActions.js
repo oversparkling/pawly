@@ -38,11 +38,13 @@ export const getTaskByType = (type) =>{
 
 export const getTaskByUser = (username) =>{
     return new Promise((resolve,reject) =>{
-        
-        firebase.firestore().collection("UserTasks").where("userID","==",username).get().then((querySnapShot)=>{
+        var beginningDate = Date.now() + 604800000;
+        var beginningDateObject = new Date(beginningDate);
+        console.log(beginningDateObject)
+        firebase.firestore().collection("UserTasks").where("userID","==",username).where("TaskTime","<",beginningDateObject).orderBy("TaskTime").get().then((querySnapShot)=>{
             let UserTasks = []
             querySnapShot.forEach((doc)=>{
-                console.log(doc.data())
+                // console.log(doc.data())
                 UserTasks.push(doc.data())
             })
             resolve(UserTasks);
@@ -57,13 +59,14 @@ export const getTaskByUser = (username) =>{
     
 }
 
-export const insertTaskByUser = (type,time,username) =>{
+export const insertTaskByUser = (type,time,username,notes) =>{
     getTaskByType(type).then( result =>{
         firebase.firestore().collection("UserTasks").add({
             TaskTime : time,
             cardImageUrl:result[1],
             userID:username,
             description:result[0],
+            notes: notes
         })
     }
     )

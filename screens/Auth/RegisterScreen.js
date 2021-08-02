@@ -32,9 +32,9 @@ function RegisterScreen(props) {
            <Text style = { styles.title }>Register</Text>
 
            {/* Input boxes: Username, Email, Password */}
-           <TextInput autoCapitalize = {"none"} style = { styles.input } placeholder = "Username" onChangeText = { (text)=>setUsername(text) }/>
-           <TextInput autoCapitalize = {"none"} style = { styles.input } placeholder = "Email" onChangeText = { (text)=>setEmail(text) }/>
-           <TextInput secureTextEntry = { true } autoCapitalize = {"none"} style = { styles.input } placeholder = "Password" onChangeText = { (text)=>setPassword(text) }/>
+           <TextInput autoCapitalize = {"none"} style = { styles.input } placeholder = "Username" onChangeText = { (text)=>setUsername(text) } placeholderTextColor = "#d3d3d3"/>
+           <TextInput autoCapitalize = {"none"} style = { styles.input } placeholder = "Email" onChangeText = { (text)=>setEmail(text) } placeholderTextColor = "#d3d3d3"/>
+           <TextInput secureTextEntry = { true } autoCapitalize = {"none"} style = { styles.input } placeholder = "Password" onChangeText = { (text)=>setPassword(text) } placeholderTextColor = "#d3d3d3"/>
            
            {/* Buttons: Submit */}
            <View style = { {alignItems:'center'} }>

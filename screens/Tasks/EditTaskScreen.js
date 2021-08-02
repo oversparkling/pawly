@@ -24,7 +24,6 @@ import DateTimePicker from '@react-native-community/datetimepicker'
 import { onChange } from "react-native-reanimated";
 import { Platform } from "react-native";
 import { Appearance, useColorScheme } from 'react-native-appearance';
-import App from "../../App";
 
 function EditTaskScreen(props) {
     const { setIsLoggedIn, isLoggedIn, username } = useContext(AuthContext);
@@ -85,7 +84,7 @@ function EditTaskScreen(props) {
 
 
     const confirmAddTask = () =>{
-        insertTaskByUser(props.route.params.type,date,username)
+        insertTaskByUser(props.route.params.type,date,username,notes)
     }
 
     return (

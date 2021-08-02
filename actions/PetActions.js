@@ -11,12 +11,13 @@ export const getUsers = async () => {
     return Users;
   };
 
-export const getPets = () =>{
+export const getPets = (username) =>{
     return new Promise((resolve,reject) =>{
         
-        firebase.firestore().collection("pets").get().then((querySnapShot)=>{
+        firebase.firestore().collection("pets").where("ownerID","array-contains",username).get().then((querySnapShot)=>{
             let Pets = []
             querySnapShot.forEach((doc)=>{
+                console.log(doc.data())
                 Pets.push(doc)
             })
             resolve(Pets);

@@ -11,20 +11,36 @@ function TaskHomeScreen(props) {
     // const { username} = useContext(AuthContext);
     const { setIsLoggedIn, isLoggedIn, username } = useContext(AuthContext);
     const [tasks, setTaskList] = useState([])
+    const [todayTasks,setTodayTasks] = useState([])
+    const [thisweekTasks, setThisWeekTasks] = useState([])
+
 
      useEffect(()=>{
-        console.log("hi")
-        console.log(username)
-        const unsubscribe = firebase.firestore().collection("UserTasks").where("userID","==",username).onSnapshot(querySnapShot=>{
-            let UserTasks = []
+        var beginningDate = Date.now();
+        var beginningDateObject = new Date(beginningDate);
+        var endDate =  Date.now() + 604800000;
+        var endDateObject = new Date(endDate);
+        const unsubscribe = firebase.firestore().collection("UserTasks").where("userID","==",username).where("TaskTime",">=",beginningDateObject).where("TaskTime","<",endDateObject).orderBy("TaskTime").onSnapshot(querySnapShot=>{
+            let today = []
+            let week = []
             querySnapShot.forEach((doc)=>{
-                console.log(doc.data())
-                UserTasks.push(doc.data())
+                console.log(doc.data().TaskTime.toDate().toDateString())
+                console.log(new Date().toDateString())
+                if (doc.data().TaskTime.toDate().toDateString() == new Date().toDateString()){
+                    today.push(doc.data())
+                }
+                else{
+                    week.push(doc.data())
+                }
             })
-            setTaskList(UserTasks)
-            console.log(UserTasks)
+            setTodayTasks(today)
+            setThisWeekTasks(week)
+            
+            // console.log(UserTasks)
         })
-        return () => unsubscribe();
+        return () => {
+            unsubscribe()
+        };
     },[])
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -50,12 +66,12 @@ function TaskHomeScreen(props) {
                 <Text style = {styles.headerText}> Upcoming </Text>
                 <Text style={styles.headerDay}> Today </Text>
 
-                <Button title = "log out" onPress = {()=> logout()}/>
+                {/* <Button title = "log out" onPress = {()=> logout()}/> */}
                     <View style = {tailwind("items-center mt-10")}>
                         {/* <TaskCard time = "3hrs" />
                         <TaskCard />
                         <TaskCard /> */}
-                        {tasks.map((item,index) =>{
+                        {todayTasks.map((item,index) =>{
                             return(
                                 <TaskCard taskName = {item.description}  cardImageUrl = {item.cardImageUrl} time = {formatAMPM(item.TaskTime.toDate()) }key = {index} pets = {item.pets}/>
                             )
@@ -63,6 +79,22 @@ function TaskHomeScreen(props) {
 
                         }
                     </View>
+                
+                    <Text style={styles.headerDay}> This Week </Text>
+
+
+    <View style = {tailwind("items-center mt-10")}>
+        {/* <TaskCard time = "3hrs" />
+        <TaskCard />
+        <TaskCard /> */}
+        {thisweekTasks.map((item,index) =>{
+            return(
+                <TaskCard taskName = {item.description}  cardImageUrl = {item.cardImageUrl} time = {formatAMPM(item.TaskTime.toDate()) }key = {index} pets = {item.pets}/>
+            )
+        })
+
+        }
+    </View>
             </ScrollView>
         </View>
     );
