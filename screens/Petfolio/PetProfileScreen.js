@@ -20,7 +20,10 @@ function PetProfileScreen(props) {
 
     useEffect(()=>{
         console.log(props)
-        getPetDetails(props.route.params.id).then(response => setPetImages(response))
+        getPetDetails(props.route.params.id).then(response => {
+            let array = response.data().photos;
+            setPetImages(array)
+        })
     },[])
 
     return (
@@ -33,9 +36,9 @@ function PetProfileScreen(props) {
                 showsPagination = { false }
                 style = {{ height: 500 }}>
 
-                {PetImages.map((item) => {
+                {PetImages.map((item,index) => {
                     return(
-                    <Image key = {item.url} style={styles.image} source={{ uri: item.url }} />)
+                    <Image key = {index} style={styles.image} source={{ uri: item }} />)
                 })}
             </Swiper>
 
@@ -50,8 +53,8 @@ function PetProfileScreen(props) {
             <TouchableOpacity
                 style = { styles.plus }
                 // [💡] Change to allow users to add photos of this pet
-                onPress = {() => navigation.goBack()}>
-                <Icon name = "add-outline" type = "ionicon" color = "#000" />
+                onPress = {() => navigation.navigate("AddPhotos",{id:props.route.params.id})}>
+                <Icon name = "add-outline" type = "ionicon" color = "white" />
             </TouchableOpacity>
 
             {/* Information Section */}

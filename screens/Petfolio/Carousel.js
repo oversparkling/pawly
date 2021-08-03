@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, Dimensions, FlatList, Animated } from 'react-native'
 import CarouselItem from './CarouselItem'
 import { getPetDetails } from '../../actions/PetActions'
+import firebase  from '../../firebaseConfig'
 
 
 const { width, height } = Dimensions.get('window')
@@ -33,10 +34,36 @@ function Carousel(props) {
     const [dataList, setDataList] = useState([])
 
     useEffect(()=> {
-        getPetDetails(props.id).then(response => setDataList(response))
+        // return new Promise((resolve,reject) =>{
+        //     firebase.firestore().collection("pets").doc(id).get().then((querySnapShot)=>{
+                
+        //         resolve(querySnapShot);
+        //     }).catch(error =>{
+        //         console.log(error)
+        //         console.log("getPetDetails error")
+        //     })
+        // })
+        const unsubscribe = firebase.firestore().collection("pets").doc(props.id).onSnapshot((querySnapshot) =>{
+            let array = querySnapshot.data().photos;
+            console.log("hi")
+            setDataList(array)
+            infiniteScroll(dataList)
+        })
+
+
+
+        // getPetDetails(props.id).then((response) => {
+            
+        //     let array = response.data().photos;
+        //     setDataList(array)
+        //     console.log(dataList)
+        //     infiniteScroll(dataList)
+        // })
+        
+        return ()=> {unsubscribe()}
+            
         // setDataList(props.data)
-        console.log(dataList)
-        infiniteScroll(dataList)
+        
         
     },[])
 

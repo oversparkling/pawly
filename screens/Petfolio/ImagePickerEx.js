@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Button, Image, View, Platform } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import storage from "../../firebaseConfig.js"
+import { uploadPetImage } from '../../actions/PetActions.js';
 
 
-export default function ImagePickerExample() {
+export default function ImagePickerExample(props) {
   const [image, setImage] = useState(null);
 
   useEffect(() => {
@@ -33,28 +34,7 @@ export default function ImagePickerExample() {
     }
   };
   const handleUpload = () => {
-    const uploadTask = storage.ref(`images/${image.name}`).put(image);
-    uploadTask.on(
-      "state_changed",
-      snapshot => {
-        const progress = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
-        setProgress(progress);
-      },
-      error => {
-        console.log(error);
-      },
-      () => {
-        storage
-          .ref("images")
-          .child(image.name)
-          .getDownloadURL()
-          .then(url => {
-            setUrl(url);
-          });
-      }
-    );
+    uploadPetImage(props.route.params.id,image)
   };
 
   return (

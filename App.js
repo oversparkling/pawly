@@ -20,7 +20,7 @@ import EditTaskScreen from "./screens/Tasks/EditTaskScreen";
 import TaskStack from "./screens/Tasks/TaskStack";
 import Example from "./screens/Tasks/DatePicker.js"
 import { AppearanceProvider } from 'react-native-appearance';
-import ImagePickerExample from "./screens/Tasks/ImagePickerEx";
+import ImagePickerExample from "./screens/Petfolio/ImagePickerEx";
 
 function App() {
     const [isLoaded, setIsLoaded] = useState(false);
@@ -71,7 +71,7 @@ function App() {
         <AppearanceProvider>
             <AuthContextProvider>
                 <NavigationContainer>
-                    <ImagePickerExample/>
+                    <RootStack/>
                 </NavigationContainer>
             </AuthContextProvider> 
         </AppearanceProvider>

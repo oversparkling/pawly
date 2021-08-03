@@ -18,11 +18,7 @@ function MainPetsScreen(props) {
         getPets(username).then(response => setPets(response))
         
         
-        // firebase.firestore().collection("pets").doc("fFAzuW79gFAAssqko7Y4").collection("photos").get().then((querySnapShot1) =>{
-        //     querySnapShot1.forEach((doc1)=>{
-        //         console.log(doc1.data())
-        //     })
-        // })
+        
      
     },[])
     return (
