@@ -27,7 +27,7 @@ function MainPetsScreen(props) {
             <ScrollView showsVerticalScrollIndicator = { false } style = { styles.scrollView }>
                 <View style = { styles.header }>
                     <Text style = { styles.headerText }> My Pets </Text>
-                    <TouchableOpacity style = { styles.plus } >
+                    <TouchableOpacity style = { styles.plus } onPress= {()=>navigation.navigate("AddPets")} >
                     <Icon
                         name = "plus"
                         type = "antdesign"
