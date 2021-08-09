@@ -36,6 +36,22 @@ export const getPets = (username) =>{
     
 }
 
+export const addPet = (petName,gender,species,breed,birthday,weight,neutered,microchipped,microchipNo,notes,username) =>{
+  firebase.firestore().collection("pets").add({
+    name:petName,
+    gender:gender,
+    species:species,
+    breed:breed,
+    birthday:birthday,
+    weight:weight,
+    neutered:neutered,
+    microchipped:microchipped,
+    microchipNo:microchipNo,
+    ownerID: firebase.firestore.FieldValue.arrayUnion(username),
+    notes: notes
+})
+}
+
 export const getPetDetails = (id) =>{
     
     return new Promise((resolve,reject) =>{

@@ -12,6 +12,7 @@ import Swiper from "react-native-swiper";
 import { Icon, Divider } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import { getPetDetails } from "../../actions/PetActions";
+import firebase  from "../../firebaseConfig";
 
 function PetProfileScreen(props) {
 
@@ -19,11 +20,13 @@ function PetProfileScreen(props) {
     const [PetImages, setPetImages] = useState([])
 
     useEffect(()=>{
-        console.log(props)
-        getPetDetails(props.route.params.id).then(response => {
-            let array = response.data().photos;
+        const unsubscribe = firebase.firestore().collection("pets").doc(props.route.params.id).onSnapshot((querySnapshot) =>{
+            let array = querySnapshot.data().photos;
             setPetImages(array)
         })
+        return () =>{
+            unsubscribe
+        }
     },[])
 
     return (
