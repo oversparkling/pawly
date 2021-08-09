@@ -34,7 +34,7 @@ function PetProfileScreen(props) {
         <View style = { styles.mainContainer }>
             <ScrollView showsVerticalScrollIndicator = { false }>
             {/* Image Swiper: Displays pets images */}
-            <Swiper
+            {PetImages && <Swiper
                 autoplay = { true }
                 showsPagination = { false }
                 style = {{ height: 500 }}>
@@ -43,7 +43,7 @@ function PetProfileScreen(props) {
                     return(
                     <Image key = {index} style={styles.image} source={{ uri: item }} />)
                 })}
-            </Swiper>
+            </Swiper>}
 
             {/* Back Arrow */}
             <TouchableOpacity

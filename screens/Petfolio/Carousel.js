@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect,useRef } from 'react'
 import { View, Text, StyleSheet, Dimensions, FlatList, Animated } from 'react-native'
 import CarouselItem from './CarouselItem'
 import { getPetDetails } from '../../actions/PetActions'
@@ -8,7 +8,7 @@ import firebase  from '../../firebaseConfig'
 const { width, height } = Dimensions.get('window')
 let flatList
 
-function infiniteScroll(dataList){
+function infiniteScroll(dataList,mySlide){
     const numberOfData = dataList.length
     let scrollValue = 0, scrolled = 0
 
@@ -22,13 +22,19 @@ function infiniteScroll(dataList){
             scrolled = 0
         }
         
-        this.flatList.scrollToOffset({ animated: false, offset: scrollValue})
+        if (mySlide.current) {
+            mySlide.current.scrollToOffset({
+                animated: true,
+                offset: scrollValue,
+            });
+        }
         
     }, 3000)
 }
 
 
 function Carousel(props) {
+    const mySlide = useRef();
     const scrollX = new Animated.Value(0)
     let position = Animated.divide(scrollX, width)
     const [dataList, setDataList] = useState([])
@@ -47,7 +53,7 @@ function Carousel(props) {
             let array = querySnapshot.data().photos;
             console.log("hi")
             setDataList(array)
-            infiniteScroll(dataList)
+            infiniteScroll(dataList,mySlide)
         })
 
 
@@ -72,7 +78,7 @@ function Carousel(props) {
         return (
             <View>
                 <FlatList data={dataList}
-                ref = {(flatList) => {this.flatList = flatList}}
+                    ref={mySlide}
                     keyExtractor={(item, index) => 'key' + index}
                     horizontal
                     pagingEnabled
@@ -85,7 +91,8 @@ function Carousel(props) {
                         return <CarouselItem item={item} />
                     }}
                     onScroll={Animated.event(
-                        [{ nativeEvent: { contentOffset: { x: scrollX } } }]
+                        [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+                        { useNativeDriver: false }
                     )}
                 />
 

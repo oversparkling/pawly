@@ -17,7 +17,7 @@ function AddPetScreen(props) {
     const [gender,setGender] = useState("")
     const [species,setSpecies] = useState("")
     const [breed,setBreed] = useState("")
-    const [birthday,setBirthday] = useState("")
+    const [birthday,setBirthday] = useState(new Date())
     const [weight,setWeight] = useState("")
     const [neutered,setNeutered] = useState("")
     const [microchipped,setMicrochipped] = useState("")
@@ -32,13 +32,7 @@ function AddPetScreen(props) {
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     function formatAMPM(date) {
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    var ampm = hours >= 12 ? 'pm' : 'am';
-    hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
-    minutes = minutes < 10 ? '0'+minutes : minutes;
-    var strTime = date.getDate() + " " + monthNames[date.getMonth()] + " "  + hours + ':' + minutes + ' ' + ampm;
+    var strTime = date.getDate() + " " + monthNames[date.getMonth()] + " " + date.getFullYear();
     
     return strTime;
   }
@@ -63,7 +57,7 @@ function AddPetScreen(props) {
   
     const handleConfirm = (date) => {
     //   console.warn("A date has been picked: " + date.getDate() + " " + monthNames[date.getMonth()] + " " + formatAMPM(date));
-    setDate(date)  
+    setBirthday(date)  
     hideDatePicker();
     };
     
@@ -86,19 +80,19 @@ function AddPetScreen(props) {
                   </TouchableOpacity>
                 </View>
                 <View style = {styles.infoContainer}>
-                    <InfoCardPet stateChange = {(text)=> setName(text)} title = "Name" input = "hello"/>
+                    <InfoCardPet stateChange = {(text)=> setName(text)} title = "Name" input = "ie. Hiro"/>
                     <InfoCardPet stateChange = {(text)=> setGender(text)} title = "Gender" input = "hello"/>
                     <InfoCardPet stateChange = {(text)=> setSpecies(text)} title = "Species" input = "hello"/>
                     <InfoCardPet stateChange = {(text)=> setBreed(text)} title = "Breed" input = "hello"/>
-                    <InfoCardPet stateChange = {(text)=> setBirthday(text)} title = "Birthday" input = "hello"/>
+                    <TouchableOpacity onPress = {()=>showDatePicker()}>
+                      <InfoCard title="Birthday"
+                            input={formatAMPM(birthday)} />
+                    </TouchableOpacity>
                     <InfoCardPet stateChange = {(text)=> setWeight(text)} title = "Weight" input = "hello"/>
                     <InfoCardPet stateChange = {(text)=> setNeutered(text)} title = "Neutered" input = "hello"/>
                     <InfoCardPet stateChange = {(text)=> setMicrochipped(text)} title = "Microchipped" input = "hello"/>
                     <InfoCardPet stateChange = {(text)=> setMicrochipNo(text)} title = "Microchipped" input = "hello"/>
-                    <TouchableOpacity onPress = {()=>showDatePicker()}>
-                      <InfoCard title="🗓  Date"
-                            input={formatAMPM(date)} />
-                    </TouchableOpacity>
+                    
                     
                 </View>
                 <View style={styles.notesContainer} >
@@ -119,10 +113,10 @@ function AddPetScreen(props) {
                     </View>
                     <DateTimePickerModal
         isVisible={isDatePickerVisible}
-        mode="datetime"
+        mode="date"
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
-        display = 'default'
+        display = 'spinner'
         isDarkModeEnabled = {currentColorScheme == 'dark'}
       />
             </KeyboardAwareScrollView>
