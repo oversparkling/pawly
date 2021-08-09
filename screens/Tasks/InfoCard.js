@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
 
     container: {
         width:              350,
-        height:             50,
+        height:             45,
         borderRadius:       30,
         flexDirection:      "row",
         backgroundColor:    "white",
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     },
 
     titleText: {
-        fontSize:           18,
+        fontSize:           15,
         fontFamily:         "Sofia-Pro-Regular",
         color:              "black",
         justifyContent:     "flex-start",
@@ -37,14 +37,14 @@ const styles = StyleSheet.create({
     },
 
     inputText: {
-        fontSize:           18,
+        fontSize:           15,
         fontFamily:         "Sofia-Pro-Regular",
         color:              "white",
     },
 
     input: {
         width:              180,
-        height:             50,
+        height:             45,
         borderRadius:       30,
         backgroundColor:    "#E1AAAA",
         borderColor:        "#E1AAAA",

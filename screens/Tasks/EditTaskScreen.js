@@ -26,6 +26,7 @@ import { Platform } from "react-native";
 import { Appearance, useColorScheme } from 'react-native-appearance';
 
 function EditTaskScreen(props) {
+
     const { setIsLoggedIn, isLoggedIn, username } = useContext(AuthContext);
     const navigation = useNavigation();
     const [pets, setPets] = useState([]);
@@ -37,8 +38,7 @@ function EditTaskScreen(props) {
     const [notes, setNotes] = useState("");
     const [show,setShow] = useState(false)
     const [imageUrl, setImageUrl] = useState("")
-    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     function formatAMPM(date) {
     var hours = date.getHours();
     var minutes = date.getMinutes();
@@ -51,11 +51,6 @@ function EditTaskScreen(props) {
     return strTime;
   }
 
-
-    //     const { username } = useContext(AuthContext)
-    //     useEffect(()=>{
-    //         console.log(props)
-    //     },[])
     Appearance.getColorScheme();
     useEffect(() => {
         getPets().then((response) => setPets(response));
@@ -79,9 +74,6 @@ function EditTaskScreen(props) {
     setDate(date)  
     hideDatePicker();
     };
-    
-    
-
 
     const confirmAddTask = () =>{
         insertTaskByUser(props.route.params.type,date,username,notes)
@@ -90,32 +82,32 @@ function EditTaskScreen(props) {
     return (
         
         <KeyboardAvoidingView style={{ flex: 1, flexDirection: 'column',justifyContent: 'center',backgroundColor:'white'}} behavior="padding" enabled  keyboardVerticalOffset={20} >
-
-
-        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ flexGrow: 1 }}>
-             
-             
-            <View style={styles.primaryContainer}>
-                
+        <ScrollView showsVerticalScrollIndicator = {false} contentContainerStyle={{ flexGrow: 1 }}>
+            <View style = {styles.primaryContainer}>
+                {/* Back Arrow Icon */}
                 <TouchableOpacity
-                    style={styles.arrow}
-                    onPress={() => navigation.goBack()}
-                >
+                    style = {styles.arrow}
+                    onPress ={() => navigation.goBack()}>
                     <Icon
-                        name="arrow-back-outline"
-                        type="ionicon"
-                        color="white"
-                    />
+                        name = "arrow-back-outline"
+                        type = "ionicon"
+                        color = "white"/>
                 </TouchableOpacity>
+
+                {/* Add Task Icon */}
                 <TouchableOpacity style = {styles.addButton} onPress = {()=>confirmAddTask()}>
-                    <Text style = {{color:'blue'}}>Add</Text>
+                    <Text style = {{color:'white'}}>Add</Text>
                 </TouchableOpacity>
-                <Image
-                    source={{uri:imageUrl }}
-                    style={{ width: "100%", height: 500, position: "absolute" }}
-                />
+
+                {/* Task Image */}
+                <Image source={{uri:imageUrl }} style={{ width: "100%", height: 500, position: "absolute" }}/>
+                
                 <View style={styles.secondaryContainer}>
                     {/* Header */}
+                    <Text style = {styles.headerText}>{props.route.params.type}{" "}</Text>
+
+                    {/* Task Description */}
+
                     <View style = {{zIndex:5}}>
                     <DateTimePickerModal
         isVisible={isDatePickerVisible}
@@ -127,10 +119,6 @@ function EditTaskScreen(props) {
       />
       
                 </View>
-    
-                    <Text style={styles.headerText}>
-                        {props.route.params.type}{" "}
-                    </Text>
 
                     <TouchableOpacity onPress = {()=>showDatePicker()}>
                         <InfoCard
@@ -177,76 +165,78 @@ function EditTaskScreen(props) {
 }
 
 const styles = StyleSheet.create({
+
     primaryContainer: {
-        width: "100%",
-        backgroundColor: "white",
-        paddingTop: 380,
+        width:                  "100%",
+        backgroundColor:        "white",
+        paddingTop:             380,
     },
 
     secondaryContainer: {
-        width: "100%",
-        height: "100%",
-        borderRadius: 50,
-        alignItems: "center",
-        backgroundColor: "white",
-        // padding: 30,
+        width:                  "100%",
+        height:                 "100%",
+        borderRadius:           50,
+        alignItems:             "center",
+        backgroundColor:        "white",
+        paddingTop:             15,
     },
 
     notesContainer: {
-        width: "100%",
-        height: "100%",
-        backgroundColor: "white",
-        paddingTop: 5,
-        padding:30
+        width:                  "100%",
+        height:                 "100%",
+        backgroundColor:        "white",
+        paddingTop:             5,
+        padding:                30
     },
 
     headerText: {
-        fontSize: 40,
-        fontFamily: "Recoleta-Regular",
-        paddingTop: 5,
-        paddingBottom: 25,
+        fontSize:               34,
+        fontFamily:             "Recoleta-Regular",
+        paddingTop:             8,
+        paddingBottom:          25,
     },
 
     noteText: {
-        fontFamily: "Recoleta-Regular",
-        color: "black",
-        fontSize: 18,
-        justifyContent: "flex-start",
-        paddingBottom: 5,
+        fontFamily:             "Recoleta-Regular",
+        color:                  "black",
+        fontSize:               18,
+        justifyContent:         "flex-start",
+        paddingBottom:          5,
     },
 
     input: {
-        borderColor: "#E1AAAA",
-        borderRadius: 15,
-        borderWidth: 2,
-        width: "80%",
-        fontSize: 20,
-        paddingVertical: 10,
-        fontFamily: "Recoleta-Regular",
-        color: "grey",
-        paddingLeft: 10,
+        borderColor:        "#E1AAAA",
+        borderRadius:       15,
+        borderWidth:        2,
+        width:              "80%",
+        fontSize:           15,
+        paddingVertical:    10,
+        fontFamily:         "Recoleta-Regular",
+        color:              "grey",
+        paddingLeft:        10,
     },
 
     text: {
-        fontFamily: "Sofia-Pro-Regular",
-        color: "black",
-        fontSize: 15,
-        justifyContent: "flex-start",
-        paddingTop: 15,
+        fontFamily:             "Sofia-Pro-Regular",
+        color:                  "black",
+        fontSize:               15,
+        justifyContent:         "flex-start",
+        paddingTop:             15,
     },
 
     arrow: {
-        position: "absolute",
-        top: 60,
-        left: 30,
-        zIndex: 1,
+        position:           "absolute",
+        top:                60,
+        left:               30,
+        zIndex:             1,
     },
 
     addButton:{
-        position: "absolute",
-        top: 60,
-        right: 30,
-        zIndex: 1,
+        position:           "absolute",
+        top:                60,
+        right:              30,
+        zIndex:             1,
+        fontFamily:         "Sofia-Pro-Regular",
     }
 });
 export default EditTaskScreen;

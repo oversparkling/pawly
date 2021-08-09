@@ -6,21 +6,22 @@ import TaskCard from "../../components/TaskCard";
 import { getTaskByUser } from "../../actions/TaskActions";
 import firebase from "../../firebaseConfig"
 
-
 function TaskHomeScreen(props) {
+
     // const { username} = useContext(AuthContext);
     const { setIsLoggedIn, isLoggedIn, username } = useContext(AuthContext);
     const [tasks, setTaskList] = useState([])
     const [todayTasks,setTodayTasks] = useState([])
     const [thisweekTasks, setThisWeekTasks] = useState([])
 
-
-     useEffect(()=>{
+    useEffect(()=>{
+    
         var beginningDate = Date.now();
         var beginningDateObject = new Date(beginningDate);
         var endDate =  Date.now() + 604800000;
         var endDateObject = new Date(endDate);
-        const unsubscribe = firebase.firestore().collection("UserTasks").where("userID","==",username).where("TaskTime",">=",beginningDateObject).where("TaskTime","<",endDateObject).orderBy("TaskTime").onSnapshot(querySnapShot=>{
+        
+        const unsubscribe = firebase.firestore().collection("UserTasks").where("userID", "==", username).where("TaskTime", ">=", beginningDateObject).where("TaskTime", "<", endDateObject).orderBy("TaskTime").onSnapshot(querySnapShot=>{
             let today = []
             let week = []
             querySnapShot.forEach((doc)=>{
@@ -42,19 +43,22 @@ function TaskHomeScreen(props) {
             unsubscribe()
         };
     },[])
+
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
       function formatAMPM(date) {
       var hours = date.getHours();
       var minutes = date.getMinutes();
       var ampm = hours >= 12 ? 'pm' : 'am';
       hours = hours % 12;
       hours = hours ? hours : 12; // the hour '0' should be '12'
-      minutes = minutes < 10 ? '0'+minutes : minutes;
+      minutes = minutes < 10 ? '0' + minutes : minutes;
       var strTime = date.getDate() + " " + monthNames[date.getMonth()] + " "  + hours + ':' + minutes + ' ' + ampm;
       
       return strTime;
     }
+
     const logout = () =>{
         setIsLoggedIn(false)
         console.log(isLoggedIn)
@@ -63,38 +67,22 @@ function TaskHomeScreen(props) {
     return (
         <View style = { styles.container }>
             <ScrollView showsVerticalScrollIndicator = { false }>
-                <Text style = {styles.headerText}> Upcoming </Text>
-                <Text style={styles.headerDay}> Today </Text>
+                {/* Headers */}
+                <Text style = { styles.headerOneText }>Upcoming</Text>
+                <Text style = { styles.headerTwoText }>Today</Text>
 
                 {/* <Button title = "log out" onPress = {()=> logout()}/> */}
-                    <View style = {tailwind("items-center mt-10")}>
-                        {/* <TaskCard time = "3hrs" />
-                        <TaskCard />
-                        <TaskCard /> */}
-                        {todayTasks.map((item,index) =>{
-                            return(
-                                <TaskCard taskName = {item.description}  cardImageUrl = {item.cardImageUrl} time = {formatAMPM(item.TaskTime.toDate()) }key = {index} pets = {item.pets}/>
-                            )
-                        })
-
-                        }
-                    </View>
+                <View style = { tailwind("items-center mt-5") }>
+                    {todayTasks.map((item,index) =>{
+                        return(<TaskCard taskName = { item.description }  cardImageUrl = { item.cardImageUrl } time = { formatAMPM(item.TaskTime.toDate()) }key = { index } pets = { item.pets }/>)})}
+                </View>
                 
-                    <Text style={styles.headerDay}> This Week </Text>
+                {/* <Text style = {styles.headerDay}> This Week </Text> */}
 
-
-    <View style = {tailwind("items-center mt-10")}>
-        {/* <TaskCard time = "3hrs" />
-        <TaskCard />
-        <TaskCard /> */}
-        {thisweekTasks.map((item,index) =>{
-            return(
-                <TaskCard taskName = {item.description}  cardImageUrl = {item.cardImageUrl} time = {formatAMPM(item.TaskTime.toDate()) }key = {index} pets = {item.pets}/>
-            )
-        })
-
-        }
-    </View>
+                <View style = {tailwind("items-center mt-10")}>
+                    {thisweekTasks.map((item,index) =>{
+                        return(<TaskCard taskName = {item.description}  cardImageUrl = {item.cardImageUrl} time = {formatAMPM(item.TaskTime.toDate()) }key = {index} pets = {item.pets}/>)})}
+                </View>
             </ScrollView>
         </View>
     );
@@ -110,14 +98,16 @@ const styles = StyleSheet.create({
         paddingTop:         60,
     },
 
-    headerText: {
-        fontSize: 40,
-        fontFamily: "Recoleta-Regular",
+    headerOneText: {
+        fontSize:           36,
+        fontFamily:         "Recoleta-Regular",
     },
 
-    headerDay: {
-        fontSize: 23,
-        fontFamily: "Recoleta-Regular",
+    headerTwoText: {
+        fontSize:           15,
+        fontFamily:         "Sofia-Pro-Regular",
+        textTransform:      'uppercase',
+        paddingTop:         10,
     },
 });
 
