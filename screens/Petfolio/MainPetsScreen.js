@@ -51,7 +51,7 @@ function MainPetsScreen(props) {
                                 </View>
 
                                 {/* Photo Carousel */}
-                                <View><Carousel data = {petfolioData} id = {item.id}/></View>
+                                <View><Carousel id = {item.id}/></View>
                             </View>
                         )
                     })}

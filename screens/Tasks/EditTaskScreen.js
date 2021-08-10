@@ -76,7 +76,7 @@ function EditTaskScreen(props) {
     };
 
     const confirmAddTask = () =>{
-        insertTaskByUser(props.route.params.type,date,username,notes)
+        insertTaskByUser(props.route.params.type,date,username,notes,"Kai")
     }
 
     // Pop up to confirm adding task
