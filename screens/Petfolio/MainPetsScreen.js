@@ -2,7 +2,6 @@ import React, { useState, useEffect,useContext } from "react";
 import { View, StyleSheet,TouchableOpacity, Text, ScrollView, Image, TouchableNativeFeedback } from "react-native";
 import { Icon, Divider } from "react-native-elements";
 import { useNavigation } from '@react-navigation/native';
-import { petfolioData } from './petfolioData'
 import { getPets } from "../../actions/PetActions";
 import firebase from "../../firebaseConfig"
 import Carousel from './Carousel'

@@ -5,6 +5,8 @@ import tailwind from "tailwind-rn";
 import TaskCard from "../../components/TaskCard";
 import { getTaskByUser } from "../../actions/TaskActions";
 import firebase from "../../firebaseConfig"
+import ListItemSwipeable from "react-native-elements/dist/list/ListItemSwipeable";
+import { getPetProfilePicture } from "../../actions/PetActions";
 
 function TaskHomeScreen(props) {
 
@@ -74,14 +76,20 @@ function TaskHomeScreen(props) {
                 {/* <Button title = "log out" onPress = {()=> logout()}/> */}
                 <View style = { tailwind("items-center mt-5") }>
                     {todayTasks.map((item,index) =>{
-                        return(<TaskCard taskName = { item.description }  cardImageUrl = { item.cardImageUrl } time = { formatAMPM(item.TaskTime.toDate()) }key = { index } pets = { item.pets }/>)})}
+                        let imageArray = []
+                        item.pets.forEach(petname => {
+                            getPetProfilePicture(petname,username).then(response => {
+                                console.log("Added")
+                               imageArray.push(response)
+                        })})
+                        return(<TaskCard taskName = { item.description }  cardImageUrl = { item.cardImageUrl } time = { formatAMPM(item.TaskTime.toDate()) }key = {index} image = {item.profilePics}/>)})}
                 </View>
                 
-                {/* <Text style = {styles.headerDay}> This Week </Text> */}
-
+                <Text style = { styles.headerTwoText }>This Week</Text>
                 <View style = {tailwind("items-center mt-10")}>
                     {thisweekTasks.map((item,index) =>{
-                        return(<TaskCard taskName = {item.description}  cardImageUrl = {item.cardImageUrl} time = {formatAMPM(item.TaskTime.toDate()) }key = {index} pets = {item.pets}/>)})}
+                        console.log("Pets: " + item.pets )
+                        return(<TaskCard taskName = {item.description}  cardImageUrl = {item.cardImageUrl} time = {formatAMPM(item.TaskTime.toDate()) }key = {index} image = {item.profilePics}/>)})}
                 </View>
             </ScrollView>
         </View>

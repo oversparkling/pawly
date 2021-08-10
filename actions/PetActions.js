@@ -65,6 +65,19 @@ export const getPetDetails = (id) =>{
     })
 }
 
+export const getPetProfilePicture = (petname,username) =>{
+  return new Promise((resolve,reject) =>{
+    firebase.firestore().collection("pets").where("ownerID","array-contains",username).where("name","==",petname).get().then((querySnapShot)=>{  
+      querySnapShot.forEach((doc)=>{
+        resolve(doc.data().photos[0]);
+      })
+    }).catch(error =>{
+        console.log(error)
+        console.log("getPetDetails error")
+    })
+})
+}
+
 export const uploadPetImage = async (id,imageUri) =>{
     const response = await fetch(imageUri);
     const blob = await response.blob();

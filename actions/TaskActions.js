@@ -1,4 +1,5 @@
 import firebase from "../firebaseConfig"
+import { getPetProfilePicture } from "./PetActions"
 
 export const getTaskPage = () =>{
     return new Promise((resolve,reject) =>{
@@ -59,14 +60,35 @@ export const getTaskByUser = (username) =>{
     
 }
 
-export const insertTaskByUser = (type,time,username,notes) =>{
+export const insertTaskByUser = async (type,time,username,notes,petName) =>{
+
+    // petName.forEach(element =>{
+    //     console.log(element)
+    //     await getPetProfilePicture(petName,element).then(response =>{
+    //         console.log("yo")
+    //         profilePics.push(response)
+    //     })
+    // })
+
+    const promises = await petName.map(async element =>{
+        console.log("1")
+        const profilePic = await getPetProfilePicture(element,username)
+        console.log("2")
+        return profilePic
+    })
+
+    const profilePics = await Promise.all(promises)
+    console.log(profilePics)
     getTaskByType(type).then( result =>{
+        console.log("here")
         firebase.firestore().collection("UserTasks").add({
             TaskTime : time,
             cardImageUrl:result[1],
             userID:username,
             description:result[0],
-            notes: notes
+            notes: notes,
+            pets: firebase.firestore.FieldValue.arrayUnion(...petName),
+            profilePics: firebase.firestore.FieldValue.arrayUnion(...profilePics)
         })
     }
     )
