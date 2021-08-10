@@ -1,6 +1,6 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import HomeStack from "../Home/HomeStack";
 import PetfolioStack from "../Petfolio/PetfolioStack";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -9,9 +9,12 @@ import AddTaskScreen from "../Tasks/AddTaskScreen";
 import TaskStack from "../Tasks/TaskStack";
 
 function TabStack(props) {
+
     const Tab = createBottomTabNavigator();
+
     return (
         <Tab.Navigator tabBarOptions={{ showLabel: false }}>
+
             <Tab.Screen
                 name = "Home"
                 component = { HomeStack }
@@ -25,10 +28,13 @@ function TabStack(props) {
                     ),
                 }}
             />
-            <Tab.Screen name = "AddPets" component = { TaskStack } options = {{ tabBarIcon:({focused})=>(
-                <CustomTabButton />
-            )
-            }}/>
+            {/* AddTask */}
+            <Tab.Screen 
+                name = "AddTask" 
+                component = { TaskStack } 
+                options = {{ tabBarIcon:({ focused })=>(<CustomTabButton/>)}}
+            />
+            {/* Petfolio */}
             <Tab.Screen
                 name = "Petfolio"
                 component = { PetfolioStack } 
@@ -45,5 +51,6 @@ function TabStack(props) {
         </Tab.Navigator>
     );
 }
+
 
 export default TabStack;

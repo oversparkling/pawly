@@ -8,7 +8,7 @@ function InfoCardPet(props) {
         <View style = { styles.container }>  
             <Text style = { styles.titleText }> { props.title } </Text>
             {/* <View style = { styles.input }>  */}
-            <TextInput style = { styles.input } onChangeText = {(text)=>props.stateChange(text)}/> 
+            <TextInput style = { styles.input }  placeholder = { props.input } placeholderTextColor = "white" onChangeText = {(text)=>props.stateChange(text)}/> 
             {/* </View> */}
         </View>
     );
@@ -17,8 +17,8 @@ function InfoCardPet(props) {
 const styles = StyleSheet.create({
 
     container: {
-        width:              350,
-        height:             50,
+        width:              330,
+        height:             45,
         borderRadius:       30,
         flexDirection:      "row",
         backgroundColor:    "white",
@@ -30,22 +30,16 @@ const styles = StyleSheet.create({
     },
 
     titleText: {
-        fontSize:           18,
+        fontSize:           15,
         fontFamily:         "Sofia-Pro-Regular",
         color:              "black",
         justifyContent:     "flex-start",
         paddingLeft:        13,
     },
 
-    inputText: {
-        fontSize:           18,
-        fontFamily:         "Sofia-Pro-Regular",
-        color:              "white",
-    },
-
     input: {
         width:              180,
-        height:             50,
+        height:             45,
         borderRadius:       30,
         backgroundColor:    "#E1AAAA",
         borderColor:        "#E1AAAA",
@@ -53,7 +47,7 @@ const styles = StyleSheet.create({
         justifyContent:     "center",
         borderWidth:        1,
         textAlign:          'center',
-        fontSize:           18,
+        fontSize:           15,
         fontFamily:         "Sofia-Pro-Regular",
         color:              "white",
     },

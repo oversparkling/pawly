@@ -23,6 +23,7 @@ import { AppearanceProvider } from 'react-native-appearance';
 import ImagePickerExample from "./screens/Petfolio/ImagePickerEx";
 
 function App() {
+    
     const [isLoaded, setIsLoaded] = useState(false);
 
     const loadFonts = async () => {
@@ -75,20 +76,14 @@ function App() {
                 </NavigationContainer>
             </AuthContextProvider> 
         </AppearanceProvider>
-        
-       
-        
-            
-        
+           
     ) : (
        
-
         <View>
             <Text>Still Loading</Text>
         </View>
     );
 
-    // <Tweet/>
 }
 
 // export default withAuthenticator(App)

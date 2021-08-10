@@ -13,11 +13,12 @@ function CustomTabButton(props) {
 const styles = StyleSheet.create({
     container: {
         height:             40,
-        width:              70,
+        width:              60,
         backgroundColor:    "#E1AAAA",
-        borderRadius:       35,
+        borderRadius:       30,
         alignItems:         "center",
         justifyContent:     "center",
+        marginTop:          15,
     },
 });
 

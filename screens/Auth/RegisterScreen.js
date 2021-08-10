@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     
     title: {
         fontFamily:         'Recoleta-Regular',
-        fontSize:           36,
+        fontSize:           34,
         paddingTop:         150,
         paddingBottom:      20,
     },
@@ -68,14 +68,14 @@ const styles = StyleSheet.create({
         height:             52, 
         borderWidth:        2,
         padding:            10,
-        fontSize:           18,
+        fontSize:           15,
         fontFamily:         'Sofia-Pro-Regular',
         marginBottom:       20
     },
 
     button: {
-        width:              190,
-        height:             56,
+        width:              150,
+        height:             50,
         borderRadius:       50,
         backgroundColor:    'black',
         alignItems:         'center',
@@ -85,13 +85,13 @@ const styles = StyleSheet.create({
     buttonText: {
         color:              'white',
         fontFamily:         'Sofia-Pro-Regular',
-        fontSize:           18,
+        fontSize:           15,
     },
 
     inputText: {
         color:              'grey',
         fontFamily:         'Sofia-Pro-Regular',
-        fontSize:           18,
+        fontSize:           15,
     },
 
     arrow: {

@@ -48,8 +48,8 @@ const styles = StyleSheet.create({
     },
 
     button: {
-        width:              190,
-        height:             56,
+        width:              150,
+        height:             50,
         borderRadius:       50,
         backgroundColor:    'black',
         alignItems:         'center',
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
 
     buttonText: {
         fontFamily:         "Sofia-Pro-Regular",
-        fontSize:           18,
+        fontSize:           15,
         color:              'white',
     }
 });

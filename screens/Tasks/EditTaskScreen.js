@@ -6,8 +6,8 @@ import {
     TouchableOpacity,
     Button,
     Image,
-
-    KeyboardAvoidingView
+    KeyboardAvoidingView,
+    Alert
 } from "react-native";
 import { useNavigation, useScrollToTop } from "@react-navigation/native";
 import { Icon } from "react-native-elements";
@@ -79,6 +79,17 @@ function EditTaskScreen(props) {
         insertTaskByUser(props.route.params.type,date,username,notes)
     }
 
+    // Pop up to confirm adding task
+    const createButtonAlert = () =>
+        Alert.alert(
+        // Title
+        "Add new task", 
+        // Subtitle
+        "Click to confirm.",
+        [{ text: "Cancel", onPress: () => navigation.goBack(), style: "cancel"},
+         { text: "Confirm", onPress: () => { confirmAddTask(); navigation.navigate('Home'); }}]
+    );
+
     return (
         
         <KeyboardAvoidingView style={{ flex: 1, flexDirection: 'column',justifyContent: 'center',backgroundColor:'white'}} behavior="padding" enabled  keyboardVerticalOffset={20} >
@@ -95,7 +106,7 @@ function EditTaskScreen(props) {
                 </TouchableOpacity>
 
                 {/* Add Task Icon */}
-                <TouchableOpacity style = {styles.addButton} onPress = {()=>confirmAddTask()}>
+                <TouchableOpacity style = {styles.addButton} onPress={()=>createButtonAlert()} >
                     <Text style = {{color:'white'}}>Add</Text>
                 </TouchableOpacity>
 

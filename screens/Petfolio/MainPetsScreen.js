@@ -10,51 +10,51 @@ import { AuthContext } from "../../provider/AuthProvider";
 
 
 function MainPetsScreen(props) {
+
     const navigation = useNavigation();
     const {username} = useContext(AuthContext);
     const [Pets, setPets] = useState([]);
     useEffect(()=>{
         console.log(username)
         getPets(username).then(response => setPets(response))
-        
-        
-        
-     
     },[])
+
     return (
     
         <View style = { styles.container }>
             <ScrollView showsVerticalScrollIndicator = { false } style = { styles.scrollView }>
+                
+                {/* Top section: Header */}
                 <View style = { styles.header }>
-                    <Text style = { styles.headerText }> My Pets </Text>
+                    <Text style = { styles.headerText }>My Pets</Text>
+                    
+                    {/* Add Pets Button */}
                     <TouchableOpacity style = { styles.plus } onPress= {()=>navigation.navigate("AddPets")} >
-                    <Icon
-                        name = "plus"
-                        type = "antdesign"
-                        color = "white"
-                    />
-                  </TouchableOpacity>
+                        <Icon name = "plus" type = "antdesign" color = "white" />
+                    </TouchableOpacity>
                 </View> 
+
+                {/* Body Section */}
                 <View style = { styles.body }>
-                    {/* navigation.navigate("PetProfileScreen") */}
-                    {Pets.map((item) => {
+                    {/* For each pet, show all their photos */}
+                    { Pets.map((item) => {
                         console.log(item.id)
                         return (
                             <View key = {item.id}>
-                                <TouchableOpacity onPress = {()=> navigation.navigate('PetProfileScreen',{id:item.id, age:item.data().age, weight:item.data().weight,gender:item.data().gender, name: item.data().name, description: item.data().description} ) }>
+
+                                {/* Pet Header: Pet Profile Picture, Name, VIEW button */}
+                                <View style = { styles.petHeaderContainer}>
                                     <Text style = { styles.petText }> {item.data().name} </Text>
+                                    <TouchableOpacity onPress = {()=> navigation.navigate('PetProfileScreen',{id:item.id, age:item.data().age, weight:item.data().weight,gender:item.data().gender, name: item.data().name, description: item.data().description} ) }>
+                                        <Text style = { styles.petViewText }>VIEW</Text>
                                     </TouchableOpacity>
+                                </View>
+
+                                {/* Photo Carousel */}
                                 <View><Carousel data = {petfolioData} id = {item.id}/></View>
                             </View>
                         )
                     })}
-                
-                    
-                      {/* <TouchableOpacity onPress = {()=> navigation.navigate("PetProfileScreen")}>
-                         <Text style = { styles.petText }> Hiro </Text>
-                     </TouchableOpacity>
-                     <View><Carousel data = {petfolioData}/></View>  */}
-
                 </View>
             </ScrollView>
         </View>
@@ -96,11 +96,23 @@ const styles = StyleSheet.create({
         paddingBottom:      20,            
     },
 
+    petHeaderContainer: {
+        flexDirection:      "row",
+        paddingTop:         20,
+        paddingLeft:        30,
+    },
+
     petText: {
         fontFamily:         'Recoleta-Regular',
         fontSize:           25,
-        paddingTop:         30,
-        paddingLeft:        30,
+    },
+
+    petViewText: {
+        fontFamily:         'Sofia-Pro-Regular',
+        fontSize:           15,
+        color:              "grey",
+        paddingTop:         10,
+        paddingLeft:        200,
     },
 
     image: {

@@ -37,11 +37,13 @@ const styles = StyleSheet.create({
         margin: 10,
         left: 5,
     },
+
     image: {
         width: width - 20,
         height: height / 3,
         borderRadius: 10
     },
+    
     itemTitle: {
         color: 'white',
         fontSize: 22,
