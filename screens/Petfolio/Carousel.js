@@ -9,6 +9,7 @@ const { width, height } = Dimensions.get('window')
 let flatList
 
 function infiniteScroll(dataList,mySlide){
+
     const numberOfData = dataList.length
     let scrollValue = 0, scrolled = 0
 
@@ -34,6 +35,7 @@ function infiniteScroll(dataList,mySlide){
 
 
 function Carousel(props) {
+
     const mySlide = useRef();
     const scrollX = new Animated.Value(0)
     let position = Animated.divide(scrollX, width)
@@ -51,12 +53,9 @@ function Carousel(props) {
         // })
         const unsubscribe = firebase.firestore().collection("pets").doc(props.id).onSnapshot((querySnapshot) =>{
             let array = querySnapshot.data().photos;
-            console.log("hi")
             setDataList(array)
             infiniteScroll(dataList,mySlide)
         })
-
-
 
         // getPetDetails(props.id).then((response) => {
             
@@ -69,7 +68,6 @@ function Carousel(props) {
         return ()=> {unsubscribe()}
             
         // setDataList(props.data)
-        
         
     },[])
 
