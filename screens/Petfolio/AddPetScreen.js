@@ -5,7 +5,7 @@ import { Icon, Divider } from "react-native-elements";
 import AttributeCard from "../../components/AttributeCard";
 import InfoCard from "../Tasks/InfoCard";
 import InfoCardPet from "./Add Pets/InfoCardPet";
-import InfoCardPetGender from "./Add Pets/InfoCardPetGender";
+import InfoCardPetGender, { PreviewLayout } from "./Add Pets/InfoCardPetGender";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { addPet } from "../../actions/PetActions";
 import { AuthContext } from "../../provider/AuthProvider";
@@ -94,8 +94,12 @@ function AddPetScreen(props) {
         {/* Pet Information */}
         <View style = {styles.infoContainer}>
           <InfoCardPet stateChange = {(text)=> setName(text)} title = "Name" input = "Hiro"/>
-          <InfoCardPet stateChange = {(text)=> setGender(text)} title = "Gender" input = "Male"/>
-          <InfoCardPetGender></InfoCardPetGender> 
+          <InfoCardPet stateChange = {(text)=> setGender(text)} title = "Gender" input = {gender}/>
+          <PreviewLayout
+            values = {["Male", "Female"]}
+            selectedValue = {gender}
+            setSelectedValue = {setGender}
+        />
           <InfoCardPet stateChange = {(text)=> setSpecies(text)} title = "Species" input = "Dog"/>
           <InfoCardPet stateChange = {(text)=> setBreed(text)} title = "Breed" input = "Shiba Inu"/>
           <TouchableOpacity onPress = {()=>showDatePicker()}>

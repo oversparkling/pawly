@@ -2,22 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 
-function InfoCardPetGender() {
-
-    const [gender, setGender] = useState("");
-
-    return (
-        <PreviewLayout
-            values = {["Male", "Female"]}
-            selectedValue = {gender}
-            setSelectedValue = {setGender}
-        >
-        
-        </PreviewLayout>
-    );
-}
-
-const PreviewLayout = ({values, selectedValue, setSelectedValue}) => (
+export const PreviewLayout = ({values, selectedValue, setSelectedValue}) => (
     <View style = {styles.container} >
         {values.map((value) => (
             <TouchableOpacity key = {value} onPress={() => setSelectedValue(value)}
@@ -71,4 +56,3 @@ const styles = StyleSheet.create({
     
 });
 
-export default InfoCardPetGender;
