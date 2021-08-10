@@ -102,12 +102,12 @@ function EditTaskScreen(props) {
                     <Icon
                         name = "arrow-back-outline"
                         type = "ionicon"
-                        color = "white"/>
+                        color = "black"/>
                 </TouchableOpacity>
 
                 {/* Add Task Icon */}
                 <TouchableOpacity style = {styles.addButton} onPress={()=>createButtonAlert()} >
-                    <Text style = {{color:'white'}}>Add</Text>
+                    <Text style = {{color:'black', fontFamily: 'Sofia-Pro-Regular', fontSize: 15 }}>Add</Text>
                 </TouchableOpacity>
 
                 {/* Task Image */}

@@ -6,43 +6,37 @@ import TaskTypeCard from "./TaskTypeCard";
 import { getTaskPage } from "../../actions/TaskActions";
 
 function AddTaskScreen(props) {
-    const [task, setTask] = useState([
-        // { name: "Brush", key: "1" },
-        // { name: "Clean", key: "2" },
-        // { name: "Feed", key: "3" },
-        // { name: "Groom", key: "4" },
-        // { name: "Play", key: "5" },
-        // { name: "Shower", key: "6" },
-        // { name: "Walk", key: "7" },
-        // { name: "Train", key: "8" },
-    ]);
+  
+  const [task, setTask] = useState([]);
+  useEffect(() => { getTaskPage().then(response => setTask(response)) },[])
 
-    useEffect(() => { getTaskPage().then(response => setTask(response)) },[])
+  const navigation = useNavigation();
 
-    const navigation = useNavigation();
-
-    return (
-        <View style = { styles.mainContainer }>
-            <ScrollView showsVerticalScrollIndicator = { false }> 
-                <View style = { styles.header }>
-                  <Text style = { styles.headerText }> Add Task </Text>
-                </View>
-                <View style = {styles.taskContainer}>
-                    { task.map((item, index) => {
-                        return (
-                          <TaskTypeCard
-                              text = { item.id }
-                              key = { index }
-                              onPress={() => navigation.navigate("EditTask",{
-                              type: item.id,
-                              name: item.data().description
-                              })}/>
-                        );
-                    })}
-                </View>
-            </ScrollView>
+  return (
+    <View style = { styles.mainContainer }>
+      <ScrollView showsVerticalScrollIndicator = { false }> 
+        {/* Header */}
+        <View style = { styles.header }>
+          <Text style = { styles.headerText }>Add Task</Text>
         </View>
-    );
+
+        {/* Body */}
+        <View style = {styles.taskContainer}>
+          { task.map((item, index) => {
+            return (
+              <TaskTypeCard
+                text = { item.id }
+                key = { index }
+                onPress={() => navigation.navigate("EditTask",{
+                  type: item.id,
+                  name: item.data().description
+              })}/>
+            );
+          })}
+        </View>
+      </ScrollView>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

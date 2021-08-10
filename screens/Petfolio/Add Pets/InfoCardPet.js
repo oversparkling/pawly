@@ -8,8 +8,8 @@ function InfoCardPet(props) {
         <View style = { styles.container }>  
             <Text style = { styles.titleText }> { props.title } </Text>
             {/* <View style = { styles.input }>  */}
-            <TextInput style = { styles.input }  placeholder = { props.input } placeholderTextColor = "white" onChangeText = {(text)=>props.stateChange(text)}/> 
-            {/* </View> */}
+            <TextInput style = { styles.input }  placeholder = { props.input } placeholderTextColor = {'white'} onChangeText = {(text)=>props.stateChange(text)}/> 
+             {/* </View> */}
         </View>
     );
 }

@@ -86,58 +86,66 @@ function AddPetScreen(props) {
                 
           {/* Confirm button which triggers pop up */}
           <TouchableOpacity style = {{position:'absolute',right: 0}} onPress = {() => createButtonAlert()}>
-            <Text>Confirm</Text>
+            <Text style = {{fontFamily: "Sofia-Pro-Regular"}}>Confirm</Text>
           </TouchableOpacity>
 
         </View>
             
         {/* Pet Information */}
         <View style = {styles.infoContainer}>
-          <InfoCardPet stateChange = {(text)=> setName(text)} title = "Name" input = "Hiro"/>
-          <InfoCardPet stateChange = {(text)=> setGender(text)} title = "Gender" input = {gender}/>
-          <PreviewLayout
-            values = {["Male", "Female"]}
-            selectedValue = {gender}
-            setSelectedValue = {setGender}
-        />
-          <InfoCardPet stateChange = {(text)=> setSpecies(text)} title = "Species" input = "Dog"/>
-          <InfoCardPet stateChange = {(text)=> setBreed(text)} title = "Breed" input = "Shiba Inu"/>
+          
+          <InfoCardPet stateChange = {(text)=> setName(text)} title = "Name" input = "Enter name"/>
+          
+          {/* <InfoCardPet stateChange = {(text)=> setGender(text)} title = "Gender" input = {gender}/> */}
+          <Text style = { styles.variableText }>Gender:</Text>
+          <PreviewLayout values = {["Male", "Female"]} selectedValue = {gender} setSelectedValue = {setGender}/>
+          
+          <InfoCardPet stateChange = {(text)=> setSpecies(text)} title = "Species" input = "Select"/>
+          
+          <InfoCardPet stateChange = {(text)=> setBreed(text)} title = "Breed" input = "Select"/>
+          
           <TouchableOpacity onPress = {()=>showDatePicker()}>
             <InfoCard title = "Birthday" input={formatAMPM(birthday)} />
           </TouchableOpacity>
-          <InfoCardPet stateChange = {(text)=> setWeight(text)} title = "Weight" input = "9.8"/>
-          <InfoCardPet stateChange = {(text)=> setNeutered(text)} title = "Neutered" input = "No"/>
-          <InfoCardPet stateChange = {(text)=> setMicrochipped(text)} title = "Microchipped" input = "Yes"/>
+
+          <InfoCardPet stateChange = {(text)=> setWeight(text)} title = "Weight" input = "Enter weight"/>
+          
+          <Text style = { styles.variableText }>Neutered:</Text>
+          <PreviewLayout values = {["Yes", "No"]} selectedValue = {neutered} setSelectedValue = {setNeutered}/>
+          {/* <InfoCardPet stateChange = {(text)=> setNeutered(text)} title = "Neutered" input = "No"/> */}
+          
+          <Text style = { styles.variableText }>Microchipped:</Text>
+          <PreviewLayout values = {["Yes", "No"]} selectedValue = {microchipped} setSelectedValue = {setMicrochipped}/>
+          {/* <InfoCardPet stateChange = {(text)=> setMicrochipped(text)} title = "Microchipped" input = "Yes"/> */}
                     
                     
-                </View>
-                <View style={styles.notesContainer} >
-                        <Text style={styles.noteText}>✏ Notes</Text>
-                        <View
-                            style={{
-                                borderBottomColor: "black",
-                                borderBottomWidth: 1,
-                            }}
-                        />
-                        <TouchableOpacity>
-                            <TextInput
-                                style={styles.text}
-                                placeholder="Enter some notes about this task!"
-                                onChangeText={(text) => setNotes(text)}
-                            />
-                        </TouchableOpacity>
-                    </View>
-                    <DateTimePickerModal
-        isVisible={isDatePickerVisible}
-        mode="date"
-        onConfirm={handleConfirm}
-        onCancel={hideDatePicker}
-        display = 'spinner'
-        isDarkModeEnabled = {currentColorScheme == 'dark'}
-      />
-            </KeyboardAwareScrollView>
         </View>
-    );
+                
+        {/* Notes */}
+        <View style = {styles.notesContainer} >
+          <Text style = {styles.noteText}>✏ Notes</Text>
+          <View style = {{borderBottomColor: "black", borderBottomWidth: 1,}}/>
+          <TouchableOpacity>
+            <TextInput
+              style = { styles.text }
+              placeholder = "Enter some notes about this task!"
+              placeholderTextColor = {'#C4C4C4'}
+              onChangeText={(text) => setNotes(text)}
+            />
+          </TouchableOpacity>
+        </View>
+        
+        <DateTimePickerModal
+          isVisible={isDatePickerVisible}
+          mode="date"
+          onConfirm={handleConfirm}
+          onCancel={hideDatePicker}
+          display = 'spinner'
+          isDarkModeEnabled = {currentColorScheme == 'dark'}
+        />
+      </KeyboardAwareScrollView>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -187,6 +195,7 @@ const styles = StyleSheet.create({
       height:               "100%",
       backgroundColor:      "white",
       paddingTop:           5,
+      marginBottom:         50,
     },
 
   noteText: {
@@ -204,6 +213,13 @@ const styles = StyleSheet.create({
     justifyContent:         "flex-start",
     paddingTop:             15,
   },
+
+  variableText: {
+    fontFamily:             "Sofia-Pro-Regular",
+    color:                  "black",
+    fontSize:               15,
+    marginBottom:           20,
+  }
 
 });
 
