@@ -36,7 +36,7 @@ function AddTaskScreen(props) {
         </View>
       </ScrollView>
     </View>
-  );
+    );
 }
 
 const styles = StyleSheet.create({
@@ -50,7 +50,8 @@ const styles = StyleSheet.create({
     },
 
     taskContainer: {
-        flexDirection:  "column",
+        flexDirection:  "row",
+        flexWrap:       "wrap",
         alignItems:     "center",
         width:          "100%",
         justifyContent: "space-between",

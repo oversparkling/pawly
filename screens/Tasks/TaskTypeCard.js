@@ -5,7 +5,8 @@ import { Text, StyleSheet, TouchableHighlight, Image } from "react-native";
 function TaskTypeCard(props) {
     
     return (
-        <TouchableHighlight style = { styles.container } onPress = { props.onPress } >
+       
+        <TouchableHighlight style = { styles.container } underlayColor = {'#E1AAAA'} onPress = { props.onPress } >
             {/* <Image 
                 source = {require('./bowl.png')}
                 style = {{ width: 29, height: 29 }} /> */}
@@ -17,8 +18,8 @@ function TaskTypeCard(props) {
 const styles = StyleSheet.create({
 
     container: {
-        width:              186,
-        height:             70,
+        width:              100,
+        height:             100,
         flexDirection:      "row",
         backgroundColor:    "white",
         alignItems:         "center",
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        fontSize:           18,
+        fontSize:           15,
         fontFamily:         "Sofia-Pro-Regular",
         color:              "black",
     },
