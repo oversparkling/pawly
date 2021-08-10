@@ -61,8 +61,6 @@ function AddPetScreen(props) {
     hideDatePicker();
     };
     
-
-
     return (
         <View style = { styles.mainContainer }>
             <KeyboardAwareScrollView showsVerticalScrollIndicator = { false }> 
