@@ -31,13 +31,10 @@ function EditTaskScreen(props) {
     const navigation = useNavigation();
     const [pets, setPets] = useState([]);
     const [selectedPet, setSelectedPet] = useState("");
-    const [value, setValue] = useState(null);
-    const [type, setType] = useState("");
     const [date, setDate] = useState(new Date());
-    const [time, setTime] = useState("");
     const [notes, setNotes] = useState("");
-    const [show,setShow] = useState(false)
-    const [imageUrl, setImageUrl] = useState("")
+    const [repeat, setrepeat] = useState("Single")
+    const [imageUrl, setImageUrl] = useState("https://images.unsplash.com/photo-1607434472257-d9f8e57a643d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1052&q=80")
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     function formatAMPM(date) {
     var hours = date.getHours();
@@ -51,9 +48,15 @@ function EditTaskScreen(props) {
     return strTime;
   }
 
+    Date.prototype.addDays = function(days) {
+    var date = new Date(this.valueOf());
+    date.setDate(date.getDate() + days);
+    return date;
+    }
+
     Appearance.getColorScheme();
     useEffect(() => {
-        getPets().then((response) => setPets(response));
+        getPets(username).then((response) => setPets(response));
         console.log(pets);
         getTaskByType(props.route.params.type).then((response) => setImageUrl(response[1]))
     }, []);
@@ -76,7 +79,10 @@ function EditTaskScreen(props) {
     };
 
     const confirmAddTask = () =>{
-        insertTaskByUser(props.route.params.type,date,username,notes,["Kai","Hiro","Nicholas","Chiara"])
+        for (let i = 0; i < 1; i++){
+            insertTaskByUser(props.route.params.type,date.addDays(i),username,notes,["Kai","Hiro","Kiko"])
+        }
+        
     }
 
     // Pop up to confirm adding task
@@ -89,6 +95,9 @@ function EditTaskScreen(props) {
         [{ text: "Cancel", onPress: () => navigation.goBack(), style: "cancel"},
          { text: "Confirm", onPress: () => { confirmAddTask(); navigation.navigate('Home'); }}]
     );
+
+  
+    
 
     return (
         

@@ -71,9 +71,7 @@ export const insertTaskByUser = async (type,time,username,notes,petName) =>{
     // })
 
     const promises = await petName.map(async element =>{
-        console.log("1")
         const profilePic = await getPetProfilePicture(element,username)
-        console.log("2")
         return profilePic
     })
 
@@ -93,4 +91,16 @@ export const insertTaskByUser = async (type,time,username,notes,petName) =>{
     }
     )
     
+}
+
+export const deleteTaskByID = (id) =>{
+    return new Promise((resolve,reject)=>{
+        firebase.firestore().collection("UserTasks").doc(id).delete().then(()=>{
+            console.log("Successfully Deleted")
+            resolve(true)
+        }).catch((error)=>{
+            console.log(error)
+            reject(false)
+        })
+    })
 }

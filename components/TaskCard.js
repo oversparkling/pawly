@@ -8,39 +8,64 @@ import { AuthContext } from '../provider/AuthProvider';
 function TaskCard(props) {
 
     const {username} = useContext(AuthContext)
-    const [imageArray,setImageArray] = useState([])
-    const [hasLoaded, setHasLoaded] = useState(false)
-//     const unsubscribe = async() => {
-                
-//         props.pets.forEach(petname => {
-//              getPetProfilePicture(petname,username).then(response => {
-//                 console.log("In here")
-//                 let imageResult = imageArray
-//                 imageResult.push(response)
-//                 setImageArray(imageResult)
-//             })
-//         });
-//         console.log("In her1")
-//         setHasLoaded(true)
-
-    
-// }
-
-
-//     useEffect(()=>{
-//         unsubscribe()
-//     },[])
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const [duration, setduration] = useState()
+      function formatAMPM(date) {
+      var hours = date.getHours();
+      var minutes = date.getMinutes();
+      var ampm = hours >= 12 ? 'pm' : 'am';
+      hours = hours % 12;
+      hours = hours ? hours : 12; // the hour '0' should be '12'
+      minutes = minutes < 10 ? '0' + minutes : minutes;
+      var strTime = date.getDate() + " " + monthNames[date.getMonth()] + " "  + hours + ':' + minutes + ' ' + ampm;
+      
+      return strTime;
+    }
+    useEffect(()=>{
+        if(props.isToday){
+            let diff = Date.now() - new Date(props.time);
+            
+            if (diff > 0){
+                //Less than an hour
+                Math.abs()
+                if (Math.floor(diff/3600000 == 0)){
+                    let minutes = Math.floor(diff/60000)
+                    setduration(Math.abs(minutes) + " min ago")
+                }
+                else{
+                    let hours = Math.floor(diff/3600000);
+                    setduration(Math.abs(hours) + " hours ago")
+                }
+            }
+            else{
+                if (Math.floor(diff/3600000 == 0)){
+                    let minutes = Math.floor(diff/60000)
+                    setduration("In " + Math.abs(minutes) + " min")
+                }
+                else{
+                    let hours = Math.floor(diff/3600000);
+                    setduration("In " + Math.abs(hours) + " hours")
+                }
+            }
+        }
+    })
 
 
     return (
         <View style = { styles.container }>
-            <Image source = {{uri: props.cardImageUrl}} style = { styles.imageContainer } />
-                <Text style = {styles.dateTimeText}>{props.time}</Text>
+            {props.isToday && 
+            <View style = {{alignSelf:'flex-end'}}>
+                <Text style = {{fontFamily:'Sofia-Pro-Regular',fontSize:12,color:'#9B9999'}}>{duration}</Text>
+            </View>
+                }
+            <View >
+                <Image source = {{uri: props.cardImageUrl}} style = { styles.imageContainer } />
+                <Text style = {styles.dateTimeText}>{formatAMPM(props.time)}</Text>
                 <Text style = {styles.taskText} >{props.taskName}</Text>
                 <View style = {styles.profileImageContainer}>
                     {props.image.length!=0 && 
                             props.image.map((item,index) =>{
-                                console.log("here")
                                 return(
                                     <Image style = {styles.profileImage} source = {{uri:item}} key = {index}/>
                                 )
@@ -48,7 +73,9 @@ function TaskCard(props) {
                     }
                     {/* <Image source = {require("../assets/cat-profile.png")} style = {styles.profileImage} />   */}
                 </View>       
+            </View>
         </View>
+        
     )
         //     <Text style = {{alignSelf:'flex-end', fontFamily:"Recoleta-Regular"}}>{props.hoursAgo}</Text>
         //     <View style = {styles.container}>

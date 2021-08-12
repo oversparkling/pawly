@@ -56,8 +56,9 @@ export const getPetDetails = (id) =>{
     
     return new Promise((resolve,reject) =>{
         firebase.firestore().collection("pets").doc(id).get().then((querySnapShot)=>{
-            
-            resolve(querySnapShot);
+            querySnapShot.forEach((doc)=>{
+              resolve(doc)
+            })
         }).catch(error =>{
             console.log(error)
             console.log("getPetDetails error")
