@@ -30,14 +30,13 @@ function PetProfileScreen(props) {
     },[])
 
     return (
-        <>
-        <View style = { styles.mainContainer }>
-            <ScrollView showsVerticalScrollIndicator = { false }>
+
+            <ScrollView showsVerticalScrollIndicator = { false } >
             {/* Image Swiper: Displays pets images */}
             {PetImages && <Swiper
                 autoplay = { true }
                 showsPagination = { false }
-                style = {{ height: 500 }}>
+                style = {{ height: 420}}>
 
                 {PetImages.map((item,index) => {
                     return(
@@ -105,28 +104,27 @@ function PetProfileScreen(props) {
                     <TouchableOpacity style = {styles.documentContainer}>
                         <Text style = { styles.documentText }>Fleas and Ticks</Text>
                     </TouchableOpacity>
+                </View>
+                {/* <View style = {{height:381}}></View> */}
+                </View>
+                
 
-                </View>
-                </View>
             </ScrollView>
-        </View>
-        </>
+            
+      
     );
 }
 
 const styles = StyleSheet.create({
 
-    mainContainer: {
-        width:              "100%",
-        height:             "100%",
-        backgroundColor:    "white", 
-    },
 
     informationContainer: {
-        position:           "absolute",
-        top:                381,
+        // position:           "absolute",
+        // top:                381,
+        marginTop:          -40,
         width:              "100%",
-        borderRadius:       35,
+        borderTopLeftRadius:    35,
+        borderTopRightRadius:   35,
         alignItems:         "center",
         backgroundColor:    "white",
         padding:            30,
