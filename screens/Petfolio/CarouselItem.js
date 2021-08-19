@@ -19,16 +19,20 @@ const CarouselItem = ({ item }) => {
 const styles = StyleSheet.create({
     cardView: {
         flex: 1,
-        width: width - 20,
-        height: height / 3,
+        // width: width - 20,
+        width: 318,
+        // height: height / 3,
+        height: 318,
         backgroundColor: 'white',
-        margin: 10,
-        borderRadius: 10,
+        // marginLeft: 40,
+        marginLeft: 20,
+        borderRadius: 15,
         shadowColor: '#000',
         shadowOffset: { width: 0.5, height: 0.5 },
         shadowOpacity: 0.5,
         shadowRadius: 3,
         elevation: 5,
+        // alignContent: 'center',
     },
 
     textView: {
@@ -39,9 +43,9 @@ const styles = StyleSheet.create({
     },
 
     image: {
-        width: width - 20,
-        height: height / 3,
-        borderRadius: 10
+        width: 318,
+        height: 318,
+        borderRadius: 15
     },
     
     itemTitle: {

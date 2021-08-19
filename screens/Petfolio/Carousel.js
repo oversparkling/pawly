@@ -42,32 +42,14 @@ function Carousel(props) {
     const [dataList, setDataList] = useState([])
 
     useEffect(()=> {
-        // return new Promise((resolve,reject) =>{
-        //     firebase.firestore().collection("pets").doc(id).get().then((querySnapShot)=>{
-                
-        //         resolve(querySnapShot);
-        //     }).catch(error =>{
-        //         console.log(error)
-        //         console.log("getPetDetails error")
-        //     })
-        // })
+       
         const unsubscribe = firebase.firestore().collection("pets").doc(props.id).onSnapshot((querySnapshot) =>{
             let array = querySnapshot.data().photos;
             setDataList(array)
             infiniteScroll(dataList,mySlide)
         })
-
-        // getPetDetails(props.id).then((response) => {
-            
-        //     let array = response.data().photos;
-        //     setDataList(array)
-        //     console.log(dataList)
-        //     infiniteScroll(dataList)
-        // })
         
         return ()=> {unsubscribe()}
-            
-        // setDataList(props.data)
         
     },[])
 
@@ -104,7 +86,7 @@ function Carousel(props) {
                         return (
                             <Animated.View
                                 key={i}
-                                style={{ opacity, height: 10, width: 10, backgroundColor: '#595959', margin: 8, borderRadius: 5 }}
+                                style={{ opacity, height: 10, width: 10, backgroundColor: '#595959', margin: 10, borderRadius: 15 }}
                             />
                         )
                     })}

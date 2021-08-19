@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
 
     body: {
         borderRadius:       35,
-        backgroundColor:    'white',
+        backgroundColor:    'blue',
         height:             "100%",
     },
 

@@ -130,6 +130,7 @@ const styles = StyleSheet.create({
         alignItems:         "center",
         backgroundColor:    "white",
         padding:            30,
+        // justifyContent:     'center',
     },
 
     image: {
