@@ -39,7 +39,7 @@ function MainPetsScreen(props) {
                     { Pets.map((item) => {
                         console.log(item.id)
                         return (
-                            <View key = {item.id}>
+                            <View key = {item.id} >
 
                                 {/* Pet Header: Pet Profile Picture, Name, VIEW button */}
                                 <View style = { styles.petHeaderContainer}>
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
 
     body: {
         borderRadius:       35,
-        backgroundColor:    'blue',
+        backgroundColor:    'white',
         height:             "100%",
     },
 
@@ -98,7 +98,8 @@ const styles = StyleSheet.create({
     petHeaderContainer: {
         flexDirection:      "row",
         paddingTop:         20,
-        paddingLeft:        30,
+        paddingHorizontal:  30,
+        justifyContent:     "space-between"
     },
 
     petText: {
@@ -111,7 +112,6 @@ const styles = StyleSheet.create({
         fontSize:           15,
         color:              "grey",
         paddingTop:         10,
-        paddingLeft:        200,
     },
 
     image: {

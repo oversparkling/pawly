@@ -7,7 +7,9 @@ const { width, height } = Dimensions.get('window')
 const CarouselItem = ({ item }) => {
     return (
         <View style = { styles.cardView }>
-            <Image style={styles.image} source={{ uri: item }} />
+            <View style = {styles.shadow}>
+                <Image style={styles.image} source={{ uri: item }} />
+            </View>
             {/* <View style={styles.textView}>
                 <Text style={styles.itemTitle}> {item.title}</Text>
                 <Text style={styles.itemDescription}>{item.description}</Text>
@@ -19,19 +21,18 @@ const CarouselItem = ({ item }) => {
 const styles = StyleSheet.create({
     cardView: {
         flex: 1,
-        // width: width - 20,
-        width: 318,
+        width: width - 20,
+        // width: 318,
         // height: height / 3,
         height: 318,
         backgroundColor: 'white',
         // marginLeft: 40,
-        marginLeft: 20,
+        // marginLeft: 20,
+        margin:10,
         borderRadius: 15,
-        shadowColor: '#000',
-        shadowOffset: { width: 0.5, height: 0.5 },
-        shadowOpacity: 0.5,
-        shadowRadius: 3,
+        
         elevation: 5,
+        alignItems:'center'
         // alignContent: 'center',
     },
 
@@ -41,11 +42,18 @@ const styles = StyleSheet.create({
         margin: 10,
         left: 5,
     },
+    shadow:{
+        borderRadius: 15,
+        shadowColor: '#000',
+        shadowOffset: { width: 0.5, height: 0.5 },
+        shadowOpacity: 0.5,
+        shadowRadius: 3,
+    },
 
     image: {
         width: 318,
         height: 318,
-        borderRadius: 15
+        borderRadius: 15,
     },
     
     itemTitle: {

@@ -18,10 +18,10 @@ function infiniteScroll(dataList,mySlide){
         if(scrolled < numberOfData){
             scrollValue = scrollValue + width
         }
-        else {
-            scrollValue = 0
-            scrolled = 0
-        }
+        // else {
+        //     scrollValue = 0
+        //     scrolled = 0
+        // }
         
         if (mySlide.current) {
             mySlide.current.scrollToOffset({

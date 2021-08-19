@@ -47,18 +47,29 @@ function TaskHomeScreen(props) {
             <ScrollView showsVerticalScrollIndicator = { false } style = {styles.container} contentContainerStyle={{ flexGrow: 1 }}>
                 {/* Headers */}
                 <Text style = { styles.headerOneText }>Upcoming</Text>
-                <Text style = { styles.headerTwoText }>Today</Text>
+                {todayTasks.length != 0 && 
+                    <View>
+                        <Text style = { styles.headerTwoText }>Today</Text>
+                        <View style = { tailwind("items-center mt-5") }>
+                        {todayTasks.map((item,index) =>{
+                            return(<TaskCard taskName = { item.description }  cardImageUrl = { item.cardImageUrl } time = { item.TaskTime.toDate() }key = {index} image = {item.profilePics} isToday = {true}/>)})}
+                        </View>
+                    </View>
+                }
                 {/* <Button title = "log out" onPress = {()=> logout()}/> */}
-                <View style = { tailwind("items-center mt-5") }>
-                    {todayTasks.map((item,index) =>{
-                        return(<TaskCard taskName = { item.description }  cardImageUrl = { item.cardImageUrl } time = { item.TaskTime.toDate() }key = {index} image = {item.profilePics} isToday = {true}/>)})}
-                </View>
                 
-                <Text style = { styles.headerTwoText }>This Week</Text>
-                <View style = {tailwind("items-center mt-10")}>
+                
+                {thisweekTasks.length != 0 && 
+                    <View>
+                        <Text style = { styles.headerTwoText }>This Week</Text>
+                    <View style = {tailwind("items-center mt-10")}>
                     {thisweekTasks.map((item,index) =>{
                         return(<TaskCard taskName = {item.description}  cardImageUrl = {item.cardImageUrl} time = {item.TaskTime.toDate() }key = {index} image = {item.profilePics} isToday = {false}/>)})}
-                </View>
+                    </View>
+                    </View>
+                    
+                }
+                
             </ScrollView>
             
     );
