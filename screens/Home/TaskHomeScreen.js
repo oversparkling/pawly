@@ -36,7 +36,9 @@ function TaskHomeScreen(props) {
                     today.push(temp)
                 }
                 else{
-                    week.push(doc.data())
+                    let temp = doc.data()
+                    temp.id = doc.id
+                    week.push(temp)
                 }
             })
             setTodayTasks(today)
@@ -84,12 +86,33 @@ function TaskHomeScreen(props) {
                 
                 {thisweekTasks.length != 0 && 
                     <View>
-                        <Text style = { styles.headerTwoText }>This Week</Text>
-                    <View style = {tailwind("items-center mt-10")}>
-                    {thisweekTasks.map((item,index) =>{
-                        return(<TaskCard taskName = {item.title}  cardImageUrl = {item.cardImageUrl} time = {item.TaskTime.toDate() }key = {index} image = {item.profilePics} isToday = {false}/>)})}
-                    </View>
-                    </View>
+                    <Text style = { styles.headerTwoText }>This Week</Text>
+                    <View style = { tailwind("items-center mt-5") }>
+                    {/* {todayTasks.map((item,index) =>{
+                        console.log(item)
+                        return(<TaskCard taskName = { item.description }  cardImageUrl = { item.cardImageUrl } time = { item.TaskTime.toDate() }key = {index} image = {item.profilePics} isToday = {true}/>)})} */}
+                    
+                    <SwipeListView
+                        data={thisweekTasks}
+                        renderItem={ (data, rowMap) => (
+                        <TaskCard taskName = { data.item.description }  cardImageUrl = { data.item.cardImageUrl } time = {data.item.TaskTime.toDate()}key = {rowMap} image = {data.item.profilePics} isToday = {true}/>
+                        )}
+                        renderHiddenItem={ (data, rowMap) => (
+                            <View style={styles.rowBack}>
+                                <TouchableHighlight style = {{height:200,width:163,justifyContent:'center',backgroundColor:'blue',borderRadius:15,}}>
+                                    <Text>Completed</Text>
+                                </TouchableHighlight>
+                                <TouchableHighlight style = {{height:200,width:163,justifyContent:'center',backgroundColor:'red',borderRadius:15,alignItems:'flex-end'}} onPress = {()=>deleteTaskByID(data.item.id)}>
+                                    <Text>Delete</Text>
+                                </TouchableHighlight>
+                            </View>
+                        )}
+                        leftOpenValue={75}
+                        rightOpenValue={-75}
+    
+                    />
+                </View>
+                </View>
                     
                 }
                 

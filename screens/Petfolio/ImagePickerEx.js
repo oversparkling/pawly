@@ -58,11 +58,22 @@ export default function ImagePickerExample(props) {
 
       {/* Upload image box */}
       <View style = { styles.box }>
-        <TouchableOpacity style = { styles.plus } onPress = { pickImage } >
+        {image?  
+          
+          <TouchableOpacity  onPress = { pickImage }>
+           <Image source={{ uri: image }} style={{ width: 287, height: 257 }} />
+           </TouchableOpacity>
+           :
+           <TouchableOpacity style = { styles.plus } onPress = { pickImage } >
+            <Icon name = "plus" type = "antdesign" color = "black" />
+            <Text style = { styles.boxText } >Upload an image</Text>
+            </TouchableOpacity>
+        }
+        {/* <TouchableOpacity style = { styles.plus } onPress = { pickImage } >
           <Icon name = "plus" type = "antdesign" color = "black" />
           <Text style = { styles.boxText } >Upload an image</Text>
           {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
 
       {/* Upload button */}
