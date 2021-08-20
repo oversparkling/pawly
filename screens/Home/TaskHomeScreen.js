@@ -58,13 +58,12 @@ function TaskHomeScreen(props) {
                 }
                 {/* <Button title = "log out" onPress = {()=> logout()}/> */}
                 
-                
                 {thisweekTasks.length != 0 && 
                     <View>
                         <Text style = { styles.headerTwoText }>This Week</Text>
                     <View style = {tailwind("items-center mt-10")}>
                     {thisweekTasks.map((item,index) =>{
-                        return(<TaskCard taskName = {item.description}  cardImageUrl = {item.cardImageUrl} time = {item.TaskTime.toDate() }key = {index} image = {item.profilePics} isToday = {false}/>)})}
+                        return(<TaskCard taskName = {item.title}  cardImageUrl = {item.cardImageUrl} time = {item.TaskTime.toDate() }key = {index} image = {item.profilePics} isToday = {false}/>)})}
                     </View>
                     </View>
                     
