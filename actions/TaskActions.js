@@ -25,7 +25,7 @@ export const getTaskByType = (type) =>{
     return new Promise((resolve,reject) =>{
         firebase.firestore().collection("task").doc(type).get().then(doc => {
             let details = []
-            details.push(doc.data().description)
+            details.push(doc.data().title)
             details.push(doc.data().photoUrl)
             resolve(details)}
         )

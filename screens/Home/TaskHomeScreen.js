@@ -1,5 +1,5 @@
 import React, { useEffect, useState,useContext } from "react";
-import { View, ScrollView, Text, StyleSheet,Button } from "react-native";
+import { View, ScrollView, Text, StyleSheet,Button, TouchableHighlight } from "react-native";
 import { AuthContext } from "../../provider/AuthProvider";
 import tailwind from "tailwind-rn";
 import TaskCard from "../../components/TaskCard";
@@ -9,6 +9,7 @@ import ListItemSwipeable from "react-native-elements/dist/list/ListItemSwipeable
 import { getPetProfilePicture } from "../../actions/PetActions";
 import { SafeAreaView } from "react-native";
 import moment from 'moment'
+import { SwipeListView } from 'react-native-swipe-list-view';
 
 function TaskHomeScreen(props) {
 
@@ -30,7 +31,9 @@ function TaskHomeScreen(props) {
                 console.log(doc.data().TaskTime.toDate().toDateString())
                 console.log(new Date().toDateString())
                 if (doc.data().TaskTime.toDate().toDateString() == new Date().toDateString()){
-                    today.push(doc.data())
+                    let temp = doc.data()
+                    temp.id = doc.id
+                    today.push(temp)
                 }
                 else{
                     week.push(doc.data())
@@ -51,9 +54,30 @@ function TaskHomeScreen(props) {
                     <View>
                         <Text style = { styles.headerTwoText }>Today</Text>
                         <View style = { tailwind("items-center mt-5") }>
-                        {todayTasks.map((item,index) =>{
-                            return(<TaskCard taskName = { item.description }  cardImageUrl = { item.cardImageUrl } time = { item.TaskTime.toDate() }key = {index} image = {item.profilePics} isToday = {true}/>)})}
-                        </View>
+                        {/* {todayTasks.map((item,index) =>{
+                            console.log(item)
+                            return(<TaskCard taskName = { item.description }  cardImageUrl = { item.cardImageUrl } time = { item.TaskTime.toDate() }key = {index} image = {item.profilePics} isToday = {true}/>)})} */}
+                        
+                        <SwipeListView
+                            data={todayTasks}
+                            renderItem={ (data, rowMap) => (
+                            <TaskCard taskName = { data.item.description }  cardImageUrl = { data.item.cardImageUrl } time = {data.item.TaskTime.toDate()}key = {rowMap} image = {data.item.profilePics} isToday = {true}/>
+                            )}
+                            renderHiddenItem={ (data, rowMap) => (
+                                <View style={styles.rowBack}>
+                                    <TouchableHighlight style = {{height:200,width:163,justifyContent:'center',backgroundColor:'blue',borderRadius:15,}}>
+                                        <Text>Completed</Text>
+                                    </TouchableHighlight>
+                                    <TouchableHighlight style = {{height:200,width:163,justifyContent:'center',backgroundColor:'red',borderRadius:15,alignItems:'flex-end'}} onPress = {()=>deleteTaskByID(data.item.id)}>
+                                        <Text>Delete</Text>
+                                    </TouchableHighlight>
+                                </View>
+                            )}
+                            leftOpenValue={75}
+                            rightOpenValue={-75}
+        
+                        />
+                    </View>
                     </View>
                 }
                 {/* <Button title = "log out" onPress = {()=> logout()}/> */}
@@ -88,7 +112,9 @@ const styles = StyleSheet.create({
     headerOneText: {
         fontSize:           36,
         fontFamily:         "Recoleta-Regular",
-        marginTop:          60
+        marginTop:          60,
+        alignSelf:          'flex-start',
+        
     },
 
     headerTwoText: {
@@ -97,6 +123,15 @@ const styles = StyleSheet.create({
         textTransform:      'uppercase',
         paddingTop:         10,
     },
+    rowBack:{
+        flexDirection:      'row',
+        width:              326,
+        height:             200,
+        marginBottom:       23,
+        marginTop:          15,
+        justifyContent:     'space-between',
+        alignItems:         'center'
+    }
 });
 
 export default TaskHomeScreen;
