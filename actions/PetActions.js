@@ -21,7 +21,6 @@ export const getPets = (username) =>{
         firebase.firestore().collection("pets").where("ownerID","array-contains",username).get().then((querySnapShot)=>{
             let Pets = []
             querySnapShot.forEach((doc)=>{
-                console.log(doc.data())
                 Pets.push(doc)
             })
             resolve(Pets);
@@ -66,6 +65,7 @@ export const getPetDetails = (id) =>{
     })
 }
 
+//TODO if pets does not have a single photo
 export const getPetProfilePicture = (petname,username) =>{
   return new Promise((resolve,reject) =>{
     firebase.firestore().collection("pets").where("ownerID","array-contains",username).where("name","==",petname).get().then((querySnapShot)=>{  

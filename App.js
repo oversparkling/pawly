@@ -18,7 +18,6 @@ import AuthContextProvider from './provider/AuthProvider';
 import RootStack from "./screens/RootStack";
 import EditTaskScreen from "./screens/Tasks/EditTaskScreen";
 import TaskStack from "./screens/Tasks/TaskStack";
-import Example from "./screens/Tasks/DatePicker.js"
 import { AppearanceProvider } from 'react-native-appearance';
 import ImagePickerExample from "./screens/Petfolio/ImagePickerEx";
 

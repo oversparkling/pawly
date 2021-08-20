@@ -27,12 +27,12 @@ import { Appearance, useColorScheme } from 'react-native-appearance';
 
 function EditTaskScreen(props) {
 
-    const { setIsLoggedIn, isLoggedIn, username } = useContext(AuthContext);
+    const { username } = useContext(AuthContext);
     const navigation = useNavigation();
     const [pets, setPets] = useState([]);
-    const [selectedPet, setSelectedPet] = useState("");
     const [date, setDate] = useState(new Date());
     const [notes, setNotes] = useState("");
+    const [isLoading,setisLoading] = useState(true)
     const [repeat, setrepeat] = useState("Single")
     const [imageUrl, setImageUrl] = useState("https://images.unsplash.com/photo-1607434472257-d9f8e57a643d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1052&q=80")
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -56,7 +56,11 @@ function EditTaskScreen(props) {
 
     Appearance.getColorScheme();
     useEffect(() => {
-        getPets(username).then((response) => setPets(response));
+        getPets(username).then((response) => {
+            setPets(response)
+            setisLoading(false)
+            
+        });
         console.log(pets);
         getTaskByType(props.route.params.type).then((response) => setImageUrl(response[1]))
     }, []);
@@ -100,7 +104,7 @@ function EditTaskScreen(props) {
     
 
     return (
-        
+        isLoading? <Text>isLoading</Text>:
         <KeyboardAvoidingView style={{ flex: 1, flexDirection: 'column',justifyContent: 'center',backgroundColor:'white'}} behavior="padding" enabled  keyboardVerticalOffset={20} >
         <ScrollView showsVerticalScrollIndicator = {false} contentContainerStyle={{ flexGrow: 1 }}>
             <View style = {styles.primaryContainer}>
@@ -152,9 +156,64 @@ function EditTaskScreen(props) {
                     </TouchableOpacity>
 
                     
-                    <TouchableOpacity>
+                    {/* <TouchableOpacity>
                         <InfoCard title='🐾  Who' input = {selectedPet}></InfoCard>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
+
+                    <View style = {styles.petsContainer}>
+                        <Text style = {{fontFamily:'Sofia-Pro-Regular',fontSize:15,marginBottom:10}}>
+                        🐾 Pets
+                        </Text>
+                        <View style = {{flexDirection:'row',width:'100%',justifyContent:'space-between',paddingHorizontal:15}}>
+                        {/* <View style = {{alignItems:'center'}}>
+                            <View style = {styles.petCard}></View>
+                        </View> */}
+                                                {/* {todayTasks.map((item,index) =>{
+                            console.log(item)
+                            return(<TaskCard taskName = { item.description }  cardImageUrl = { item.cardImageUrl } time = { item.TaskTime.toDate() }key = {index} image = {item.profilePics} isToday = {true}/>)})} */}
+                        <View>
+                        {pets.map((item,index) => {
+                            if (index%2==0){
+                                return(
+                                <View style = {styles.petCard} key  = {item.id}>
+                                    <Image style = {{height:35,width:35,borderRadius:17.5}} source ={{uri:item.data().photos[0]}} />
+                                    <View style = {{flex:1,alignItems:'center'}}>
+                                        <Text style = {{fontSize:15, fontFamily:"Sofia-Pro-Regular"}}>
+                                            {item.data().name}
+                                        </Text>
+                                    </View>
+                                    
+                                </View>
+
+                                )
+                            }
+                        })
+
+                        }
+                        </View>
+                        
+                        <View style = {{alignItems:'center'}}>
+                        {pets.map((item,index) => {
+                            if (index%2!=0){
+                                return(
+                                <View style = {styles.petCard} key  = {item.id}>
+                                    <Image style = {{height:35,width:35,borderRadius:17.5}} source ={{uri:item.data().photos[0]}} />
+                                    <View style = {{flex:1,alignItems:'center'}}>
+                                        <Text style = {{fontSize:15, fontFamily:"Sofia-Pro-Regular"}}>
+                                            {item.data().name}
+                                        </Text>
+                                    </View>
+                                </View>)
+                            }
+                        })
+
+                        }
+                        </View>
+
+                        </View>
+                        
+                        
+                    </View>
 
                     {/* Notes */}
                     <View style={styles.notesContainer} >
@@ -250,7 +309,22 @@ const styles = StyleSheet.create({
         left:               30,
         zIndex:             1,
     },
-
+    petsContainer:{
+        width:              '100%',
+        paddingHorizontal:  30,
+    },
+    petCard:{
+        borderRadius:       15,
+        borderWidth:        1,
+        borderColor:        "#E1AAAA",
+        width:              136,
+        height:             60,
+        alignItems:         'center',
+        flexDirection:      'row',
+        paddingHorizontal:  10,
+        justifyContent:     'space-between',
+        marginBottom:       20
+    },
     addButton:{
         position:           "absolute",
         top:                60,
