@@ -33,6 +33,8 @@ function EditTaskScreen(props) {
     const [date, setDate] = useState(new Date());
     const [notes, setNotes] = useState("");
     const [isLoading,setisLoading] = useState(true)
+    const [isPressed, setIsPressed] = useState(false)
+    const [selectedPets, setSelectedPets] =  useState([])
     const [repeat, setrepeat] = useState("Single")
     const [imageUrl, setImageUrl] = useState("https://images.unsplash.com/photo-1607434472257-d9f8e57a643d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1052&q=80")
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -84,7 +86,7 @@ function EditTaskScreen(props) {
 
     const confirmAddTask = () =>{
         for (let i = 0; i < 1; i++){
-            insertTaskByUser(props.route.params.type,date.addDays(i),username,notes,["Kai","Hiro","Kiko"])
+            insertTaskByUser(props.route.params.type,date.addDays(i),username,notes,selectedPets)
         }
         
     }
@@ -175,7 +177,19 @@ function EditTaskScreen(props) {
                         {pets.map((item,index) => {
                             if (index%2==0){
                                 return(
-                                <View style = {styles.petCard} key  = {item.id}>
+                                <TouchableOpacity style = {selectedPets.includes(item.data().name)?styles.petCardPressed : styles.petCard} key  = {item.id} onPress = {()=>{
+                                    console.log(selectedPets.includes(item.data().name))
+                                    var idx = selectedPets.indexOf(item.data().name);
+                                    let array = [...selectedPets]
+                                    if (idx !== -1) {
+                                        array.splice(idx, 1);
+                                    }
+                                    else{
+                                        array.push(item.data().name)
+                                    }
+                                    setSelectedPets(array)
+
+                                }}>
                                     <Image style = {{height:35,width:35,borderRadius:17.5}} source ={{uri:item.data().photos[0]}} />
                                     <View style = {{flex:1,alignItems:'center'}}>
                                         <Text style = {{fontSize:15, fontFamily:"Sofia-Pro-Regular"}}>
@@ -183,7 +197,7 @@ function EditTaskScreen(props) {
                                         </Text>
                                     </View>
                                     
-                                </View>
+                                </TouchableOpacity>
 
                                 )
                             }
@@ -196,14 +210,28 @@ function EditTaskScreen(props) {
                         {pets.map((item,index) => {
                             if (index%2!=0){
                                 return(
-                                <View style = {styles.petCard} key  = {item.id}>
-                                    <Image style = {{height:35,width:35,borderRadius:17.5}} source ={{uri:item.data().photos[0]}} />
-                                    <View style = {{flex:1,alignItems:'center'}}>
-                                        <Text style = {{fontSize:15, fontFamily:"Sofia-Pro-Regular"}}>
-                                            {item.data().name}
-                                        </Text>
-                                    </View>
-                                </View>)
+                                    <TouchableOpacity style = {selectedPets.includes(item.data().name)?styles.petCardPressed : styles.petCard} key  = {item.id} onPress = {()=>{
+                                        console.log(selectedPets.includes(item.data().name))
+                                        var idx = selectedPets.indexOf(item.data().name);
+                                        let array = [...selectedPets]
+                                        if (idx !== -1) {
+                                            array.splice(idx, 1);
+                                        }
+                                        else{
+                                            array.push(item.data().name)
+                                        }
+                                        setSelectedPets(array)
+    
+                                    }}>
+                                        <Image style = {{height:35,width:35,borderRadius:17.5}} source ={{uri:item.data().photos[0]}} />
+                                        <View style = {{flex:1,alignItems:'center'}}>
+                                            <Text style = {{fontSize:15, fontFamily:"Sofia-Pro-Regular"}}>
+                                                {item.data().name}
+                                            </Text>
+                                        </View>
+                                        
+                                    </TouchableOpacity>
+                                )
                             }
                         })
 
@@ -324,6 +352,19 @@ const styles = StyleSheet.create({
         paddingHorizontal:  10,
         justifyContent:     'space-between',
         marginBottom:       20
+    },
+    petCardPressed:{
+        borderRadius:       15,
+        borderWidth:        1,
+        borderColor:        "white",
+        width:              136,
+        height:             60,
+        alignItems:         'center',
+        flexDirection:      'row',
+        paddingHorizontal:  10,
+        justifyContent:     'space-between',
+        marginBottom:       20,
+        backgroundColor:    '#E1AAAA'
     },
     addButton:{
         position:           "absolute",
