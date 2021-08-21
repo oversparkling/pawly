@@ -10,6 +10,7 @@ import { getPetProfilePicture } from "../../actions/PetActions";
 import { SafeAreaView } from "react-native";
 import moment from 'moment'
 import { SwipeListView } from 'react-native-swipe-list-view';
+import Loading from "../../components/Loading";
 
 function TaskHomeScreen(props) {
 
@@ -18,6 +19,7 @@ function TaskHomeScreen(props) {
     const [tasks, setTaskList] = useState([])
     const [todayTasks,setTodayTasks] = useState([])
     const [thisweekTasks, setThisWeekTasks] = useState([])
+    const [isLoading,setIsLoading] = useState(true)
 
     useEffect(()=>{
     
@@ -49,6 +51,9 @@ function TaskHomeScreen(props) {
         };
     },[])
     return (
+        isLoading?
+        <Loading/>:
+
             <ScrollView showsVerticalScrollIndicator = { false } style = {styles.container} contentContainerStyle={{ flexGrow: 1 }}>
                 {/* Headers */}
                 <Text style = { styles.headerOneText }>Upcoming</Text>
@@ -64,7 +69,9 @@ function TaskHomeScreen(props) {
                             data={todayTasks}
                             renderItem={ (data, rowMap) => (
                             <TaskCard taskName = { data.item.description }  cardImageUrl = { data.item.cardImageUrl } time = {data.item.TaskTime.toDate()}key = {rowMap} image = {data.item.profilePics} isToday = {true}/>
-                            )}
+                                
+                            )
+                            }
                             renderHiddenItem={ (data, rowMap) => (
                                 <View style={styles.rowBack}>
                                     <TouchableHighlight style = {{height:200,width:163,justifyContent:'center',backgroundColor:'blue',borderRadius:15,}}>

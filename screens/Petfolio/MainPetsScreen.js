@@ -6,6 +6,7 @@ import { getPets } from "../../actions/PetActions";
 import firebase from "../../firebaseConfig"
 import Carousel from './Carousel'
 import { AuthContext } from "../../provider/AuthProvider";
+import Loading from "../../components/Loading";
 
 
 function MainPetsScreen(props) {
@@ -13,13 +14,16 @@ function MainPetsScreen(props) {
     const navigation = useNavigation();
     const {username} = useContext(AuthContext);
     const [Pets, setPets] = useState([]);
+    const [isLoading,setIsLoading] = useState(true)
     useEffect(()=>{
         console.log(username)
         getPets(username).then(response => setPets(response))
+        setIsLoading(false)
     },[])
 
     return (
-    
+        isLoading?
+        <Loading/>:
         <View style = { styles.container }>
             <ScrollView showsVerticalScrollIndicator = { false } style = { styles.scrollView }>
                 
