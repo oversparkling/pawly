@@ -7,7 +7,9 @@ export const getTaskPage = () =>{
         firebase.firestore().collection("task").get().then((querySnapShot)=>{
             let Tasks = []
             querySnapShot.forEach((doc)=>{
-                Tasks.push(doc)
+                let temp = doc
+                temp.iconUrl = doc.data().iconUrl
+                Tasks.push(temp)
             })
             resolve(Tasks);
         })

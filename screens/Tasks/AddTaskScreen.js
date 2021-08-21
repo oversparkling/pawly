@@ -26,6 +26,7 @@ function AddTaskScreen(props) {
             return (
               <TaskTypeCard
                 text = { item.id }
+                image = {item.iconUrl}
                 key = { index }
                 onPress={() => navigation.navigate("EditTask",{
                   type: item.id,

@@ -1,16 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View } from "react-native";
 import { Text, StyleSheet, TouchableHighlight, Image } from "react-native";
 
 function TaskTypeCard(props) {
-    
+    useEffect(()=>{
+        console.log(props)
+    },[])
     return (
        
         <TouchableHighlight style = { styles.container } underlayColor = {'#E1AAAA'} onPress = { props.onPress } >
-            {/* <Image 
-                source = {require('./bowl.png')}
-                style = {{ width: 29, height: 29 }} /> */}
-            <Text style = { styles.text }> { props.text } </Text>
+            <View style = {{alignItems:'center'}} >
+                <Image 
+                    source = {{uri: props.image}}
+                    style = {{ width: 29, height: 29,resizeMode:'contain'}} />
+                <Text style = { styles.text }> { props.text } </Text>
+            </View>
         </TouchableHighlight>
     );
 }
@@ -20,9 +24,7 @@ const styles = StyleSheet.create({
     container: {
         width:              100,
         height:             100,
-        flexDirection:      "row",
         backgroundColor:    "white",
-        alignItems:         "center",
         justifyContent:     "center",
         borderColor:        "black",
         borderRadius:       20,
