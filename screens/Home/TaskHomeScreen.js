@@ -68,7 +68,7 @@ function TaskHomeScreen(props) {
                                     <TouchableHighlight style = {{height:200,width:163,justifyContent:'center',backgroundColor:'blue',borderRadius:15,}}>
                                         <Text>Completed</Text>
                                     </TouchableHighlight>
-                                    <TouchableHighlight style = {{height:200,width:163,justifyContent:'center',backgroundColor:'red',borderRadius:15,alignItems:'flex-end'}} onPress = {()=>deleteTaskByID(data.item.id)}>
+                                    <TouchableHighlight style = {{height:200,width:163,justifyContent:'center',backgroundColor:'#E1AAAA',borderRadius:15,alignItems:'flex-end',paddingHorizontal:20}} onPress = {()=>deleteTaskByID(data.item.id)}>
                                         <Text>Delete</Text>
                                     </TouchableHighlight>
                                 </View>
@@ -100,7 +100,7 @@ function TaskHomeScreen(props) {
                                 <TouchableHighlight style = {{height:200,width:163,justifyContent:'center',backgroundColor:'blue',borderRadius:15,}}>
                                     <Text>Completed</Text>
                                 </TouchableHighlight>
-                                <TouchableHighlight style = {{height:200,width:163,justifyContent:'center',backgroundColor:'red',borderRadius:15,alignItems:'flex-end'}} onPress = {()=>deleteTaskByID(data.item.id)}>
+                                <TouchableHighlight style = {{height:200,width:163,justifyContent:'center',backgroundColor:'#E1AAAA',borderRadius:15,alignItems:'flex-end',paddingHorizontal:20}} onPress = {()=>deleteTaskByID(data.item.id)}>
                                     <Text>Delete</Text>
                                 </TouchableHighlight>
                             </View>
