@@ -1,6 +1,6 @@
 # Pawly
 
-Pawly is an app that was ideated by Nicholas (oversparkling) and Chiara (cclim) as a side project to provide an all-in-one tracker for your pet, from their daily tasks to important details like their vaccination documents, grooming history etc.
+Pawly is an app that was ideated by Nicholas (oversparkling) and Chiara (cclimcl) as a side project to provide an all-in-one tracker for your pet, from their daily tasks to important details like their vaccination documents, grooming history etc.
 
 ### Technology Stack
 
