@@ -1,12 +1,11 @@
-import React, { useState, useEffect,useContext } from "react";
-import { View, StyleSheet,TouchableOpacity, Text, ScrollView, Image, TouchableNativeFeedback } from "react-native";
-import { Icon, Divider } from "react-native-elements";
 import { useNavigation } from '@react-navigation/native';
+import React, { useContext, useEffect, useState } from "react";
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Icon } from "react-native-elements";
 import { getPets } from "../../actions/PetActions";
-import firebase from "../../firebaseConfig"
-import Carousel from './Carousel'
-import { AuthContext } from "../../provider/AuthProvider";
 import Loading from "../../components/Loading";
+import { AuthContext } from "../../provider/AuthProvider";
+import Carousel from './Carousel';
 
 
 function MainPetsScreen(props) {

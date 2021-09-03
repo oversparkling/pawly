@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Button, Image } from "react-native";
+import React from "react";
+import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import RegisterScreen from "./RegisterScreen";
-import LoginScreen from "./LoginScreen";
 
 function WelcomeScreen(props) {
 

@@ -1,8 +1,5 @@
 import React, { useEffect,useContext,useState } from 'react';
-import { ImageBackground, View, Text, StyleSheet, Image } from 'react-native';
-import { Checkbox } from 'react-native-paper';
-import { onChange } from 'react-native-reanimated';
-import { getPetProfilePicture } from '../actions/PetActions';
+import {  View, Text, StyleSheet, Image } from 'react-native';
 import { AuthContext } from '../provider/AuthProvider';
 
 function TaskCard(props) {

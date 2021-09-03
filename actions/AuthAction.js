@@ -1,4 +1,4 @@
-import firebase from "../firebaseConfig";
+import firebase from "../config/firebaseConfig";
 import { v4 as uuidv4 } from "uuid";
 import "firebase/auth";
 

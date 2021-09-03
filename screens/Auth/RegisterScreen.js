@@ -3,7 +3,7 @@ import { View, Text, TextInput, StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { createUser } from '../../actions/AuthAction';
 import { useNavigation } from '@react-navigation/native';
-import { Icon, Divider } from "react-native-elements";
+import { Icon } from "react-native-elements";
 
 
 function RegisterScreen(props) {

@@ -1,4 +1,4 @@
-import firebase from "../firebaseConfig"
+import firebase from "../config/firebaseConfig"
 import { getPetProfilePicture } from "./PetActions"
 
 export const getTaskPage = () =>{

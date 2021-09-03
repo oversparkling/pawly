@@ -1,16 +1,15 @@
-import React, { useState,useContext,useEffect } from "react";
-import { StyleSheet, Text, ScrollView, View, TouchableOpacity, TextInput, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { Icon, Divider } from "react-native-elements";
-import AttributeCard from "../../components/AttributeCard";
-import InfoCard from "../Tasks/InfoCard";
-import InfoCardPet from "./Add Pets/InfoCardPet";
-import InfoCardPetGender, { PreviewLayout } from "./Add Pets/InfoCardPetGender";
+import React, { useContext, useState } from "react";
+import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Appearance, useColorScheme } from 'react-native-appearance';
+import { Icon } from "react-native-elements";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { addPet } from "../../actions/PetActions";
 import { AuthContext } from "../../provider/AuthProvider";
-import { Appearance, useColorScheme } from 'react-native-appearance';
-import DateTimePickerModal from "react-native-modal-datetime-picker";
+import InfoCard from "../Tasks/InfoCard";
+import InfoCardPet from "./Add Pets/InfoCardPet";
+import { PreviewLayout } from "./Add Pets/InfoCardPetGender";
 
 function AddPetScreen(props) {
 

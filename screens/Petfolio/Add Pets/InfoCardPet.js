@@ -1,7 +1,5 @@
 import React from "react";
-import { TextInput } from "react-native";
-import { View } from "react-native";
-import { Text, StyleSheet, TouchableHighlight } from "react-native";
+import { StyleSheet, Text, TextInput, View } from "react-native";
 
 function InfoCardPet(props) {
     return (

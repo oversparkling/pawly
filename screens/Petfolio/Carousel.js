@@ -1,8 +1,7 @@
-import React, { useState, useEffect,useRef } from 'react'
-import { View, Text, StyleSheet, Dimensions, FlatList, Animated } from 'react-native'
+import React, { useEffect, useRef, useState } from 'react'
+import { Animated, Dimensions, FlatList, StyleSheet, View } from 'react-native'
+import firebase from '../../config/firebaseConfig'
 import CarouselItem from './CarouselItem'
-import { getPetDetails } from '../../actions/PetActions'
-import firebase  from '../../firebaseConfig'
 
 
 const { width, height } = Dimensions.get('window')

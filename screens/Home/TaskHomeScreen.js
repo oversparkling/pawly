@@ -1,25 +1,18 @@
-import React, { useEffect, useState,useContext } from "react";
-import { View, ScrollView, Text, StyleSheet,Button, TouchableHighlight } from "react-native";
-import { AuthContext } from "../../provider/AuthProvider";
-import tailwind from "tailwind-rn";
-import TaskCard from "../../components/TaskCard";
-import { deleteTaskByID, getTaskByUser } from "../../actions/TaskActions";
-import firebase from "../../firebaseConfig"
-import ListItemSwipeable from "react-native-elements/dist/list/ListItemSwipeable";
-import { getPetProfilePicture } from "../../actions/PetActions";
-import { SafeAreaView } from "react-native";
-import moment from 'moment'
+import moment from 'moment';
+import React, { useContext, useEffect, useState } from "react";
+import { ScrollView, StyleSheet, Text, TouchableHighlight, View } from "react-native";
 import { SwipeListView } from 'react-native-swipe-list-view';
-import Loading from "../../components/Loading";
+import tailwind from "tailwind-rn";
+import { deleteTaskByID } from "../../actions/TaskActions";
+import TaskCard from "../../components/TaskCard";
+import firebase from "../../config/firebaseConfig";
+import { AuthContext } from "../../provider/AuthProvider";
 
 function TaskHomeScreen(props) {
 
-    // const { username} = useContext(AuthContext);
-    const { setIsLoggedIn, isLoggedIn, username } = useContext(AuthContext);
-    const [tasks, setTaskList] = useState([])
+    const { username } = useContext(AuthContext);
     const [todayTasks,setTodayTasks] = useState([])
     const [thisweekTasks, setThisWeekTasks] = useState([])
-    const [isLoading,setIsLoading] = useState(true)
 
     useEffect(()=>{
     
@@ -51,8 +44,6 @@ function TaskHomeScreen(props) {
         };
     },[])
     return (
-        isLoading?
-        <Loading/>:
 
             <ScrollView showsVerticalScrollIndicator = { false } style = {styles.container} contentContainerStyle={{ flexGrow: 1 }}>
                 {/* Headers */}

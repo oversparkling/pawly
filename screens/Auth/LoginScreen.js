@@ -1,10 +1,10 @@
 import React, { useState,useContext } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { createUser, loginUser } from '../../actions/AuthAction';
+import {  loginUser } from '../../actions/AuthAction';
 import { AuthContext } from "../../provider/AuthProvider";
 import { useNavigation } from '@react-navigation/native';
-import { Icon, Divider } from "react-native-elements";
+import { Icon } from "react-native-elements";
 
 
 function LoginScreen(props) {

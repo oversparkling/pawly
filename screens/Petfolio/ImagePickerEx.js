@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Image, View, Platform, TouchableOpacity, StyleSheet, Text, Alert } from 'react-native';
-import * as ImagePicker from 'expo-image-picker';
-import storage from "../../firebaseConfig.js"
-import { uploadPetImage } from '../../actions/PetActions.js';
-import { Icon } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
+import * as ImagePicker from 'expo-image-picker';
+import React, { useEffect, useState } from 'react';
+import { Alert, Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Icon } from "react-native-elements";
+import { uploadPetImage } from '../../actions/PetActions.js';
 
 
 export default function ImagePickerExample(props) {

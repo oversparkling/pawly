@@ -1,12 +1,10 @@
-import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { View, StyleSheet } from "react-native";
+import React from "react";
+import Ionicons from "react-native-vector-icons/Ionicons";
 import HomeStack from "../Home/HomeStack";
 import PetfolioStack from "../Petfolio/PetfolioStack";
-import Ionicons from "react-native-vector-icons/Ionicons";
-import CustomTabButton from "./components/CustomTabButton";
-import AddTaskScreen from "../Tasks/AddTaskScreen";
 import TaskStack from "../Tasks/TaskStack";
+import CustomTabButton from "./components/CustomTabButton";
 
 function TabStack(props) {
 
