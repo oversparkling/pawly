@@ -25,9 +25,7 @@ https://user-images.githubusercontent.com/56868622/131998777-cba8c633-148b-4e2b-
 
 Additionally, we also introduced a feature for users to upload their pet pictures so as to share with others!
 
-
-![AddingNewPets](https://user-images.githubusercontent.com/56868622/131998805-eaa0bc5e-d722-4c1f-bef2-7e3312b7aeea.jpeg)
-
+<img src="https://user-images.githubusercontent.com/56868622/131998805-eaa0bc5e-d722-4c1f-bef2-7e3312b7aeea.jpeg" width="276" height="599">
 Lastly, in this Add Pets screen, we can see how each user can input many details of their pets, enhancing the all in one functionality that we envisioned for
 our application. 
 
