@@ -29,3 +29,8 @@ Additionally, we also introduced a feature for users to upload their pet picture
 Lastly, in this Add Pets screen, we can see how each user can input many details of their pets, enhancing the all in one functionality that we envisioned for
 our application. 
 
+### Collaboration
+We are open to working with potential developers to further scale this project into full deployment. Additionally if you would like to run this project on your local machine with the actual environment variables, drop either Chiara (cclim@bu.edu) or me (nicholasongck@gmail.com) an email!
+
+### Thank you so much for looking at our project!
+
